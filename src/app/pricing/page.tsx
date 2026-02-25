@@ -7,42 +7,17 @@ import StoryGridSection from "@/components/sections/story-grid-section/StoryGrid
 import HowItWorksSection from "@/components/sections/how-it-works-section/HowItWorksSection";
 import TextWithButton from "@/components/constructor/text-with-button/TextWithButton";
 import PromoFeatureCard from "@/components/features/promo-card/PromoFeatureCard";
+import FAQ from "@/components/constructor/faq/FAQ";
+import PromoSection from "@/components/sections/promo-section/PromoSection";
 
 export default function PricingPage() {
     return (
         <>
-            <HowItWorksSection
-                label="How It Works"
-                title="From Tokens to Better Cooking"
-                description="A simple flow designed around learning outcomes, not rigid plans."
-                highlights={[
-                    {
-                        title: "AI for speed",
-                        description: "Quick progress with instant corrections.",
-                    },
-                    {
-                        title: "Chefs for mastery",
-                        description: "Deep understanding from professionals.",
-                    },
-                ]}
-                steps={[
-                    {
-                        icon: "wallet",
-                        title: "Buy Tokens",
-                        description: "Choose a pack or custom amount.",
-                    },
-                    {
-                        icon: "chef",
-                        title: "Choose AI or Chef",
-                        description: "Fast AI coaching or human expertise.",
-                    },
-                    {
-                        icon: "bulb",
-                        title: "Cook & Improve",
-                        description: "Practice, get feedback, see results.",
-                    },
-                ]}
-                note="AI paths are more affordable and faster. Chef-led programs focus on depth and technique."
+            <PromoSection
+                eyebrow="Pricing"
+                title="Crafting Culinary Experiences for the"
+                highlight="Modern World"
+                description="We combine tradition, innovation, and world-class chefs to redefine how people learn, cook, and connect through food."
             />
 
             <Grid
@@ -118,62 +93,28 @@ export default function PricingPage() {
                 />
             </Grid>
 
-            <Grid columns={2} gap="2rem">
-                <PromoFeatureCard
-                    icon="brain"
-                    title="AI-Guided Cooking"
-                    description="Best for quick results. Learn faster with instant adjustments and smart feedback."
-                    image="image3"
-                    actionText="Try AI Chef"
-                    actionLink="/ai-chef"
-                />
-
-                <PromoFeatureCard
-                    icon="chef"
-                    title="Chef-Led Programs"
-                    description="For those who want to master techniques and cooking philosophy."
-                    image="image10"
-                    imagePosition="right"
-                    actionText="Meet the Chefs"
-                    actionLink="/chefs"
-                />
-            </Grid>
-
-            {/* ================= VALUES ================= */}
-            <ValuesIcons
-                title="Why Learn With Us"
-                description="A new way to grow as a home cook"
-                values={[
+            <FAQ
+                items={[
                     {
-                        icon: "zap",
-                        title: "Faster Progress",
-                        description: "AI corrects mistakes instantly.",
+                        question: "What is the difference between AI and Coach plans?",
+                        answer:
+                            "AI plans are instant and cost fewer tokens. Coach plans are manually created and more detailed.",
                     },
                     {
-                        icon: "chef",
-                        title: "Real Expertise",
-                        description: "Learn directly from professional chefs.",
+                        question: "Do tokens expire?",
+                        answer: "No, tokens never expire.",
                     },
                     {
-                        icon: "settings",
-                        title: "Personalized Paths",
-                        description: "Every learner is different.",
+                        question: "How fast do I receive my plan?",
+                        answer:
+                            "AI plans are instant. Coach plans are delivered within 24–48 hours.",
                     },
                     {
-                        icon: "wallet",
-                        title: "Fair Pricing",
-                        description: "Pay only for what you use.",
+                        question: "Can I switch between AI and Coach?",
+                        answer:
+                            "Yes, you can use tokens for either option anytime.",
                     },
                 ]}
-            />
-
-            {/* ================= FINAL CTA ================= */}
-            <TextWithButton
-                align="center"
-                title="Ready to Cook Smarter?"
-                description="Choose AI for speed or a chef for mastery. Start learning today."
-                buttonText="Get Tokens"
-                buttonLink="/checkout"
             />
         </>
     );

@@ -111,7 +111,7 @@ export const footerStyles = {
     columnsGap: 50,
     logo: {width: 180, height: 50, align: "center" as FooterLogoAlign},
     colors: {
-        bg: "var(--text-secondary)",
+        bg: "var(--text-primary)",
 
         title: "var(--text-inverse)",
         contactLabel: "var(--text-inverse)", //Company:
@@ -120,7 +120,7 @@ export const footerStyles = {
         muted: "var(--text-inverse)",
         border: "var(--border-color)",
         link: "var(--text-inverse)",
-        linkHover: "var(--text-inverse)",
+        linkHover: "var(--secondary-color)",
         contactHover: "var(--text-inverse)",
         socialHover: "var(--text-inverse)",
     },

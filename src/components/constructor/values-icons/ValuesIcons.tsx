@@ -14,13 +14,6 @@ type BackgroundColor =
     | "quaternary-color"
     | "background-dark";
 
-interface ValuesIconsProps {
-    title?: string;
-    description?: string;
-    values: ValueItem[];
-    backgroundColor?: BackgroundColor;
-}
-
 interface ValueItem {
     icon: IconKey | string;
     title: string;
@@ -28,32 +21,42 @@ interface ValueItem {
 }
 
 interface ValuesIconsProps {
+    tagline?: string;
     title?: string;
     description?: string;
     values: ValueItem[];
+    backgroundColor?: BackgroundColor;
+    theme?: "light" | "dark"; // Новий проп для теми
 }
 
 const ValuesIcons: React.FC<ValuesIconsProps> = ({
+                                                     tagline,
                                                      title,
                                                      description,
                                                      values,
                                                      backgroundColor,
+                                                     theme = "light", // за замовчуванням світлий
                                                  }) => {
     return (
         <section
-            className={styles.section}
+            className={`${styles.section} ${styles[theme]}`} // додаємо клас теми
             style={
-                backgroundColor
+                backgroundColor && theme !== "dark"
                     ? { background: `var(--${backgroundColor})` }
                     : undefined
             }
         >
-            <Text
-                title={title}
-                description={description}
-                centerTitle
-                centerDescription
-            />
+            <div className={styles.headerContainer}>
+                {tagline && <span className={styles.tagline}>{tagline}</span>}
+                <Text
+                    title={title}
+                    description={description}
+                    centerTitle
+                    centerDescription
+                    // Якщо тема темна, можна передати колір у компонент Text, якщо він це підтримує
+                    variant={theme === "dark" ? "white" : "default"}
+                />
+            </div>
 
             <div className={styles.grid}>
                 {values.map((v, i) => (

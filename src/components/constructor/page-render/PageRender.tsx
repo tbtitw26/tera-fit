@@ -30,7 +30,7 @@ import type {
     CustomBlock,
 } from "./types";
 
-import MissionBanner from "@/components/constructor/missio-banner/MissionBanner";
+import Cta from "@/components/constructor/cta/Cta";
 import ContactUsForm from "@/components/widgets/contact-form/ContactForm";
 import ValuesIcons from "@/components/constructor/values-icons/ValuesIcons";
 import TeamGrid from "../team-grid/TeamGrid";
@@ -58,7 +58,7 @@ function RenderCustom(b: CustomBlock) {
     switch (b.component) {
         case "MissionBanner":
             return (
-                <MissionBanner
+                <Cta
                     title={b.title}
                     description={b.description}
                     image={b.image ? resolveMedia(b.image) : undefined}

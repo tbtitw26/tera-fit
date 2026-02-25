@@ -1,58 +1,37 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useMemo } from "react";
 import { useCurrency } from "@/context/CurrencyContext";
 import styles from "./CurrencySwitch.module.scss";
-import { IoMdArrowDropdown } from "react-icons/io";
 
-const CURRENCIES = ["GBP", "EUR", "USD"] as const;
+const CURRENCIES = ["EUR", "GBP", "USD"] as const;
 
 const CurrencySwitch: React.FC = () => {
     const { currency, setCurrency } = useCurrency();
-    const [open, setOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const handleSelect = (val: typeof CURRENCIES[number]) => {
-        setCurrency(val);
-        setOpen(false);
-    };
-
-    useEffect(() => {
-        const handleClickOutside = (e: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-                setOpen(false);
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    // Обчислюємо позицію активного фону (33.33% на кожен елемент)
+    const activeIndex = useMemo(() => CURRENCIES.indexOf(currency as any), [currency]);
 
     return (
-        <div className={styles.wrapper} ref={dropdownRef}>
-            <button
-                className={`${styles.trigger} ${open ? styles.active : ""}`}
-                onClick={() => setOpen((v) => !v)}
-                aria-expanded={open}
-            >
-                <span className={styles.value}>{currency}</span>
-                <IoMdArrowDropdown className={styles.chevron} />
-            </button>
+        <div className={styles.container}>
+            <div className={styles.segmentedControl}>
+                {/* Рухома підкладка */}
+                <div
+                    className={styles.activeGlow}
+                    style={{ transform: `translateX(${activeIndex * 100}%)` }}
+                />
 
-            {open && (
-                <div className={styles.menu}>
-                    {CURRENCIES.map((c) => (
-                        <button
-                            key={c}
-                            className={`${styles.option} ${
-                                currency === c ? styles.selected : ""
-                            }`}
-                            onClick={() => handleSelect(c)}
-                        >
-                            {c}
-                        </button>
-                    ))}
-                </div>
-            )}
+                {CURRENCIES.map((c) => (
+                    <button
+                        key={c}
+                        type="button"
+                        className={`${styles.tab} ${currency === c ? styles.active : ""}`}
+                        onClick={() => setCurrency(c)}
+                    >
+                        {c}
+                    </button>
+                ))}
+            </div>
         </div>
     );
 };

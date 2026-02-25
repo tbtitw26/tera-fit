@@ -1,223 +1,202 @@
+"use client";
 
-import HeroSection from "@/components/constructor/hero/Hero";
-import Section from "@/components/constructor/section/Section";
+import PromoSection from "@/components/sections/promo-section/PromoSection";
 import ValuesIcons from "@/components/constructor/values-icons/ValuesIcons";
-import InfoBlock from "@/components/constructor/Info-block/InfoBlock";
-import MissionBanner from "@/components/constructor/missio-banner/MissionBanner";
-import StoryGridSection from "@/components/sections/story-grid-section/StoryGridSection";
 import HowItWorksSection from "@/components/sections/how-it-works-section/HowItWorksSection";
 import TeamGrid from "@/components/constructor/team-grid/TeamGrid";
-import TextWithButton from "@/components/constructor/text-with-button/TextWithButton";
+import TestimonialsSlider from "@/components/constructor/testimonials-slider/TestimonialsSlider";
+import Cta from "@/components/constructor/cta/Cta";
+import MissionBanner from "@/components/constructor/mission-banner/MissionBanner";
 import FAQ from "@/components/constructor/faq/FAQ";
-import HighlightStrip from "@/components/constructor/highlight-strip/HighlightStrip";
-import StoryTimeline from "@/components/constructor/story-timeline/StoryTimeline";
 
 export default function AboutPage() {
     return (
         <>
-            <HeroSection
-                title={
-                    <>
-                        Reinventing the way the <span>world</span> cooks.
-                    </>
-                }
-                description="Where centuries of culinary tradition meet the precision of modern AI. We help home cooks achieve professional results — without losing the soul of cooking."
-                secondaryCta={{text: "Meet the Chefs", link: "/extra/chefs"}}
-                image="image7"
-            />
-
-            <StoryGridSection
-                label="Our Origins"
-                title="From a Small Kitchen to a Global Table"
-                cards={[
-                    {
-                        type: "text",
-                        title: "It started with a simple frustration.",
-                        text: "Why does home cooking feel so intimidating? In 2021, we realized the problem wasn’t people — it was access to real culinary knowledge.",
-                    },
-                    {
-                        type: "image",
-                        image: "image8",
-                    },
-                    {
-                        type: "quote",
-                        quote: "Cooking is the ultimate human connection. AI should support it — not replace it.",
-                        author: "Elena R.",
-                        role: "Founder",
-                    },
-                    {
-                        type: "wideImage",
-                        image: "image10",
-                        title: "Community First",
-                        text: "Great food brings people together — across cultures and continents.",
-                    },
-                ]}
+            <PromoSection
+                eyebrow="About Us"
+                title="Crafting Culinary Experiences for the"
+                highlight="Modern World"
+                description="We combine tradition, innovation, and world-class chefs to redefine how people learn, cook, and connect through food."
+                image="image11"
+                imageText="Where Passion Meets Precision."
             />
 
             <MissionBanner
-                title="Our Mission"
-                description="To make professional-level cooking accessible to anyone by combining human mastery with responsible, supportive AI."
-                image="image9"
-            />
-
-            <Section
-                title="Two Ways to Learn"
-                description="Choose the learning style that fits your goals and pace."
-            >
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gap: "2rem",
-                    }}
-                >
-                    <InfoBlock
-                        eyebrow="The Human Side"
-                        title="Crafted by Real Chefs"
-                        description="Every recipe starts as a human idea — shaped by experience, culture, and taste."
-                        bullets={[
-                            "Michelin & fine dining backgrounds",
-                            "Authentic regional techniques",
-                            "Hands-on testing and filming",
-                        ]}
-                        image="image11"
-                        variant="chef"
-                    />
-
-                    <InfoBlock
-                        eyebrow="The AI Side"
-                        title="Enhanced by Intelligent Systems"
-                        description="AI adapts recipes to you — without removing creativity or intuition."
-                        bullets={[
-                            "Smart ingredient substitutions",
-                            "Diet & allergy personalization",
-                            "Skill-level pacing",
-                        ]}
-                        image="image12"
-                        variant="ai"
-                    />
-                </div>
-            </Section>
-
-            <HowItWorksSection
-                label="How It Works"
-                title={
-                    <>
-                        Human Expertise. <br/>
-                        <span>Machine Precision.</span>
-                    </>
-                }
-                description="We scale chef intuition, not automate creativity. The result — consistent, confident cooking."
-                highlights={[
+                image="image11"
+                cards={[
                     {
-                        title: "Chef-Led Content",
-                        description: "Every recipe is authored and approved by professionals.",
-                    },
-                    {
-                        title: "AI Adaptation",
-                        description: "Recipes adjust to your preferences in real time.",
-                    },
-                ]}
-                steps={[
-                    {
-                        icon: "chef",
-                        title: "Chef Creates",
-                        description: "Flavor, structure, and intent",
-                    },
-                    {
-                        icon: "brain",
-                        title: "AI Refines",
-                        description: "Personalized adjustments",
-                    },
-                    {
-                        icon: "accessibility",
-                        title: "You Cook",
-                        description: "Reliable, delicious results",
-                    },
-                ]}
-                note="On average, AI adaptations preserve up to 94% flavor fidelity according to user feedback."
-            />
-
-            <ValuesIcons
-                title="Our Core Values"
-                description="The principles behind every decision, recipe, and feature."
-                values={[
-                    {
-                        icon: "accessibility",
-                        title: "Accessibility",
-                        description: "Professional culinary knowledge should be available to everyone.",
-                    },
-                    {
-                        icon: "settings",
-                        title: "Personalization",
-                        description: "No two palates are the same — learning should adapt.",
+                        icon: "zap",
+                        title: "The Mission",
+                        description: "To make high-performance coaching accessible to every athlete regardless of location."
                     },
                     {
                         icon: "bulb",
-                        title: "Innovation",
-                        description: "We combine food science with technology responsibly.",
+                        title: "The Vision",
+                        description: "A world where effort is quantifiable, rewarded, and optimized by intelligence."
+                    }
+                ] as const}
+            />
+
+            <ValuesIcons
+                tagline="Our Core Values"
+                title="What Drives Us Every Day"
+                description="Our foundation is built on passion, integrity, and relentless innovation."
+                theme={"dark"}
+                values={[
+                    {
+                        icon: "path",
+                        title: "Excellence",
+                        description: "We aim for Michelin-level standards in every course.",
                     },
                     {
-                        icon: "community",
-                        title: "Community",
-                        description: "Cooking is better when shared.",
+                        icon: "globe",
+                        title: "Global Perspective",
+                        description: "Authentic techniques from every corner of the world.",
+                    },
+                    {
+                        icon: "shield",
+                        title: "Passion",
+                        description: "Cooking is emotion, creativity, and connection.",
+                    },
+                    {
+                        icon: "brain",
+                        title: "Innovation",
+                        description: "We merge culinary art with modern technology.",
+                    },
+                ]}
+                backgroundColor="surface-muted"
+            />
+
+            {/* 4️⃣ HOW WE WORK */}
+            <HowItWorksSection
+                label="Our Process"
+                title="How We Build Every Course"
+                description="Every program goes through a rigorous creative and technical process."
+                steps={[
+                    {
+                        title: "Concept & Research",
+                        description:
+                            "We collaborate with chefs to design authentic learning experiences.",
+                    },
+                    {
+                        title: "Hands-on Production",
+                        description:
+                            "Each lesson is professionally filmed and tested in real kitchens.",
+                    },
+                    {
+                        title: "Platform Optimization",
+                        description:
+                            "We refine delivery, structure, and learning flow for maximum clarity.",
+                    },
+                    {
+                        title: "Global Launch",
+                        description:
+                            "Courses are released to thousands of aspiring chefs worldwide.",
+                    },
+                ]}
+                note="Every course is built with real chefs, real kitchens, and real passion."
+            />
+
+            {/* 5️⃣ TEAM */}
+            <TeamGrid
+                title="Meet Our Culinary Experts"
+                description="The masters behind every recipe and technique."
+                viewAllText="View All Trainers"
+                members={[
+                    { name: "Luca Romano", role: "Italian Cuisine", image: "team1" },
+                    { name: "Sophie Laurent", role: "French Pastry", image: "team2" },
+                    { name: "Kenji Tanaka", role: "Japanese Cuisine", image: "team3" },
+                    { name: "Maria Alvarez", role: "Spanish Cuisine", image: "team4" },
+                    { name: "James Carter", role: "Modern Fusion", image: "team5" },
+                    { name: "Elena Petrova", role: "Eastern European", image: "team6" },
+                ]}
+            />
+
+            {/* 6️⃣ TESTIMONIALS */}
+            <TestimonialsSlider
+                title="Athletes Love It"
+                description="4.9/5 average rating from real users."
+                testimonials={[
+                    {
+                        name: "Mark T.",
+                        image: "image1",
+                        rating: 5,
+                        text: "AI adapts my plan weekly based on performance and recovery. It actually feels personal, not generic.",
+                    },
+                    {
+                        name: "Anna R.",
+                        image: "image1",
+                        rating: 5,
+                        text: "Coach feedback improved my squat technique drastically. I gained confidence under the bar.",
+                    },
+                    {
+                        name: "David L.",
+                        image: "image1",
+                        rating: 4.4,
+                        text: "Finally a fitness app without subscriptions. Pay once, train smart, repeat.",
+                    },
+                    {
+                        name: "Chris M.",
+                        image: "image1",
+                        rating: 5,
+                        text: "The token system is genius. I only pay for what I actually use.",
+                    },
+                    {
+                        name: "Elena S.",
+                        image: "image1",
+                        rating: 4.5,
+                        text: "I love how structured the plans are. No more guessing what to do in the gym.",
+                    },
+                    {
+                        name: "Tom K.",
+                        image: "image1",
+                        rating: 4.9,
+                        text: "Progress tracking keeps me accountable. I’ve added 15kg to my deadlift in 3 months.",
+                    },
+                    {
+                        name: "Sophie W.",
+                        image: "image1",
+                        rating: 5,
+                        text: "The AI adjusts volume when I feel fatigued. That alone saved me from burnout.",
+                    },
+                    {
+                        name: "Daniel P.",
+                        image: "image1",
+                        rating: 4.8,
+                        text: "Clean interface, clear workouts, zero fluff. Exactly what athletes need.",
                     },
                 ]}
             />
 
-            <TeamGrid
-                title="Meet Our Chefs"
-                description="Real professionals crafting courses — not generic content."
-                viewAllText="View all chefs →"
-                viewAllLink="/extra/chefs"
-                members={[
-                    {name: "Marcus L.", role: "French Cuisine", image: "team1"},
-                    {name: "Sarah J.", role: "Molecular Gastronomy", image: "team2"},
-                    {name: "Kenji T.", role: "Fermentation", image: "team4"},
-                    {name: "Maria G.", role: "Pastry Arts", image: "team3"},
-                ]}
+            <Cta
+                title="Join Our Culinary Movement"
+                description="Discover world-class cooking techniques and elevate your skills today."
+                buttonText="Explore Courses"
+                link="/courses"
             />
 
             <FAQ
                 items={[
                     {
-                        question: "Does AI replace real chefs?",
+                        question: "What is the difference between AI and Coach plans?",
                         answer:
-                            "No. Our platform is chef-led. AI only enhances and adapts recipes created by professionals — it never replaces human creativity.",
+                            "AI plans are instant and cost fewer tokens. Coach plans are manually created and more detailed.",
                     },
                     {
-                        question: "How accurate are AI adaptations?",
-                        answer:
-                            "Based on user feedback and testing, our adaptations preserve up to 94% flavor fidelity while adjusting ingredients and techniques.",
+                        question: "Do tokens expire?",
+                        answer: "No, tokens never expire.",
                     },
                     {
-                        question: "Who is this platform for?",
+                        question: "How fast do I receive my plan?",
                         answer:
-                            "It’s designed for everyone — from complete beginners to experienced home cooks seeking consistency, confidence, and inspiration.",
+                            "AI plans are instant. Coach plans are delivered within 24–48 hours.",
                     },
                     {
-                        question: "Do I need professional equipment or skills?",
+                        question: "Can I switch between AI and Coach?",
                         answer:
-                            "Not at all. Recipes are designed for real home kitchens and adapt to your skill level and available tools.",
-                    },
-                    {
-                        question: "Can the platform adapt to dietary needs or allergies?",
-                        answer:
-                            "Yes. AI can adjust recipes for dietary preferences, allergies, and ingredient availability without compromising flavor.",
-                    },
-                    {
-                        question: "What makes this different from other cooking apps?",
-                        answer:
-                            "Unlike generic recipe apps, our content is created by real chefs and intelligently personalized — combining human mastery with modern technology.",
+                            "Yes, you can use tokens for either option anytime.",
                     },
                 ]}
-            />
-
-            <TextWithButton
-                title="Ready to Cook Smarter?"
-                description="Join thousands of home cooks learning directly from world-class chefs."
-                buttonText="Explore Courses"
-                buttonLink="/dashboard"
             />
         </>
     );

@@ -4,34 +4,55 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import styles from "./InfoBlock.module.scss";
 import { media } from "@/resources/media";
+import { renderIcon } from "@/utils/renderIcon";
+import { IconKey } from "@/resources/icons";
+
+// Проста галочка для списку (bullets)
+const CheckIcon = () => (
+    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 5L4.5 8.5L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+);
 
 interface InfoBlockProps {
-    eyebrow?: string;
     title: string;
-    description?: string;
-    image?: keyof typeof media; // ✅ як у всіх
+    description?: string; // Курсивний підзаголовок
+
+    // Медіа
+    image?: keyof typeof media;
+    icon?: IconKey | string | React.ReactNode; // Тепер підтримує ваші IconKey
+
     bullets?: string[];
-    variant?: "chef" | "ai";
+
+    // Дизайн
+    variant?: "light" | "dark";
+    badge?: string;
+    buttonText?: string;
+    onButtonClick?: () => void;
 }
 
 const InfoBlock: React.FC<InfoBlockProps> = ({
-                                                 eyebrow,
                                                  title,
                                                  description,
                                                  image,
+                                                 icon,
                                                  bullets,
-                                                 variant = "chef",
+                                                 variant = "light",
+                                                 badge,
+                                                 buttonText,
+                                                 onButtonClick
                                              }) => {
     const imageSrc = image ? media[image] : null;
 
     return (
         <motion.div
-            className={`${styles.infoBlock} ${styles[variant]}`}
-            initial={{ opacity: 0, y: 40 }}
+            className={`${styles.infoBlock} ${styles[variant]} ${imageSrc ? styles.hasImage : ''}`}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
         >
+            {/* Рендер великого фото (якщо передано) */}
             {imageSrc && (
                 <div className={styles.imageWrapper}>
                     <Image
@@ -44,20 +65,44 @@ const InfoBlock: React.FC<InfoBlockProps> = ({
             )}
 
             <div className={styles.content}>
-                {eyebrow && <span className={styles.eyebrow}>{eyebrow}</span>}
 
-                <h3 className={styles.title}>{title}</h3>
-
-                {description && (
-                    <p className={styles.description}>{description}</p>
+                {/* Рендер фонової іконки справа зверху (якщо немає фото) */}
+                {!imageSrc && icon && (
+                    <div className={styles.backgroundIcon}>
+                        {renderIcon(icon)}
+                    </div>
                 )}
+
+                <div className={styles.header}>
+                    <div className={styles.titleRow}>
+                        <h3 className={styles.title}>{title}</h3>
+                        {badge && <span className={styles.badge}>{badge}</span>}
+                    </div>
+                    {description && (
+                        <p className={styles.description}>{description}</p>
+                    )}
+                </div>
 
                 {bullets && (
                     <ul className={styles.bullets}>
                         {bullets.map((item, i) => (
-                            <li key={i}>{item}</li>
+                            <li key={i}>
+                                <span className={styles.checkWrapper}>
+                                    <CheckIcon />
+                                </span>
+                                {item}
+                            </li>
                         ))}
                     </ul>
+                )}
+
+                {buttonText && (
+                    <button
+                        className={styles.actionButton}
+                        onClick={onButtonClick}
+                    >
+                        {buttonText}
+                    </button>
                 )}
             </div>
         </motion.div>

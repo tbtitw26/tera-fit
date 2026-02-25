@@ -1,5 +1,5 @@
-import type {Metadata} from "next";
-import {COMPANY_NAME} from "@/resources/constants";
+import type { Metadata } from "next";
+import { COMPANY_NAME } from "@/resources/constants";
 
 import HeroSection from "@/components/constructor/hero/Hero";
 import ValuesIcons from "@/components/constructor/values-icons/ValuesIcons";
@@ -7,201 +7,140 @@ import Grid from "@/components/constructor/grid/Grid";
 import FAQ from "@/components/constructor/faq/FAQ";
 import PricingCard from "@/components/constructor/pricing-card/PricingCard";
 import TestimonialsSlider from "@/components/constructor/testimonials-slider/TestimonialsSlider";
-import HowItWorksSection from "@/components/sections/how-it-works-section/HowItWorksSection";
-import TeamGrid from "@/components/constructor/team-grid/TeamGrid";
 import PromoFeatureCard from "@/components/features/promo-card/PromoFeatureCard";
-import Section from "@/components/constructor/section/Section";
 import InfoBlock from "@/components/constructor/Info-block/InfoBlock";
+import Cta from "@/components/constructor/cta/Cta";
+import HowItWorksSection from "@/components/sections/how-it-works-section/HowItWorksSection";
 
 export const metadata: Metadata = {
-    title: `${COMPANY_NAME} — Online Culinary Courses & AI Cooking Programs`,
+    title: `${COMPANY_NAME} — AI & Coach Based Fitness Platform`,
     description:
-        "Learn to cook with expert-led culinary courses and AI-powered cooking programs. Step-by-step recipes, personalized meal plans, and professional techniques for all skill levels.",
-    keywords: [
-        "online cooking courses",
-        "culinary courses",
-        "learn to cook online",
-        "AI cooking",
-        "chef-led cooking classes",
-        "cooking lessons",
-        "professional cooking techniques",
-        "meal planning",
-        "recipe courses",
-        "culinary education platform",
-    ],
-    alternates: {
-        canonical: "/",
-    },
+        "Buy tokens. Choose AI or a real trainer. Get a personalized fitness program based on your goals.",
+    alternates: { canonical: "/" },
 };
 
 export default function HomePage() {
     return (
         <>
+            {/* HERO */}
             <HeroSection
                 title={
                     <>
-                        Learn to cook <span>like a chef</span> — or let AI teach you.
+                        Train Smarter with <span>AI</span> or Real Coaches
                     </>
                 }
-                description="Choose your path: personal courses written by real professional chefs, or a custom AI-powered cooking plan delivered within 4 hours. No subscriptions. Just learning."
-                primaryCta={{text: "Get Started", link: "/dashboard"}}
-                secondaryCta={{text: "Explore Chefs", link: "/extra/chefs"}}
+                description="Token-based fitness platform. Buy tokens, choose your path and receive a personalized training plan."
+                primaryCta={{ text: "Get Started", link: "/" }}
+                secondaryCta={{ text: "How It Works", link: "/" }}
                 image="image1"
+                badge={{
+                    label: "New",
+                    title: "AI Adaptive Training System",
+                }}
             />
 
-            <Grid columns={2} gap="2rem">
-                <PromoFeatureCard
-                    icon="chef"
-                    title="Learn from Real Chefs"
-                    description="Choose a professional chef. Spend tokens and receive a structured, step-by-step culinary course written personally for you."
-                    actionText="Choose a Chef →"
-                    actionLink="/extra/chefs"
-                    image="image2"
-                    imagePosition="left"
-                />
+            {/* WHY CHOOSE US */}
+            <ValuesIcons
+                tagline="WHY FIT PLATFORM"
+                title="Built for Modern Athletes"
+                description="No subscriptions. No contracts. Just performance."
+                values={[
+                    {
+                        title: "Flexible Payments",
+                        description: "Buy tokens once. Use whenever you want.",
+                        icon: "wallet",
+                    },
+                    {
+                        title: "Instant AI Plans",
+                        description: "Generate a structured workout in under 60 seconds.",
+                        icon: "zap",
+                    },
+                    {
+                        title: "Human Expertise",
+                        description: "Certified trainers available anytime.",
+                        icon: "community",
+                    },
+                    {
+                        title: "Secure & Private",
+                        description: "Your fitness data stays protected.",
+                        icon: "shield",
+                    },
+                ]}
+            />
 
-                <PromoFeatureCard
+            {/* AI vs TRAINER */}
+            <Grid columns={2} gap="2rem">
+                <InfoBlock
+                    variant="dark"
+                    title="Personal Coach"
+                    badge="PREMIUM"
+                    icon="community"
+                    description="Precision. Strategy. Accountability."
+                    bullets={[
+                        "Manual workout design",
+                        "Technique corrections",
+                        "Direct communication",
+                    ]}
+                    buttonText="Choose Coach"
+                />
+                <InfoBlock
+                    variant="light"
+                    title="AI Training"
                     icon="brain"
-                    title="AI Cooking Assistant"
-                    description="Describe your goals, skill level, diet, and kitchen tools. Our AI will generate a personalized cooking course within 4 hours."
-                    actionText="Start with AI →"
-                    actionLink="/dashboard"
-                    image="image3"
-                    imagePosition="right"
+                    description="Fast. Smart. Adaptive."
+                    bullets={[
+                        "Instant workout generation",
+                        "Auto progression system",
+                        "Optimized load balancing",
+                    ]}
+                    buttonText="Start with AI"
                 />
             </Grid>
 
-
+            {/* HOW SYSTEM WORKS */}
             <HowItWorksSection
-                title={
-                    <>
-                        How It <span>Works</span>
-                    </>
-                }
-                description="One account. One balance. Full freedom to learn at your own pace."
+                label="PROCESS"
+                title="How It Works"
+                description="Start your transformation in minutes."
                 steps={[
                     {
                         icon: "login",
-                        title: "Create an Account",
-                        description: "Sign up and get access to your personal learning dashboard.",
+                        title: "Create Account",
+                        description: "Sign up and receive free starter tokens.",
                     },
                     {
                         icon: "coins",
                         title: "Buy Tokens",
-                        description: "Purchase tokens once. They never expire.",
+                        description: "Choose the token package that fits your goals.",
                     },
                     {
-                        icon: "path",
-                        title: "Choose Your Learning Path",
-                        description: "Spend tokens on a chef-written course or an AI-generated plan.",
-                    },
-                ]}
-            />
-
-            <Section
-                title="Two Ways to Learn"
-                description="Choose the learning style that fits your goals and pace."
-            >
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gap: "2rem",
-                        width: "100%",
-                    }}
-                >
-                    <InfoBlock
-                        variant="chef"
-                        eyebrow="Human Expertise"
-                        title="Learn from a Real Chef"
-                        description="A professional chef creates a structured course tailored to your level and goals."
-                        image="image5"
-                        bullets={[
-                            "Written by a real culinary expert",
-                            "Deep techniques & theory",
-                            "Step-by-step lessons",
-                            "Best for long-term growth",
-                        ]}
-                    />
-
-                    <InfoBlock
-                        variant="ai"
-                        eyebrow="AI Powered"
-                        title="AI Cooking Assistant"
-                        description="Describe your preferences and receive a personalized cooking plan within 4 hours."
-                        image="image4"
-                        bullets={[
-                            "Ready in up to 4 hours",
-                            "Adapts to your diet & ingredients",
-                            "Fast and flexible learning",
-                            "Available anytime",
-                        ]}
-                    />
-                </div>
-            </Section>
-
-            <ValuesIcons
-                title="Our Core Values"
-                description="The principles that guide every feature we build and every recipe we film."
-                values={[
-                    {
-                        icon: "accessibility",
-                        title: "Accessibility",
-                        description:
-                            "Gourmet skills for every kitchen. We believe high-end culinary education shouldn’t be locked behind expensive culinary school tuition.",
-                    },
-                    {
-                        icon: "settings",
-                        title: "Personalization",
-                        description:
-                            "A curriculum that adapts to your taste buds. No two palates are the same, so no two learning paths should be identical.",
-                    },
-                    {
-                        icon: "bulb",
-                        title: "Innovation",
-                        description:
-                            "Pushing the boundaries of home cooking. We experiment with food science and data so you can experiment with confidence.",
-                    },
-                    {
-                        icon: "community",
-                        title: "Community",
-                        description:
-                            "Learning is better together. We build connections through shared experiences, feedback, and a global cooking community.",
-                    },
-                ]}
-            />
-
-            <ValuesIcons
-                title="Why Tokens?"
-                description="Because learning should be flexible, not locked behind subscriptions."
-                backgroundColor="quaternary-color"
-                values={[
-                    {
-                        icon: "subscriptions",
-                        title: "No Subscriptions",
-                        description: "Pay only when you want to learn. No monthly fees.",
-                    },
-                    {
-                        icon: "flex",
-                        title: "Full Flexibility",
-                        description: "Spend tokens on chefs or AI. Mix both anytime.",
-                    },
-                    {
-                        icon: "priceTag",
-                        title: "Fair Pricing",
-                        description: "One token = one learning action. Simple and transparent.",
+                        icon: "brain",
+                        title: "Generate Plan",
+                        description: "Select AI or a real coach to build your program.",
                     },
                     {
                         icon: "calendar",
-                        title: "Your Pace",
-                        description: "Learn when you want, how you want.",
+                        title: "Track Progress",
+                        description: "Monitor workouts and improvements weekly.",
                     },
                 ]}
             />
 
+            {/* AI EXPLANATION */}
+            <PromoFeatureCard
+                icon="settings"
+                title="How Our AI Builds Your Program"
+                description="AI analyzes your goals, training frequency, experience level and recovery capacity. It structures weekly splits, intensity and progression automatically."
+                actionText="Try AI Now"
+                actionLink="/"
+                image="image1"
+                imagePosition="right"
+            />
+
+            {/* PRICING */}
             <Grid
-                title="Learning Tokens"
-                description="Buy once. Use anytime. No expiration."
+                title="Token Packages"
+                description="No monthly payments. No hidden fees."
                 columns={4}
                 gap="2rem"
             >
@@ -209,209 +148,152 @@ export default function HomePage() {
                     variant="starter"
                     title="Starter"
                     price="€5"
-                    tokens={5000}
+                    tokens={500}
                     badgeTop="Try It"
-                    description="Perfect to test chef courses or AI learning."
+                    description="Great for testing AI workouts and exploring the platform. Enough tokens to generate multiple training plans and see how everything works."
                     buttonText="Buy Tokens"
                 />
 
                 <PricingCard
                     variant="pro"
-                    title="Cook Pro"
-                    price="€25"
-                    tokens={25000}
+                    title="Athlete"
+                    price="€19"
+                    tokens={2500}
                     badgeTop="Popular"
-                    description="Ideal for consistent learning and skill growth."
+                    description="Perfect for consistent training. Combine AI plans with coach feedback and update your program regularly."
                     buttonText="Get Started"
                 />
 
                 <PricingCard
                     variant="premium"
-                    title="Chef Mode"
-                    price="€79"
-                    tokens={79000}
+                    title="Pro"
+                    price="€49"
+                    tokens={7000}
                     badgeTop="Best Value"
-                    description="For serious learners and advanced techniques."
+                    description="Best choice for serious progress. Ideal for long-term programs and deeper work with personal trainers."
                     buttonText="Choose Plan"
                 />
 
                 <PricingCard
-                    index={3}
                     variant="custom"
-                    title="Custom Balance"
+                    title="Custom"
                     price="dynamic"
                     tokens={0}
                     badgeTop="Flexible"
-                    description="Add any amount and use it whenever you need."
+                    description="Select the exact token balance you need. Flexible option for advanced users or teams."
                     buttonText="Continue"
                 />
             </Grid>
 
-            <TeamGrid
-                title="Meet Our Chefs"
-                description="Real professionals crafting courses — not generic content."
-                viewAllText="View all chefs →"
-                viewAllLink="/extra/chefs"
-                members={[
-                    {name: "Marcus L.", role: "French Cuisine", image: "team1"},
-                    {name: "Sarah J.", role: "Molecular Gastronomy", image: "team2"},
-                    {name: "Kenji T.", role: "Fermentation", image: "team4"},
-                    {name: "Maria G.", role: "Pastry Arts", image: "team3"},
+            {/* NO SUBSCRIPTION MODEL */}
+            <ValuesIcons
+                tagline="NO SUBSCRIPTIONS"
+                title="Train Without Monthly Fees"
+                description="Traditional fitness apps lock you into €30–€60 monthly payments. We don’t."
+                values={[
+                    {
+                        title: "No Contracts",
+                        description: "Use tokens anytime without obligations.",
+                        icon: "subscriptions",
+                    },
+                    {
+                        title: "Full Control",
+                        description: "Decide when and how you train.",
+                        icon: "settings",
+                    },
+                    {
+                        title: "Transparent Pricing",
+                        description: "You always know what you pay for.",
+                        icon: "priceTag",
+                    },
                 ]}
             />
 
+            {/* TESTIMONIALS */}
             <TestimonialsSlider
-                title="What Students Say About Our Cooking Courses"
-                description="Trusted by home cooks and aspiring chefs who want to master real culinary skills."
+                title="Athletes Love It"
+                description="4.9/5 average rating from real users."
                 testimonials={[
                     {
-                        name: "Leon Sutherland",
-                        image: "review9",
+                        name: "Mark T.",
+                        image: "image1",
                         rating: 5,
-                        text:
-                            "I started with basic courses and quickly moved to advanced techniques. The lessons are clear, practical, and easy to follow at home.",
+                        text: "AI adapts my plan weekly based on performance and recovery. It actually feels personal, not generic.",
                     },
                     {
-                        name: "Anna Peterson",
-                        image: "review12",
+                        name: "Anna R.",
+                        image: "image1",
                         rating: 5,
-                        text:
-                            "Loved how the platform explains not just recipes, but techniques. I finally understand why dishes turn out the way they do.",
+                        text: "Coach feedback improved my squat technique drastically. I gained confidence under the bar.",
                     },
                     {
-                        name: "Marco Rossi",
-                        image: "review10",
-                        rating: 4,
-                        text:
-                            "Great structure and professional instructors. The step-by-step videos helped me significantly improve my cooking skills.",
+                        name: "David L.",
+                        image: "image1",
+                        rating: 4.4,
+                        text: "Finally a fitness app without subscriptions. Pay once, train smart, repeat.",
                     },
                     {
-                        name: "Sofia Martinez",
-                        image: "review13",
+                        name: "Chris M.",
+                        image: "image1",
+                        rating: 5,
+                        text: "The token system is genius. I only pay for what I actually use.",
+                    },
+                    {
+                        name: "Elena S.",
+                        image: "image1",
                         rating: 4.5,
-                        text:
-                            "The courses are well organized and inspiring. Customer support was responsive when I had questions about my learning plan.",
+                        text: "I love how structured the plans are. No more guessing what to do in the gym.",
                     },
                     {
-                        name: "Daniel Kim",
-                        rating: 4.8,
-                        image: "review11",
-                        text:
-                            "I cook at home almost every day now. The platform gave me confidence, techniques, and creativity in the kitchen.",
+                        name: "Tom K.",
+                        image: "image1",
+                        rating: 4.9,
+                        text: "Progress tracking keeps me accountable. I’ve added 15kg to my deadlift in 3 months.",
                     },
                     {
-                        name: "Emily Brown",
+                        name: "Sophie W.",
+                        image: "image1",
+                        rating: 5,
+                        text: "The AI adjusts volume when I feel fatigued. That alone saved me from burnout.",
+                    },
+                    {
+                        name: "Daniel P.",
+                        image: "image1",
                         rating: 4.8,
-                        image: "review7",
-                        text:
-                            "Perfect for beginners and advanced cooks alike. High-quality videos, clear explanations, and practical recipes.",
+                        text: "Clean interface, clear workouts, zero fluff. Exactly what athletes need.",
                     },
                 ]}
             />
 
-            <HowItWorksSection
-                label="Join the team"
-                title={
-                    <>
-                        Become part of <span>our global team</span>
-                    </>
-                }
-                description={
-                    <>
-                        We collaborate with chefs, creators, and professionals from all over
-                        the world. If you value quality, independence, and meaningful work —
-                        we’d love to hear from you.
-                    </>
-                }
-                highlights={[
-                    {
-                        title: "Work remotely",
-                        description: "Collaborate from anywhere in the world.",
-                    },
-                    {
-                        title: "Flexible collaboration",
-                        description: "No rigid schedules or micromanagement.",
-                    },
-                    {
-                        title: "Real impact",
-                        description: "Your work directly helps people learn and grow.",
-                    },
-                ]}
-                steps={[
-                    {
-                        icon: "login",
-                        title: "Apply",
-                        description: "Fill out a short application form.",
-                    },
-                    {
-                        icon: "settings",
-                        title: "We review",
-                        description: "Our team carefully reviews your profile.",
-                    },
-                    {
-                        icon: "community",
-                        title: "Start collaborating",
-                        description: "If it’s a match, we’ll reach out to you.",
-                    },
-                ]}
-                note={
-                    <>
-                        Interested?{" "}
-                        <a
-                            href="/join-team"
-                            style={{
-                                color: "var(--primary-color)",
-                                fontWeight: 600,
-                                textDecoration: "underline",
-                            }}
-                        >
-                            Join our team →
-                        </a>
-                    </>
-                }
+            {/* FINAL CTA */}
+            <Cta
+                title="Ready to Level Up?"
+                description="Create your account today and receive free starter tokens."
+                buttonText="Create Account"
+                link="/"
             />
 
+            {/* FAQ */}
             <FAQ
                 items={[
                     {
-                        question: "What is this cooking platform?",
+                        question: "What is the difference between AI and Coach plans?",
                         answer:
-                            "This is an online culinary learning platform that offers professional cooking courses created by chefs and instant AI-powered answers to culinary questions.",
+                            "AI plans are instant and cost fewer tokens. Coach plans are manually created and more detailed.",
                     },
                     {
-                        question: "What types of services do you offer?",
-                        answer:
-                            "We offer two types of services: full cooking courses written by professional chefs and fast AI-generated answers for quick culinary guidance.",
+                        question: "Do tokens expire?",
+                        answer: "No, tokens never expire.",
                     },
                     {
-                        question: "What is the difference between chef-written courses and AI answers?",
+                        question: "How fast do I receive my plan?",
                         answer:
-                            "Chef-written courses are detailed, structured learning programs, while AI answers provide quick, instant responses for specific cooking questions.",
+                            "AI plans are instant. Coach plans are delivered within 24–48 hours.",
                     },
                     {
-                        question: "Do I receive learning materials after completing a course?",
+                        question: "Can I switch between AI and Coach?",
                         answer:
-                            "Yes. After completing a course, you receive a downloadable PDF file containing the full course materials.",
-                    },
-                    {
-                        question: "How can I purchase courses?",
-                        answer:
-                            "Courses can be purchased using tokens available on the platform.",
-                    },
-                    {
-                        question: "How do tokens work?",
-                        answer:
-                            "Tokens are an internal currency that you can buy with real money and use to purchase courses or AI services.",
-                    },
-                    {
-                        question: "Can I use tokens for both courses and AI answers?",
-                        answer:
-                            "Yes. Tokens can be used to access chef-written courses as well as AI-powered culinary answers.",
-                    },
-                    {
-                        question: "What happens if I run out of tokens?",
-                        answer:
-                            "You can top up your token balance at any time using your preferred payment method.",
+                            "Yes, you can use tokens for either option anytime.",
                     },
                 ]}
             />

@@ -12,17 +12,21 @@ interface FAQItem {
 
 interface FAQProps {
     items: FAQItem[];
+    title?: string;
+    description?: string;
 }
 
-const FAQ: React.FC<FAQProps> = ({ items }) => {
+const FAQ: React.FC<FAQProps> = ({ items, title = "Frequently Asked Questions", description }) => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
-    const toggle = (idx: number) =>
-        setOpenIndex(openIndex === idx ? null : idx);
+    const toggle = (idx: number) => setOpenIndex(openIndex === idx ? null : idx);
 
     return (
         <section className={styles.section}>
             <div className={styles.inner}>
-                <h2 className={styles.title}>Questions & Answers</h2>
+                <div className={styles.header}>
+                    <h2 className={styles.title}>{title}</h2>
+                    {description && <p className={styles.description}>{description}</p>}
+                </div>
 
                 <div className={styles.grid}>
                     {items.map((item, idx) => {
@@ -41,7 +45,7 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
                                     <span>{item.question}</span>
                                     <motion.span
                                         animate={{ rotate: isOpen ? 180 : 0 }}
-                                        transition={{ duration: 0.2 }}
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
                                         className={styles.arrow}
                                     >
                                         <IoIosArrowDown />
@@ -54,7 +58,7 @@ const FAQ: React.FC<FAQProps> = ({ items }) => {
                                             initial={{ height: 0, opacity: 0 }}
                                             animate={{ height: "auto", opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.25 }}
+                                            transition={{ duration: 0.3, ease: "easeOut" }}
                                             className={styles.answerWrapper}
                                         >
                                             <div className={styles.answer}>

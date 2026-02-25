@@ -1,186 +1,169 @@
 .card {
   position: relative;
-  background: linear-gradient(180deg, #0f1b14 0%, #0c1410 100%);
-  border-radius: 18px;
-  padding: 28px 24px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 48px 32px 32px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-  transition: all 0.25s ease;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #0f172a;
 
   &:hover {
-    transform: translateY(-6px);
+    border-color: #cbd5e1;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
   }
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.priceValue {
+  font-size: 48px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.oneTime {
+  font-size: 14px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.tokenHighlight {
+  font-size: 20px;
+  font-weight: 700;
+  color: #10b981; // Зелений як на референсі
+  margin-top: 12px;
 }
 
 /* ===== Badge ===== */
-.badgeTop {
+.badgeWrapper {
   position: absolute;
   top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 6px 14px;
-  font-size: 11px;
-  font-weight: 700;
-  border-radius: 999px;
-  background: #22c55e;
-  color: #04210f;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-/* ===== Title ===== */
-.title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #fff;
-}
-
-/* ===== Price ===== */
-.priceRow {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.price {
-  font-size: 40px;
-  font-weight: 900;
-  color: #22c55e;
-  letter-spacing: -0.02em;
-}
-
-.tokens {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-/* ===== Custom ===== */
-.customBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.quickAmounts {
-  display: flex;
-  gap: 8px;
-}
-
-.quickBtn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 6px 12px;
-  font-size: 13px;
-  cursor: pointer;
-  color: #fff;
-
-  &:hover {
-    border-color: #22c55e;
-    color: #22c55e;
-  }
-}
-
-.preview {
-  background: rgba(34, 197, 94, 0.12);
-  border: 1px solid rgba(34, 197, 94, 0.35);
-  border-radius: 12px;
-  padding: 12px;
-  text-align: center;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
-  gap: 5px;
-
-  p {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    text-transform: uppercase;
-  }
-
-  span {
-    font-size: 24px;
-    font-weight: 700;
-    color: #22c55e;
-  }
 }
 
-.customHint {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-
-  b {
-    color: #22c55e;
-  }
+.badgeTop {
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* ===== Description ===== */
+/* ===== Content & Description ===== */
+.content {
+  flex-grow: 1;
+  margin-bottom: 32px;
+}
+
 .description {
-  font-size: 14px;
-  color: #d1d5db;
-  line-height: 1.55;
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
 }
 
-/* ===== Features ===== */
-.features {
-  list-style: none;
-  padding: 0;
-  margin: 4px 0 14px;
+/* ===== Custom Section ===== */
+.customSection {
+  .divider {
+    height: 1px;
+    background: #f1f5f9;
+    margin-bottom: 24px;
+  }
+}
+
+.inputLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.tokenInput {
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  padding: 8px 12px !important;
+  margin-bottom: 20px;
+
+  &:focus-within {
+    border-color: #2563eb !important;
+  }
+}
+
+.totalRow {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 600;
+}
 
-  li {
-    font-size: 14px;
-    color: #e5e7eb;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.totalValue {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+}
 
-    &::before {
-      content: "✓";
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #22c55e;
-      color: #04210f;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 900;
+/* ===== CTA Button ===== */
+.actionButton {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease !important;
+
+  &:hover {
+    background-color: #e2e8f0 !important;
+  }
+}
+
+/* ===== Variants ===== */
+.pro {
+  border: 2px solid #2563eb; // Синя рамка для популярного плану
+
+  .actionButton {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+
+    &:hover {
+      background-color: #1d4ed8 !important;
     }
   }
 }
 
-.cta {
-  margin-top: auto;
-}
-
-/* ===== Variants ===== */
-.starter {
-}
-
-.pro {
-  border: 2px solid #22c55e;
-  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25),
-  0 25px 60px rgba(34, 197, 94, 0.35);
-}
-
-.premium {
-  border-color: #a3e635;
-}
-
 .custom {
-  border-style: dashed;
-}
-
-/* ===== Mobile ===== */
-@media (max-width: 768px) {
-  .price {
-    font-size: 32px;
-  }
+  background: #ffffff;
 }

@@ -21,28 +21,28 @@ export const headerContent = {
         href: "/"
     },
     links: [
-        {label: `About Our Mission`, href: "/about-us"},
-        {label: "How It Works", href: "/get-started"},
-        {label: "Chefs", href: "/extra/chefs"},
-        {label: "Pricing", href: "/pricing"},
-        {label: "Career", href: "/join-team"},
+        {label: `About Us`, href: "/about-us"},
+        {label: "Get Started", href: "/get-started"},
+        {label: "Our Trainers", href: "/extra/chefs"},
+        {label: "Plans", href: "/pricing"},
         {label: "Contact", href: "/contact-us"},
+        {label: "Join to Us", href: "/join-team"},
         {label: "Faq", href: "/faq"},
     ]
 };
 
 export const footerContent = {
-    logo: {src: media.logo.src, alt: "Site Logo", href: "/"},
+    logo: {src: media.logo_white.src, alt: "Site Logo", href: "/"},
     columns: [
         {
             title: "Navigate",
             links: [
-                {label: `About Our Mission`, href: "/about-us"},
-                {label: "How It Works", href: "/get-started"},
-                {label: "Chefs", href: "/extra/chefs"},
-                {label: "Pricing", href: "/pricing"},
-                {label: "Career", href: "/join-team"},
+                {label: `About Us`, href: "/about-us"},
+                {label: "Get Started", href: "/get-started"},
+                {label: "Our Trainers", href: "/extra/chefs"},
+                {label: "Plans", href: "/pricing"},
                 {label: "Contact", href: "/contact-us"},
+                {label: "Join to Us", href: "/join-team"},
                 {label: "Faq", href: "/faq"},
             ]
         },

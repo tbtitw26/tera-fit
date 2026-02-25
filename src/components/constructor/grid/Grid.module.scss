@@ -20,12 +20,30 @@
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+  width: 100%; // Гарантуємо, що обгортка на всю ширину
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  width: 100%;
+  margin: 0 auto;
+  // Прибираємо max-width або ставимо такий самий, як у секції ValuesIcons,
+  // щоб була візуальна симетрія по всьому сайту.
+  max-width: 1280px;
+  padding: 0 20px;
+
+  /* Використовуємо gap з пропсів, але тут дефолт */
   gap: 24px;
+
+  /* На планшетах 2 колонки */
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* На мобільних 1 колонка */
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* Desktop */

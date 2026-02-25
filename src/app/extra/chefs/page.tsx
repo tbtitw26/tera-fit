@@ -1,31 +1,21 @@
 "use client";
 
-import {useMemo, useState} from "react";
+import { useMemo, useState } from "react";
 import ExpertCard from "@/components/extra/experts/expert-card/Card";
-import {experts} from "@/data/experts";
-import Grid from "@/components/constructor/grid/Grid";
+import { experts } from "@/data/experts";
 import ExpertsFilterBar from "@/components/extra/experts/expert-filter-bar/ExpertFilterBar";
 import HeroSection from "@/components/constructor/hero/Hero";
-import Link from "next/link";
+import styles from "./ChefsPage.module.scss";
 
 export default function Page() {
     const [search, setSearch] = useState("");
-    const [cuisine, setCuisine] = useState("");
+    const [specialty, setSpecialty] = useState("");
     const [level, setLevel] = useState("");
+    const [rating, setRating] = useState(""); // окремий стан рейтингу
 
-    // зібрати всі унікальні кухні
-    const cuisines = useMemo(() => {
-        return Array.from(
-            new Set(experts.flatMap((e) => e.specialties))
-        ).sort();
+    const specialties = useMemo(() => {
+        return Array.from(new Set(experts.flatMap((e) => e.specialties))).sort();
     }, []);
-
-    // фільтрація
-    const LEVEL_ORDER = {
-        advanced: 0,
-        intermediate: 1,
-        beginner: 2,
-    };
 
     const filteredExperts = useMemo(() => {
         return experts.filter((e) => {
@@ -35,48 +25,53 @@ export default function Page() {
                     s.toLowerCase().includes(search.toLowerCase())
                 );
 
-            const byCuisine =
-                !cuisine || e.specialties.includes(cuisine);
+            const bySpecialty = !specialty || e.specialties.includes(specialty);
 
-            const byLevel =
-                !level || e.experienceLevel === level;
+            const byLevel = !level || e.experienceLevel === level;
 
-            return byName && byCuisine && byLevel;
+            const byRating =
+                !rating ||
+                (rating === "4.5" && e.rating >= 4.5) ||
+                (rating === "4.0" && e.rating >= 4.0);
+
+            return byName && bySpecialty && byLevel && byRating;
         });
-    }, [search, cuisine, level]);
+    }, [search, specialty, level, rating]);
 
     return (
         <>
-
             <HeroSection
                 title={
                     <>
-                        Choose your <span>personal chef</span> and learn with confidence
+                        Find your <span>personal trainer</span> and reach your goals
                     </>
                 }
-                description="Browse professional chefs by cuisine, experience, and teaching style. Learn directly from experts who match your goals — from fundamentals to advanced techniques."
+                description="Browse professional trainers by specialty, experience level, and rating. Learn directly from experts who match your fitness goals."
                 image="image18"
             />
 
-            <div>
-                <ExpertsFilterBar
-                    search={search}
-                    onSearchChange={setSearch}
-                    cuisine={cuisine}
-                    onCuisineChange={setCuisine}
-                    level={level}
-                    onLevelChange={setLevel}
-                    cuisines={cuisines}
-                />
+            <div className={styles.wrapper}>
+                <div className={styles.sidebar}>
+                    <ExpertsFilterBar
+                        search={search}
+                        onSearchChange={setSearch}
+                        specialty={specialty}
+                        onSpecialtyChange={setSpecialty}
+                        level={level}
+                        onLevelChange={setLevel}
+                        rating={rating}             // передали рейтинг
+                        onRatingChange={setRating}  // передали функцію
+                        specialties={specialties}
+                    />
+                </div>
 
-                <Grid columns={4} gap="2rem">
-                    {filteredExperts.map((expert) => (
-                            <ExpertCard
-                                key={expert.id}
-                                expert={expert}
-                            />
-                    ))}
-                </Grid>
+                <div className={styles.content}>
+                    <div className={styles.grid}>
+                        {filteredExperts.map((expert) => (
+                            <ExpertCard key={expert.id} expert={expert} />
+                        ))}
+                    </div>
+                </div>
             </div>
         </>
     );

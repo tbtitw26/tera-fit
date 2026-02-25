@@ -1,5 +1,4 @@
-import {Expert} from "@/types/expert";
-
+import { Expert } from "@/types/expert";
 
 export function getExpertBySlug(slug: string) {
     return experts.find((e) => e.slug === slug);
@@ -12,24 +11,24 @@ export const experts: Expert[] = [
         avatar: "team4",
         fullName: "Marcus Laurent",
         rating: 4.9,
-        subtitle: "French Cuisine",
+        subtitle: "Strength Training",
         experience: "15 Years",
-        education: "Tsuji Culinary School",
+        education: "NASM Certified",
         experienceLevel: "advanced",
-        itemsCount: 14,
-        bio: "Specialist in classic techniques with a structured and systematic approach.",
+        itemsCount: 320,
+        bio: "Specialist in strength development and performance optimization.",
         categories: ["Advanced"],
-        specialties: ["French"],
+        specialties: ["Strength", "Powerlifting"],
         profile: {
-            headline: "Classic French cuisine refined through discipline",
+            headline: "Build strength with precision and discipline",
             about: [
-                "Marcus Laurent is a classically trained French chef with over 15 years of experience.",
-                "His work focuses on precision, technique, and consistent high-quality results."
+                "Marcus helps athletes maximize strength safely.",
+                "His programs are structured and data-driven."
             ],
-            philosophy: "Master technique first — creativity follows naturally.",
+            philosophy: "Strength is built through consistency.",
             achievements: [
-                "Worked in Michelin-starred restaurants",
-                "Mentored over 200 professional chefs"
+                "Coached 50+ competitive athletes",
+                "15 years professional experience"
             ],
         }
     },
@@ -40,24 +39,24 @@ export const experts: Expert[] = [
         avatar: "team2",
         fullName: "Sarah Johnson",
         rating: 4.8,
-        subtitle: "Molecular Gastronomy",
+        subtitle: "Fat Loss Coaching",
         experience: "12 Years",
-        education: "Le Cordon Bleu",
+        education: "ACE, Precision Nutrition",
         experienceLevel: "advanced",
-        itemsCount: 11,
-        bio: "Explains complex processes simply with a focus on experimentation.",
+        itemsCount: 500,
+        bio: "Helping clients lose weight sustainably and safely.",
         categories: ["Advanced"],
-        specialties: ["Molecular", "French"],
+        specialties: ["Fat Loss", "Lifestyle Coaching"],
         profile: {
-            headline: "Science meets creativity in modern cuisine",
+            headline: "Sustainable fat loss without extremes",
             about: [
-                "Sarah specializes in molecular gastronomy and experimental cooking.",
-                "She makes complex culinary science accessible for professionals."
+                "Sarah combines training and nutrition.",
+                "She focuses on long-term lifestyle changes."
             ],
-            philosophy: "Curiosity and experimentation drive innovation.",
+            philosophy: "Consistency beats intensity.",
             achievements: [
-                "International culinary workshops",
-                "Published research-based recipes"
+                "500+ transformation clients",
+                "Certified nutrition coach"
             ],
         }
     },
@@ -68,24 +67,24 @@ export const experts: Expert[] = [
         avatar: "team1",
         fullName: "Kenji Tanaka",
         rating: 4.7,
-        subtitle: "Japanese Cuisine",
-        experience: "18 Years",
-        education: "Tokyo Culinary Institute",
-        experienceLevel: "advanced",
-        itemsCount: 9,
-        bio: "Process-driven approach with deep respect for time and control.",
-        categories: ["Advanced"],
-        specialties: ["Japanese"],
+        subtitle: "Mobility & Flexibility",
+        experience: "10 Years",
+        education: "FRC, Yoga Alliance",
+        experienceLevel: "intermediate",
+        itemsCount: 210,
+        bio: "Improving movement quality and flexibility.",
+        categories: ["Intermediate"],
+        specialties: ["Mobility", "Injury Prevention"],
         profile: {
-            headline: "Discipline, balance, and respect for ingredients",
+            headline: "Move better. Feel stronger.",
             about: [
-                "Kenji Tanaka is a master of traditional Japanese cuisine.",
-                "He emphasizes timing, balance, and precision in every dish."
+                "Kenji focuses on joint health and mobility.",
+                "His sessions prevent injuries and improve performance."
             ],
-            philosophy: "Respect the process, honor the ingredients.",
+            philosophy: "Quality movement first.",
             achievements: [
-                "Trained under Kyoto masters",
-                "Specialist in kaiseki cuisine"
+                "Rehabilitation program specialist",
+                "Certified mobility coach"
             ],
         }
     },
@@ -96,24 +95,24 @@ export const experts: Expert[] = [
         avatar: "team3",
         fullName: "Maria Garcia",
         rating: 4.6,
-        subtitle: "Spanish Pastry",
-        experience: "10 Years",
-        education: "Madrid Pastry Academy",
+        subtitle: "Functional Training",
+        experience: "8 Years",
+        education: "CrossFit L2",
         experienceLevel: "intermediate",
-        itemsCount: 8,
-        bio: "A balance of aesthetics and precision in pastry techniques.",
+        itemsCount: 180,
+        bio: "Functional workouts for real-life strength.",
         categories: ["Intermediate"],
-        specialties: ["Spanish", "Pastry"],
+        specialties: ["Endurance", "Athletic Conditioning"],
         profile: {
-            headline: "Pastry as art and engineering",
+            headline: "Train for life, not just aesthetics",
             about: [
-                "Maria combines Spanish traditions with modern pastry aesthetics.",
-                "Her desserts focus on balance and visual perfection."
+                "Maria integrates strength and endurance.",
+                "Her workouts improve daily performance."
             ],
-            philosophy: "Dessert should be beautiful and precise.",
+            philosophy: "Train smart, not just hard.",
             achievements: [
-                "Award-winning pastry chef",
-                "Featured in European pastry magazines"
+                "CrossFit competition coach",
+                "Group training expert"
             ],
         }
     },
@@ -124,24 +123,24 @@ export const experts: Expert[] = [
         avatar: "team5",
         fullName: "Alex Robinson",
         rating: 4.5,
-        subtitle: "Home Cooking",
+        subtitle: "Beginner Fitness",
         experience: "6 Years",
-        education: "Online Culinary Program",
+        education: "ISSA Certified",
         experienceLevel: "beginner",
-        itemsCount: 5,
-        bio: "Perfect for beginners starting from scratch.",
+        itemsCount: 150,
+        bio: "Perfect for beginners starting from zero.",
         categories: ["Beginner"],
-        specialties: ["International"],
+        specialties: ["Weight Loss", "Basic Strength"],
         profile: {
-            headline: "Cooking made simple for everyone",
+            headline: "Fitness made simple",
             about: [
-                "Alex focuses on easy, accessible home cooking.",
-                "His courses are ideal for absolute beginners."
+                "Alex helps beginners start confidently.",
+                "Programs are clear and easy to follow."
             ],
-            philosophy: "Anyone can cook with the right guidance.",
+            philosophy: "Start small. Stay consistent.",
             achievements: [
-                "10k+ beginner students",
-                "Popular online cooking instructor"
+                "Beginner transformation specialist",
+                "Online coaching mentor"
             ],
         }
     },
@@ -152,276 +151,294 @@ export const experts: Expert[] = [
         avatar: "team6",
         fullName: "Luca Bianchi",
         rating: 4.8,
-        subtitle: "Italian Cuisine",
+        subtitle: "Italian Fitness",
         experience: "14 Years",
-        education: "ALMA Culinary School",
+        education: "ALMA Fitness School",
         experienceLevel: "advanced",
-        itemsCount: 16,
-        bio: "Traditional Italian recipes with a modern approach.",
+        itemsCount: 160,
+        bio: "Traditional techniques with modern fitness approach.",
         categories: ["Advanced"],
-        specialties: ["Italian"],
+        specialties: ["Strength", "Functional Training"],
         profile: {
-            headline: "Italian tradition with a modern soul",
+            headline: "Tradition meets modern fitness",
             about: [
-                "Luca preserves authentic Italian flavors.",
-                "He modernizes classics without losing tradition."
+                "Luca preserves classic methods and modernizes workouts.",
+                "He emphasizes proper form and results."
             ],
-            philosophy: "Tradition evolves, but never disappears.",
+            philosophy: "Consistency over gimmicks.",
             achievements: [
-                "Worked in Rome & Milan",
-                "Specialist in regional Italian cuisine"
+                "Worked with elite athletes",
+                "Specialist in functional conditioning"
             ],
         }
     },
-
     {
         id: "expert_emily_c",
         slug: "emily-chen",
         avatar: "team11",
         fullName: "Emily Chen",
         rating: 4.7,
-        subtitle: "Asian Fusion",
+        subtitle: "Yoga & Mindfulness",
         experience: "11 Years",
-        education: "Hong Kong Culinary Academy",
+        education: "Yoga Alliance, Mindfulness Coach",
         experienceLevel: "advanced",
-        itemsCount: 13,
-        bio: "Asian fusion cuisine with creative techniques.",
+        itemsCount: 220,
+        bio: "Combines yoga, breathing, and mindfulness for holistic wellness.",
         categories: ["Advanced"],
-        specialties: ["Chinese", "Fusion"],
+        specialties: ["Yoga", "Mindfulness"],
         profile: {
-            headline: "Where Asian flavors collide creatively",
+            headline: "Balance your body and mind",
             about: [
-                "Emily blends Asian cuisines into modern fusion dishes.",
-                "Her style is bold, experimental, and refined."
+                "Emily guides clients to strength, flexibility, and mental clarity.",
+                "Her holistic programs improve lifestyle and wellbeing."
             ],
-            philosophy: "Fusion must respect origins.",
+            philosophy: "Wellness is harmony of mind and body.",
             achievements: [
-                "Fusion menu consultant",
-                "International food festivals"
+                "Trained 300+ yoga practitioners",
+                "Mindfulness workshops worldwide"
             ],
         }
     },
-
     {
         id: "expert_david_m",
         slug: "david-miller",
         avatar: "team7",
         fullName: "David Miller",
         rating: 4.6,
-        subtitle: "BBQ & Grill",
+        subtitle: "Cardio & Endurance",
         experience: "16 Years",
-        education: "Texas BBQ Institute",
+        education: "NASM Certified",
         experienceLevel: "advanced",
-        itemsCount: 12,
-        bio: "Low & slow American BBQ master.",
+        itemsCount: 270,
+        bio: "Expert in cardio conditioning and endurance sports.",
         categories: ["Advanced"],
-        specialties: ["American"],
+        specialties: ["Endurance", "HIIT"],
         profile: {
-            headline: "Low & slow BBQ perfection",
+            headline: "Push limits safely and effectively",
             about: [
-                "David is a master of American BBQ techniques.",
-                "He focuses on smoking, timing, and fire control."
+                "David designs endurance programs for athletes and hobbyists.",
+                "Specializes in HIIT and long-term cardio planning."
             ],
-            philosophy: "Patience creates flavor.",
+            philosophy: "Consistency builds performance.",
             achievements: [
-                "BBQ championship finalist",
-                "Pitmaster instructor"
+                "Coached 100+ marathon runners",
+                "HIIT certification instructor"
             ],
         }
     },
-
     {
         id: "expert_anna_k",
         slug: "anna-kowalska",
         avatar: "team12",
         fullName: "Anna Kowalska",
         rating: 4.5,
-        subtitle: "Healthy Cuisine",
+        subtitle: "Nutrition & Weight Loss",
         experience: "9 Years",
-        education: "Warsaw Nutrition Academy",
+        education: "Precision Nutrition, ISSA",
         experienceLevel: "intermediate",
-        itemsCount: 10,
-        bio: "Healthy and balanced European meals.",
+        itemsCount: 190,
+        bio: "Helps clients achieve sustainable weight loss through training and diet.",
         categories: ["Intermediate"],
-        specialties: ["Polish", "European"],
+        specialties: ["Nutrition", "Fat Loss"],
         profile: {
-            headline: "Healthy food without compromise",
+            headline: "Healthy habits, real results",
             about: [
-                "Anna specializes in balanced European cuisine.",
-                "She combines nutrition with great taste."
+                "Anna creates personalized plans combining training and nutrition.",
+                "Focuses on long-term sustainable results."
             ],
-            philosophy: "Health and pleasure can coexist.",
+            philosophy: "Small habits, big changes.",
             achievements: [
-                "Certified nutrition chef",
-                "Wellness retreat menus"
+                "Over 400 transformation clients",
+                "Certified nutrition coach"
             ],
         }
     },
-
     {
         id: "expert_pierre_d",
         slug: "pierre-dubois",
         avatar: "team8",
         fullName: "Pierre Dubois",
         rating: 4.9,
-        subtitle: "French Pastry",
+        subtitle: "Strength & Conditioning",
         experience: "20 Years",
-        education: "École Ferrandi",
+        education: "NSCA, NASM",
         experienceLevel: "advanced",
-        itemsCount: 18,
-        bio: "Classic French pastry master.",
+        itemsCount: 350,
+        bio: "Elite strength and conditioning coach for athletes.",
         categories: ["Advanced"],
-        specialties: ["French", "Pastry"],
+        specialties: ["Strength", "Athletic Conditioning"],
         profile: {
-            headline: "The art of classic French pastry",
+            headline: "Maximize power and performance",
             about: [
-                "Pierre is a master of traditional French desserts.",
-                "His teaching focuses on structure and consistency."
+                "Pierre has trained professional athletes across multiple sports.",
+                "Focuses on progressive overload and recovery."
             ],
-            philosophy: "Precision is the soul of pastry.",
+            philosophy: "Strong foundations lead to peak performance.",
             achievements: [
-                "20+ years teaching pastry",
-                "Worked with top Paris patisseries"
+                "Worked with Olympic athletes",
+                "Published performance training guides"
             ],
         }
     },
-
     {
         id: "expert_sofia_n",
         slug: "sofia-novak",
         avatar: "team13",
         fullName: "Sofia Novak",
         rating: 4.6,
-        subtitle: "Vegetarian Cuisine",
+        subtitle: "Pilates & Mobility",
         experience: "8 Years",
-        education: "Plant-Based Culinary School",
+        education: "Pilates Certification, FRC",
         experienceLevel: "intermediate",
-        itemsCount: 9,
-        bio: "Creative vegetarian cuisine.",
+        itemsCount: 170,
+        bio: "Pilates instructor specializing in mobility and core strength.",
         categories: ["Intermediate"],
-        specialties: ["Vegetarian"],
+        specialties: ["Pilates", "Mobility"],
         profile: {
-            headline: "Vegetarian food without limits",
+            headline: "Strengthen your core, improve movement",
             about: [
-                "Sofia redefines vegetarian cuisine.",
-                "Her dishes are creative and seasonal."
+                "Sofia creates programs improving posture, balance, and flexibility.",
+                "Focuses on sustainable, injury-free training."
             ],
-            philosophy: "Plants deserve creativity.",
+            philosophy: "Strong core, strong body.",
             achievements: [
-                "Plant-based cooking advocate",
-                "Eco cuisine workshops"
+                "Certified Pilates instructor",
+                "Mobility workshops in Europe"
             ],
         }
     },
-
     {
         id: "expert_omar_h",
         slug: "omar-hassan",
         avatar: "team9",
         fullName: "Omar Hassan",
         rating: 4.7,
-        subtitle: "Middle Eastern Cuisine",
+        subtitle: "CrossFit & Functional Training",
         experience: "13 Years",
-        education: "Beirut Culinary Institute",
+        education: "CrossFit L3",
         experienceLevel: "advanced",
-        itemsCount: 11,
-        bio: "Authentic Middle Eastern cooking.",
+        itemsCount: 260,
+        bio: "CrossFit coach focusing on functional strength and conditioning.",
         categories: ["Advanced"],
-        specialties: ["Middle Eastern"],
+        specialties: ["Functional Training", "CrossFit"],
         profile: {
-            headline: "Authentic Middle Eastern flavors",
+            headline: "Train hard, move well",
             about: [
-                "Omar brings traditional Middle Eastern recipes.",
-                "His cuisine reflects family and heritage."
+                "Omar builds strength and endurance through functional movements.",
+                "Coaches both beginners and elite athletes."
             ],
-            philosophy: "Food tells history.",
+            philosophy: "Functional strength improves life quality.",
             achievements: [
-                "Regional cuisine ambassador",
-                "Cultural cooking events"
+                "CrossFit level 3 trainer",
+                "Functional training workshops internationally"
             ],
         }
     },
-
     {
         id: "expert_julia_s",
         slug: "julia-schneider",
         avatar: "team15",
         fullName: "Julia Schneider",
         rating: 4.5,
-        subtitle: "European Home Cooking",
+        subtitle: "Home Fitness",
         experience: "7 Years",
-        education: "Berlin Culinary Studio",
+        education: "ISSA Certified",
         experienceLevel: "beginner",
-        itemsCount: 6,
-        bio: "Simple European comfort food.",
+        itemsCount: 140,
+        bio: "Provides beginner-friendly home workouts.",
         categories: ["Beginner"],
-        specialties: ["German", "European"],
+        specialties: ["Bodyweight Training", "Home Fitness"],
         profile: {
-            headline: "Comfort food for everyday life",
+            headline: "Get fit at home with ease",
             about: [
-                "Julia focuses on simple European meals.",
-                "Her style is cozy and approachable."
+                "Julia designs short, effective routines for home use.",
+                "Programs require minimal equipment."
             ],
-            philosophy: "Food should feel like home.",
+            philosophy: "Consistency > complexity.",
             achievements: [
-                "Popular beginner courses",
-                "Family-oriented cooking programs"
+                "Created online home fitness programs",
+                "100k+ online followers"
             ],
         }
     },
-
     {
         id: "expert_mateo_r",
         slug: "mateo-rossi",
         avatar: "team10",
         fullName: "Mateo Rossi",
         rating: 4.8,
-        subtitle: "Mediterranean Cuisine",
+        subtitle: "Mediterranean Fitness",
         experience: "15 Years",
-        education: "Mediterranean Culinary Academy",
+        education: "ACE, NASM",
         experienceLevel: "advanced",
-        itemsCount: 14,
-        bio: "Mediterranean seafood & classics.",
+        itemsCount: 310,
+        bio: "Combines Mediterranean lifestyle with fitness and nutrition.",
         categories: ["Advanced"],
-        specialties: ["Mediterranean", "Italian"],
+        specialties: ["Endurance", "Functional Training"],
         profile: {
-            headline: "Mediterranean freshness and balance",
+            headline: "Fitness inspired by lifestyle",
             about: [
-                "Mateo specializes in Mediterranean seafood.",
-                "His cuisine highlights freshness and simplicity."
+                "Mateo integrates diet, endurance, and strength training.",
+                "Focus on holistic performance and longevity."
             ],
-            philosophy: "Freshness is everything.",
+            philosophy: "Healthy lifestyle supports fitness goals.",
             achievements: [
-                "Coastal restaurant consultant",
-                "Seafood cuisine expert"
+                "Coached professional endurance athletes",
+                "Author of Mediterranean fitness guides"
             ],
         }
     },
-
     {
         id: "expert_nina_p",
         slug: "nina-petrov",
         avatar: "team14",
         fullName: "Nina Petrov",
         rating: 4.6,
-        subtitle: "Eastern European Cuisine",
+        subtitle: "Eastern European Fitness",
         experience: "12 Years",
-        education: "Prague Culinary Institute",
+        education: "NASM, FMS",
         experienceLevel: "intermediate",
-        itemsCount: 10,
-        bio: "Eastern European traditional cuisine.",
+        itemsCount: 200,
+        bio: "Traditional Eastern European training methods modernized.",
         categories: ["Intermediate"],
-        specialties: ["Ukrainian", "Czech"],
+        specialties: ["Strength", "Mobility"],
         profile: {
-            headline: "Eastern European traditions reimagined",
+            headline: "Modern training with traditional roots",
             about: [
-                "Nina brings authentic Eastern European recipes.",
-                "Her dishes honor tradition with modern presentation."
+                "Nina combines Eastern European strength techniques with mobility training.",
+                "Focuses on safe, effective methods."
             ],
             philosophy: "Respect roots, refine execution.",
             achievements: [
-                "Traditional cuisine preservation",
-                "Cultural food workshops"
+                "Certified functional training coach",
+                "Organized fitness workshops"
+            ],
+        }
+    },
+    {
+        id: "expert_ivan_v",
+        slug: "ivan-volkov",
+        avatar: "team15",
+        fullName: "Ivan Volkov",
+        rating: 4.7,
+        subtitle: "Athletic Conditioning",
+        experience: "10 Years",
+        education: "CSCS, NASM",
+        experienceLevel: "advanced",
+        itemsCount: 230,
+        bio: "Conditioning programs for athletes of all levels.",
+        categories: ["Advanced"],
+        specialties: ["Athletic Conditioning", "Strength"],
+        profile: {
+            headline: "Train like an athlete",
+            about: [
+                "Ivan creates sport-specific conditioning programs.",
+                "Improves performance, endurance, and strength."
+            ],
+            philosophy: "Train smart, perform better.",
+            achievements: [
+                "Worked with professional sports teams",
+                "Athletic performance consultant"
             ],
         }
     }

@@ -10,8 +10,9 @@ import { useUser } from "@/context/UserContext";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useRouter } from "next/navigation";
 import { useCheckoutStore } from "@/utils/store";
+import { PiPencilSimpleLineBold } from "react-icons/pi";
 
-const TOKENS_PER_GBP = 100;
+const TOKENS_PER_UNIT = 1000;
 
 interface PricingCardProps {
     variant?: "starter" | "pro" | "premium" | "custom";
@@ -38,32 +39,30 @@ const PricingCard: React.FC<PricingCardProps> = ({
                                                  }) => {
     const { showAlert } = useAlert();
     const user = useUser();
-    const { sign, convertFromGBP, convertToGBP, currency } = useCurrency();
+    // Отримуємо нові методи з контексту
+    const { sign, convertFromBase, currency } = useCurrency();
     const router = useRouter();
     const { setPlan } = useCheckoutStore();
 
-    const isCustom = price === "dynamic";
-    const [customAmount, setCustomAmount] = useState<number>(50);
+    const isCustom = variant === "custom";
+    const [customTokenAmount, setCustomTokenAmount] = useState<string>("");
 
-    const basePriceGBP = useMemo(() => {
-        if (isCustom) return 0;
+    const effectiveTokens = useMemo(() => {
+        const val = parseInt(customTokenAmount);
+        return isNaN(val) ? 0 : val;
+    }, [customTokenAmount]);
+
+    // Базова ціна тепер розраховується в EUR
+    const basePriceEUR = useMemo(() => {
+        if (isCustom) return effectiveTokens / TOKENS_PER_UNIT;
         const num = parseFloat(price.replace(/[^0-9.]/g, ""));
         return isNaN(num) ? 0 : num;
-    }, [price, isCustom]);
+    }, [price, isCustom, effectiveTokens]);
 
+    // Конвертуємо з базової (EUR) у вибрану валюту
     const convertedPrice = useMemo(() => {
-        if (isCustom) return 0;
-        return convertFromGBP(basePriceGBP);
-    }, [basePriceGBP, convertFromGBP, isCustom]);
-
-    const calculatedTokens = useMemo(() => {
-        const gbp = convertToGBP(customAmount);
-        return Math.floor(gbp * TOKENS_PER_GBP);
-    }, [customAmount, convertToGBP]);
-
-    const finalCustomPriceGBP = useMemo(() => {
-        return convertToGBP(customAmount);
-    }, [customAmount, convertToGBP]);
+        return convertFromBase(basePriceEUR);
+    }, [basePriceEUR, convertFromBase]);
 
     const handleBuy = () => {
         if (!user) {
@@ -72,17 +71,19 @@ const PricingCard: React.FC<PricingCardProps> = ({
             return;
         }
 
-        const finalTokens = isCustom ? calculatedTokens : tokens;
-        const finalPriceGBP = isCustom ? finalCustomPriceGBP : basePriceGBP;
+        const finalTokens = isCustom ? effectiveTokens : tokens;
+        if (isCustom && finalTokens < 50) {
+            showAlert("Minimum tokens", "Please enter at least 50 tokens", "warning");
+            return;
+        }
 
         const plan = {
             title,
-            price: finalPriceGBP,
+            price: basePriceEUR,
             tokens: finalTokens,
             variant,
-            currency,
+            currency
         };
-
         setPlan(plan);
         localStorage.setItem("selectedPlan", JSON.stringify(plan));
         router.push("/checkout");
@@ -96,71 +97,66 @@ const PricingCard: React.FC<PricingCardProps> = ({
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: index * 0.08 }}
         >
-            {badgeTop && <span className={styles.badgeTop}>{badgeTop}</span>}
-            <h3 className={styles.title}>{title}</h3>
-
-            {!isCustom ? (
-                <div className={styles.priceRow}>
-                    <span className={styles.price}>
-                        {sign}
-                        {convertedPrice.toFixed(2)}
-                    </span>
-                    <span className={styles.tokens}>
-                        {tokens.toLocaleString()} tokens
-                    </span>
-                </div>
-            ) : (
-                <div className={styles.customBlock}>
-                    <Input
-                        type="number"
-                        value={customAmount}
-                        onChange={(e) =>
-                            setCustomAmount(Math.max(1, Number(e.target.value)))
-                        }
-                        startDecorator={sign}
-                        size="md"
-                    />
-
-                    <div className={styles.quickAmounts}>
-                        {[50, 100, 200].map((v) => (
-                            <button
-                                key={v}
-                                onClick={() => setCustomAmount(v)}
-                                className={styles.quickBtn}
-                            >
-                                {sign}
-                                {v}
-                            </button>
-                        ))}
-                    </div>
-
-                    <div className={styles.preview}>
-                        <p>
-                            You get{" "}
-                            <span>{calculatedTokens.toLocaleString()}</span>{" "}
-                            tokens
-                        </p>
-                    </div>
+            {badgeTop && (
+                <div className={styles.badgeWrapper}>
+                    <span className={styles.badgeTop}>{badgeTop}</span>
                 </div>
             )}
 
-            <p className={styles.description}>{description}</p>
+            <div className={styles.header}>
+                <h3 className={styles.title}>{title}</h3>
+                <div className={styles.priceContainer}>
+                    <span className={styles.priceValue}>
+                        {sign}{convertedPrice.toFixed(isCustom && effectiveTokens === 0 ? 2 : (isCustom ? 2 : 0))}
+                    </span>
+                    <span className={styles.oneTime}>one-time</span>
+                </div>
+                <div className={styles.tokenHighlight}>
+                    {isCustom
+                        ? `${effectiveTokens.toLocaleString()} Tokens`
+                        : `${tokens.toLocaleString()} Tokens`}
+                </div>
+            </div>
 
-            <ul className={styles.features}>
-                {features.map((f, i) => (
-                    <li key={i}>{f}</li>
-                ))}
-            </ul>
+            <div className={styles.content}>
+                {isCustom ? (
+                    <div className={styles.customSection}>
+                        <div className={styles.divider} />
+                        <label className={styles.inputLabel}>TOKENS</label>
+                        <Input
+                            type="number"
+                            variant="plain"
+                            placeholder="50"
+                            value={customTokenAmount}
+                            onChange={(e) => setCustomTokenAmount(e.target.value)}
+                            endDecorator={<PiPencilSimpleLineBold size={18} />}
+                            className={styles.tokenInput}
+                            slotProps={{
+                                input: {
+                                    min: 0,
+                                    step: 10,
+                                }
+                            }}
+                        />
+                        <div className={styles.totalRow}>
+                            <span>Total Price</span>
+                            <span className={styles.totalValue}>
+                                {sign}{convertedPrice.toFixed(2)}
+                            </span>
+                        </div>
+                    </div>
+                ) : (
+                    <p className={styles.description}>{description}</p>
+                )}
+            </div>
 
             <div className={styles.cta}>
                 <ButtonUI
                     fullWidth
-                    size="md"
-                    color="primary"
-                    variant="solid"
+                    variant="soft"
                     onClick={handleBuy}
                 >
-                    {user ? buttonText : "Sign in to buy tokens"}
+                    {isCustom ? "Calculate Price" : (user ? buttonText : "Sign in to buy")}
                 </ButtonUI>
             </div>
         </motion.div>

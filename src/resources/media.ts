@@ -1,5 +1,6 @@
 import logo from "@/assets/logo/logo.png";
 import logo_black from "@/assets/logo/logo-black.svg";
+import logo_white from "@/assets/logo/logo-white.png"
 import image1 from "@/assets/images/image1.jpg";
 import image2 from "@/assets/images/image2.jpg";
 import image3 from "@/assets/images/image3.jpg";
@@ -56,6 +57,7 @@ import team15 from "@/assets/images/team15.jpg";
 export const media = {
     logo: logo,
     logo_black: logo_black,
+    logo_white: logo_white,
 
     image1: image1,
     image2: image2,

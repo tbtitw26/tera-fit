@@ -15,9 +15,21 @@ export default function ExpertProfile({ expert }: Props) {
     return (
         <section className={styles.profile}>
             <div className={styles.container}>
-                <div className={styles.grid}>
-                    {/* LEFT CARD */}
-                    <aside className={styles.card}>
+                <header className={styles.header}>
+                    <div className={styles.headerMain}>
+                        <p className={styles.kicker}>Coach profile</p>
+                        <h1 className={styles.title}>{expert.fullName}</h1>
+                        <p className={styles.subtitle}>{expert.subtitle}</p>
+                        <p className={styles.bio}>{expert.bio}</p>
+
+                        <div className={styles.pills}>
+                            {expert.categories.map((c) => (
+                                <span key={c} className={styles.pill}>{c}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className={styles.headerMedia}>
                         <div className={styles.avatarWrap}>
                             <Image
                                 src={img}
@@ -27,64 +39,80 @@ export default function ExpertProfile({ expert }: Props) {
                                 className={styles.avatar}
                             />
                         </div>
+                    </div>
+                </header>
 
-                        <h2 className={styles.name}>{expert.fullName}</h2>
-                        <p className={styles.role}>Executive Chef</p>
+                <div className={styles.layout}>
+                    {/* LEFT: STICKY META */}
+                    <aside className={styles.sidebar}>
+                        <div className={styles.card}>
+                            <h2 className={styles.cardTitle}>Overview</h2>
 
-                        <div className={styles.meta}>
-                            <div>
-                                <span>⭐ Rating</span>
-                                <strong>{expert.rating}/5.0</strong>
-                            </div>
+                            <dl className={styles.meta}>
+                                <div className={styles.metaRow}>
+                                    <dt>Rating</dt>
+                                    <dd>{expert.rating.toFixed(1)}/5</dd>
+                                </div>
+                                <div className={styles.metaRow}>
+                                    <dt>Experience</dt>
+                                    <dd>{expert.experience}</dd>
+                                </div>
+                                <div className={styles.metaRow}>
+                                    <dt>Education</dt>
+                                    <dd>{expert.education}</dd>
+                                </div>
+                                <div className={styles.metaRow}>
+                                    <dt>Level</dt>
+                                    <dd>
+                                        <span className={styles.level}>
+                                            {expert.experienceLevel.toUpperCase()}
+                                        </span>
+                                    </dd>
+                                </div>
+                                <div className={styles.metaRow}>
+                                    <dt>Programs</dt>
+                                    <dd>{expert.itemsCount}</dd>
+                                </div>
+                                <div className={styles.metaRow}>
+                                    <dt>Slug</dt>
+                                    <dd className={styles.mono}>{expert.slug}</dd>
+                                </div>
+                            </dl>
 
-                            <div>
-                                <span>⏱ Experience</span>
-                                <strong>{expert.experience}</strong>
-                            </div>
+                            <div className={styles.divider} />
 
-                            <div>
-                                <span>🎓 Education</span>
-                                <strong>{expert.education}</strong>
-                            </div>
-
-                            <div>
-                                <span>⚡ Level</span>
-                                <strong className={styles.level}>
-                                    {expert.experienceLevel.toUpperCase()}
-                                </strong>
+                            <h3 className={styles.sectionTitle}>Specialties</h3>
+                            <div className={styles.tags}>
+                                {expert.specialties.map((s) => (
+                                    <span key={s} className={styles.tag}>{s}</span>
+                                ))}
                             </div>
                         </div>
                     </aside>
 
-                    {/* RIGHT CONTENT */}
+                    {/* RIGHT: DETAILS */}
                     <main className={styles.content}>
-                        <h1 className={styles.headline}>
-                            {expert.profile.headline}
-                        </h1>
-
-                        <p className={styles.subtitle}>
-                            Parisian trained, global perspective. Bringing the
-                            excellence of Michelin kitchens to your private
-                            events.
-                        </p>
-
                         <section className={styles.block}>
-                            <h3>About</h3>
-                            {expert.profile.about.map((text, i) => (
-                                <p key={i}>{text}</p>
-                            ))}
+                            <h2 className={styles.blockTitle}>{expert.profile.headline}</h2>
                         </section>
 
                         <section className={styles.block}>
-                            <h3>Philosophy</h3>
-                            <blockquote>
-                                {expert.profile.philosophy}
-                            </blockquote>
+                            <h3 className={styles.sectionTitle}>About</h3>
+                            <div className={styles.prose}>
+                                {expert.profile.about.map((text, i) => (
+                                    <p key={i}>{text}</p>
+                                ))}
+                            </div>
                         </section>
 
                         <section className={styles.block}>
-                            <h3>Achievements</h3>
-                            <ul>
+                            <h3 className={styles.sectionTitle}>Philosophy</h3>
+                            <blockquote className={styles.quote}>{expert.profile.philosophy}</blockquote>
+                        </section>
+
+                        <section className={styles.block}>
+                            <h3 className={styles.sectionTitle}>Achievements</h3>
+                            <ul className={styles.list}>
                                 {expert.profile.achievements.map((a, i) => (
                                     <li key={i}>{a}</li>
                                 ))}

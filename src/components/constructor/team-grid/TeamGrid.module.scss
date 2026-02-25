@@ -1,139 +1,165 @@
 .section {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 30px;
   width: 100%;
+  padding: 0 30px;
+  background-color: transparent;
 }
 
-/* =====================
-   HEADER
-===================== */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
 
-.head {
+/* Header Section */
+.header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 48px;
+  margin-bottom: 60px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 30px;
 }
 
-.headText {
-  max-width: 520px;
+.mainTitle {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
 }
 
-.viewAll {
-  font-size: 0.9rem;
+.subTitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+.styledLink {
+  font-weight: 700;
   color: var(--primary-color);
-  font-weight: 500;
   text-decoration: none;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  transition: all 0.3s ease;
 
   &:hover {
-    text-decoration: underline;
+    background: var(--primary-color);
+    color: white;
   }
 }
 
-/* =====================
-   GRID
-===================== */
-
-.grid {
+/* Gallery Grid */
+.gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 48px 32px; // вертикаль / горизонталь
-  justify-items: center;
+  grid-template-columns: repeat(4, 1fr); // 4 шефи в ряд
+  gap: 24px;
 }
 
-
-/* =====================
-   CARD
-===================== */
-
-.card {
-  text-align: center;
-  width: 100%;
-  max-width: 260px; // ❗️ключове — прибирає пустоту
-}
-
-
-/* =====================
-   AVATAR
-===================== */
-
-.avatar {
+/* Card Styling */
+.memberCard {
   position: relative;
-  width: 168px;
-  height: 168px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
+  height: 480px; // Висока вертикальна картка
+  border-radius: 24px;
   overflow: hidden;
-  background: #f3f4f6;
+  background: var(--surface-muted);
 }
 
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-.image {
+.chefImage {
   object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-/* =====================
-   TEXT
-===================== */
-
-.name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 6px;
+.memberCard:hover .chefImage {
+  transform: scale(1.1);
 }
 
-.role {
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
+/* Оновлений оверлей: прибираємо важкий чорний градієнт */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px; // Трохи менше падінгів для картки
+  background: linear-gradient(
+                  to top,
+                  rgba(0, 0, 0, 0.2) 0%,
+                  transparent 40%
+  ); // Дуже легка тінь знизу для об'єму
+  transition: all 0.3s ease;
+}
+
+/* Скляна плашка під текстом */
+.glassInfo {
+  background: rgba(255, 255, 255, 0.7); // Світлий напівпрозорий фон
+  backdrop-filter: blur(12px); // Ефект розмиття фону
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4); // Тонка біла рамка
+  border-radius: 18px;
+  padding: 16px 20px;
+  width: 100%;
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+  transform: translateY(10px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Ефект при наведенні на всю картку */
+.memberCard:hover .glassInfo {
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.85); // Стає трохи яскравішим
+}
+
+/* Стилі тексту всередині "скла" */
+.chefRole {
+  color: var(--primary-color); // Ваш фірмовий синій
+  font-size: 0.7rem;
+  font-weight: 800;
   text-transform: uppercase;
-  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  display: block;
 }
 
+.chefName {
+  color: #1a1a1a; // Темний текст на світлому фоні (набагато читабельніше)
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+}
 
-/* =====================
-   RESPONSIVE
-===================== */
-
-@media (max-width: 1024px) {
-  .grid {
+/* Responsive */
+@media (max-width: 1200px) {
+  .gallery {
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
   }
+  .mainTitle { font-size: 2.5rem; }
 }
 
-@media (max-width: 640px) {
-  .head {
+@media (max-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .memberCard { height: 400px; }
+}
+
+@media (max-width: 600px) {
+  .header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 24px;
   }
-
-  .grid {
-    gap: 28px;
-  }
-
-  .avatar {
-    width: 104px;
-    height: 104px;
-  }
-}
-
-@media (max-width:480px) {
-  .grid {
-    gap: 32px;
+  .gallery {
     grid-template-columns: 1fr;
-
   }
-
-  .avatar {
-    width: 140px;
-    height: 140px;
-  }
-
-  .card {
-    max-width: 100%;
-  }
+  .mainTitle { font-size: 2rem; }
 }
-

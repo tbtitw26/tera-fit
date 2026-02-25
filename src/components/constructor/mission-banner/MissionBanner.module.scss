@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 60px var(--main-padding);
+  background-color: var(--background-light);
+  min-height: 500px;
+}
+
+.contentSide {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.imageSide {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mainImage {
+  width: 100%;
+  max-width: 600px;
+  height: auto; // Забезпечує правильне масштабування
+  border-radius: 20px; // Трохи збільшив радіус для сучасного вигляду
+  object-fit: cover;
+  box-shadow: 0 20px 40px var(--shadow-color);
+}
+
+.card {
+  background-color: var(--background-light);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; // Трохи збільшив для балансу
+  height: 48px;
+  background-color: var(--tertiary-color);
+  color: var(--primary-color);
+  border-radius: 10px;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.cardDescription {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Адаптивність */
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column-reverse;
+    text-align: left;
+    padding: 40px 20px;
+    gap: 30px;
+  }
+
+  .imageSide {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .mainImage {
+    max-width: 100%;
+  }
+}
