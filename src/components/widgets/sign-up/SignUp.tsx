@@ -28,8 +28,8 @@ export default function SignUp() {
         >
             {({ isSubmitting }) => (
                 <FormUI
-                    title="Create Account"
-                    description="Start your journey toward culinary excellence today."
+                    title="Create Your Training Account"
+                    description="Join the platform and get access to specialist-made programs and AI workout plans."
                     submitLabel="Create My Account"
                     showTerms
                     size="lg"

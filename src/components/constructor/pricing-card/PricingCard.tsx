@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useCheckoutStore } from "@/utils/store";
 import { PiPencilSimpleLineBold } from "react-icons/pi";
 
-const TOKENS_PER_UNIT = 1000;
+const TOKENS_PER_UNIT = 100;
 
 interface PricingCardProps {
     variant?: "starter" | "pro" | "premium" | "custom";
@@ -39,7 +39,6 @@ const PricingCard: React.FC<PricingCardProps> = ({
                                                  }) => {
     const { showAlert } = useAlert();
     const user = useUser();
-    // Отримуємо нові методи з контексту
     const { sign, convertFromBase, currency } = useCurrency();
     const router = useRouter();
     const { setPlan } = useCheckoutStore();
@@ -52,14 +51,12 @@ const PricingCard: React.FC<PricingCardProps> = ({
         return isNaN(val) ? 0 : val;
     }, [customTokenAmount]);
 
-    // Базова ціна тепер розраховується в EUR
     const basePriceEUR = useMemo(() => {
         if (isCustom) return effectiveTokens / TOKENS_PER_UNIT;
         const num = parseFloat(price.replace(/[^0-9.]/g, ""));
         return isNaN(num) ? 0 : num;
     }, [price, isCustom, effectiveTokens]);
 
-    // Конвертуємо з базової (EUR) у вибрану валюту
     const convertedPrice = useMemo(() => {
         return convertFromBase(basePriceEUR);
     }, [basePriceEUR, convertFromBase]);
@@ -72,8 +69,8 @@ const PricingCard: React.FC<PricingCardProps> = ({
         }
 
         const finalTokens = isCustom ? effectiveTokens : tokens;
-        if (isCustom && finalTokens < 50) {
-            showAlert("Minimum tokens", "Please enter at least 50 tokens", "warning");
+        if (isCustom && finalTokens < 100) {
+            showAlert("Minimum tokens", "Please enter at least 100 tokens", "warning");
             return;
         }
 
@@ -82,7 +79,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
             price: basePriceEUR,
             tokens: finalTokens,
             variant,
-            currency
+            currency,
         };
         setPlan(plan);
         localStorage.setItem("selectedPlan", JSON.stringify(plan));
@@ -107,7 +104,10 @@ const PricingCard: React.FC<PricingCardProps> = ({
                 <h3 className={styles.title}>{title}</h3>
                 <div className={styles.priceContainer}>
                     <span className={styles.priceValue}>
-                        {sign}{convertedPrice.toFixed(isCustom && effectiveTokens === 0 ? 2 : (isCustom ? 2 : 0))}
+                        {sign}
+                        {convertedPrice.toFixed(
+                            isCustom && effectiveTokens === 0 ? 2 : isCustom ? 2 : 0
+                        )}
                     </span>
                     <span className={styles.oneTime}>one-time</span>
                 </div>
@@ -126,7 +126,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
                         <Input
                             type="number"
                             variant="plain"
-                            placeholder="50"
+                            placeholder="100"
                             value={customTokenAmount}
                             onChange={(e) => setCustomTokenAmount(e.target.value)}
                             endDecorator={<PiPencilSimpleLineBold size={18} />}
@@ -135,13 +135,14 @@ const PricingCard: React.FC<PricingCardProps> = ({
                                 input: {
                                     min: 0,
                                     step: 10,
-                                }
+                                },
                             }}
                         />
                         <div className={styles.totalRow}>
                             <span>Total Price</span>
                             <span className={styles.totalValue}>
-                                {sign}{convertedPrice.toFixed(2)}
+                                {sign}
+                                {convertedPrice.toFixed(2)}
                             </span>
                         </div>
                     </div>
@@ -151,12 +152,8 @@ const PricingCard: React.FC<PricingCardProps> = ({
             </div>
 
             <div className={styles.cta}>
-                <ButtonUI
-                    fullWidth
-                    variant="soft"
-                    onClick={handleBuy}
-                >
-                    {isCustom ? "Calculate Price" : (user ? buttonText : "Sign in to buy")}
+                <ButtonUI fullWidth variant="soft" onClick={handleBuy}>
+                    {isCustom ? "Calculate Price" : user ? buttonText : "Sign in to buy"}
                 </ButtonUI>
             </div>
         </motion.div>

@@ -1,33 +1,16 @@
 .section {
   width: 100%;
-  padding: 0;
+  padding: 0 30px;
 }
 
 .inner {
-  position: relative;
-  max-width: 1200px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
 }
 
-/* 🔴 вертикальна вісь */
-.axis {
-  position: absolute;
-  left: 40px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(
-                  to bottom,
-                  transparent,
-                  var(--border-color),
-                  transparent
-  );
-}
-
-/* steps list */
+/* Нова подача: акуратний "stack" з ритмом */
 .steps {
-  display: flex;
-  flex-direction: column;
-  gap: 5.5rem; /* <-- ключовий ритм */
+  display: grid;
+  gap: 1.25rem;
 }

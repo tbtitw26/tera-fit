@@ -1,9 +1,10 @@
 .aside {
-  background: #eefbea;
+  background: linear-gradient(135deg, var(--background-dark), #1e293b);
   padding: 64px 56px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  color: var(--text-inverse);
 }
 
 /* ===== Badge ===== */
@@ -16,8 +17,8 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--primary-color);
-  background: #dff5d6;
+  color: var(--text-inverse);
+  background: var(--primary-color);
 }
 
 /* ===== Title ===== */
@@ -26,16 +27,16 @@
   font-size: 32px;
   font-weight: 800;
   line-height: 1.2;
-  color: var(--text-primary);
+  color: var(--text-inverse);
 }
 
 /* ===== Subtitle ===== */
 
 .subtitle {
   font-size: 15px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   line-height: 1.6;
-  max-width: 360px;
+  max-width: 380px;
 }
 
 /* ===== Feature list ===== */
@@ -46,7 +47,7 @@
   margin-top: 12px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 
   li {
     display: flex;
@@ -56,12 +57,12 @@
 
   strong {
     font-size: 14px;
-    color: var(--text-primary);
+    color: var(--text-inverse);
   }
 
   p {
     font-size: 13px;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     margin-top: 2px;
     line-height: 1.5;
   }
@@ -73,7 +74,7 @@
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: #c9f0bb;
+  background: rgba(37, 99, 235, 0.15);
   color: var(--primary-color);
   display: flex;
   align-items: center;
@@ -89,11 +90,12 @@
   margin-top: auto;
   padding: 14px 16px;
   border-radius: 14px;
-  background: #ffffff;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.15);
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(6px);
 }
 
 .avatars {
@@ -101,14 +103,13 @@
   align-items: center;
 }
 
-/* 👇 ТЕПЕР ПРАВИЛЬНИЙ СЕЛЕКТОР */
 .avatar {
   width: 28px;
   height: 28px;
   border-radius: 50%;
   overflow: hidden;
-  background: #e5e7eb;
-  border: 2px solid #ffffff;
+  background: #1e293b;
+  border: 2px solid var(--background-dark);
   margin-left: -8px;
   flex-shrink: 0;
 
@@ -123,7 +124,7 @@
 
 .socialText {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 /* ===== Mobile ===== */

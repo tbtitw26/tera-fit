@@ -13,9 +13,9 @@ import Cta from "@/components/constructor/cta/Cta";
 import HowItWorksSection from "@/components/sections/how-it-works-section/HowItWorksSection";
 
 export const metadata: Metadata = {
-    title: `${COMPANY_NAME} — AI & Coach Based Fitness Platform`,
+    title: `${COMPANY_NAME} — Coach-Led Fitness Programs`,
     description:
-        "Buy tokens. Choose AI or a real trainer. Get a personalized fitness program based on your goals.",
+        "Buy tokens, fill out a short form, choose a certified coach (primary) or AI (faster), and receive a personalized training program as a PDF.",
     alternates: { canonical: "/" },
 };
 
@@ -26,43 +26,43 @@ export default function HomePage() {
             <HeroSection
                 title={
                     <>
-                        Train Smarter with <span>AI</span> or Real Coaches
+                        Your Training Program, Built by a <span>Coach</span>
                     </>
                 }
-                description="Token-based fitness platform. Buy tokens, choose your path and receive a personalized training plan."
-                primaryCta={{ text: "Get Started", link: "/" }}
-                secondaryCta={{ text: "How It Works", link: "/" }}
+                description="Token-based platform for personalized training plans. Log in, buy tokens, complete a short form, and get a coach-made PDF program. AI is available when you need it faster."
+                primaryCta={{ text: "Get Started", link: "/get-started" }}
+                secondaryCta={{ text: "Start Training", link: "/dashboard" }}
                 image="image1"
                 badge={{
-                    label: "New",
-                    title: "AI Adaptive Training System",
+                    label: "Coach-Led",
+                    title: "Programs Made by Specialists",
                 }}
             />
 
             {/* WHY CHOOSE US */}
             <ValuesIcons
                 tagline="WHY FIT PLATFORM"
-                title="Built for Modern Athletes"
-                description="No subscriptions. No contracts. Just performance."
+                title="Programs You Can Trust"
+                description="Real specialists first. Clear process. Results-focused plans."
                 values={[
                     {
-                        title: "Flexible Payments",
-                        description: "Buy tokens once. Use whenever you want.",
+                        title: "Token Payments",
+                        description: "Buy tokens once and use them when you need a plan.",
                         icon: "wallet",
                     },
                     {
-                        title: "Instant AI Plans",
-                        description: "Generate a structured workout in under 60 seconds.",
+                        title: "Coach-Made PDF",
+                        description: "A specialist designs your program and delivers it as a PDF.",
                         icon: "zap",
                     },
                     {
-                        title: "Human Expertise",
-                        description: "Certified trainers available anytime.",
+                        title: "Expert Training Design",
+                        description: "Structured progressions built for your goals and level.",
                         icon: "community",
                     },
                     {
                         title: "Secure & Private",
-                        description: "Your fitness data stays protected.",
+                        description: "Your answers and training data stay protected.",
                         icon: "shield",
                     },
                 ]}
@@ -72,67 +72,67 @@ export default function HomePage() {
             <Grid columns={2} gap="2rem">
                 <InfoBlock
                     variant="dark"
-                    title="Personal Coach"
-                    badge="PREMIUM"
+                    title="Personal Specialist"
+                    badge="PRIMARY"
                     icon="community"
-                    description="Precision. Strategy. Accountability."
+                    description="More time. More detail. Best results."
                     bullets={[
-                        "Manual workout design",
-                        "Technique corrections",
-                        "Direct communication",
+                        "Manually built program from your form",
+                        "Exercise selection tailored to you",
+                        "Higher quality structure and progression",
                     ]}
-                    buttonText="Choose Coach"
+                    buttonText="Choose Specialist"
+                    buttonLink="/extra/chefs"
                 />
                 <InfoBlock
                     variant="light"
-                    title="AI Training"
+                    title="AI Program"
                     icon="brain"
-                    description="Fast. Smart. Adaptive."
+                    description="Fast option when you need it now."
                     bullets={[
-                        "Instant workout generation",
-                        "Auto progression system",
-                        "Optimized load balancing",
+                        "Quick plan generation",
+                        "Simple progression logic",
+                        "Good for a rapid start",
                     ]}
-                    buttonText="Start with AI"
+                    buttonText="Generate with AI"
+                    buttonLink="/dashboard"
                 />
             </Grid>
 
-            {/* HOW SYSTEM WORKS */}
             <HowItWorksSection
                 label="PROCESS"
                 title="How It Works"
-                description="Start your transformation in minutes."
+                description="Get your personal program in a few simple steps."
                 steps={[
                     {
                         icon: "login",
                         title: "Create Account",
-                        description: "Sign up and receive free starter tokens.",
+                        description: "Log in to access your dashboard and plan history.",
                     },
                     {
                         icon: "coins",
                         title: "Buy Tokens",
-                        description: "Choose the token package that fits your goals.",
+                        description: "Pick a token package and pay only when you need a plan.",
                     },
                     {
                         icon: "brain",
-                        title: "Generate Plan",
-                        description: "Select AI or a real coach to build your program.",
+                        title: "Fill the Form & Choose Creator",
+                        description: "Answer key questions and choose a specialist (recommended) or AI (faster).",
                     },
                     {
                         icon: "calendar",
-                        title: "Track Progress",
-                        description: "Monitor workouts and improvements weekly.",
+                        title: "Receive Your PDF Program",
+                        description: "Download your personalized plan and start training with confidence.",
                     },
                 ]}
             />
 
-            {/* AI EXPLANATION */}
             <PromoFeatureCard
                 icon="settings"
-                title="How Our AI Builds Your Program"
-                description="AI analyzes your goals, training frequency, experience level and recovery capacity. It structures weekly splits, intensity and progression automatically."
-                actionText="Try AI Now"
-                actionLink="/"
+                title="AI Is a Fast Alternative"
+                description="When you need a quick start, AI can generate a basic plan using your goals, schedule, experience, and recovery. For the most detailed program, choose a specialist."
+                actionText="Try AI"
+                actionLink="/dashboard"
                 image="image1"
                 imagePosition="right"
             />
@@ -140,7 +140,7 @@ export default function HomePage() {
             {/* PRICING */}
             <Grid
                 title="Token Packages"
-                description="No monthly payments. No hidden fees."
+                description="No subscriptions. Tokens let you choose specialist work or AI anytime."
                 columns={4}
                 gap="2rem"
             >
@@ -149,8 +149,8 @@ export default function HomePage() {
                     title="Starter"
                     price="€5"
                     tokens={500}
-                    badgeTop="Try It"
-                    description="Great for testing AI workouts and exploring the platform. Enough tokens to generate multiple training plans and see how everything works."
+                    badgeTop="Start"
+                    description="Ideal to test the platform, generate an AI plan, or cover part of a specialist order."
                     buttonText="Buy Tokens"
                 />
 
@@ -160,7 +160,7 @@ export default function HomePage() {
                     price="€19"
                     tokens={2500}
                     badgeTop="Popular"
-                    description="Perfect for consistent training. Combine AI plans with coach feedback and update your program regularly."
+                    description="Great for regular updates and specialist-made programs when your goals change."
                     buttonText="Get Started"
                 />
 
@@ -170,7 +170,7 @@ export default function HomePage() {
                     price="€49"
                     tokens={7000}
                     badgeTop="Best Value"
-                    description="Best choice for serious progress. Ideal for long-term programs and deeper work with personal trainers."
+                    description="Best choice for serious progress with detailed specialist programming and periodic revisions."
                     buttonText="Choose Plan"
                 />
 
@@ -180,7 +180,7 @@ export default function HomePage() {
                     price="dynamic"
                     tokens={0}
                     badgeTop="Flexible"
-                    description="Select the exact token balance you need. Flexible option for advanced users or teams."
+                    description="Choose the exact amount of tokens you need for your next plan or upgrade."
                     buttonText="Continue"
                 />
             </Grid>
@@ -188,22 +188,22 @@ export default function HomePage() {
             {/* NO SUBSCRIPTION MODEL */}
             <ValuesIcons
                 tagline="NO SUBSCRIPTIONS"
-                title="Train Without Monthly Fees"
-                description="Traditional fitness apps lock you into €30–€60 monthly payments. We don’t."
+                title="Pay Only When You Need a New Program"
+                description="Get a specialist-made plan without monthly fees or long-term commitments."
                 values={[
                     {
-                        title: "No Contracts",
-                        description: "Use tokens anytime without obligations.",
+                        title: "No Monthly Payments",
+                        description: "Tokens replace subscriptions and recurring charges.",
                         icon: "subscriptions",
                     },
                     {
-                        title: "Full Control",
-                        description: "Decide when and how you train.",
+                        title: "Choose Your Approach",
+                        description: "Specialist-first, with AI available as a faster option.",
                         icon: "settings",
                     },
                     {
-                        title: "Transparent Pricing",
-                        description: "You always know what you pay for.",
+                        title: "Clear Value",
+                        description: "You know exactly what you’re paying for each time.",
                         icon: "priceTag",
                     },
                 ]}
@@ -211,89 +211,89 @@ export default function HomePage() {
 
             {/* TESTIMONIALS */}
             <TestimonialsSlider
-                title="Athletes Love It"
-                description="4.9/5 average rating from real users."
+                title="People Trust Our Specialists"
+                description="Coach-made programs are the #1 choice on the platform."
                 testimonials={[
                     {
                         name: "Mark T.",
                         image: "image1",
                         rating: 5,
-                        text: "AI adapts my plan weekly based on performance and recovery. It actually feels personal, not generic.",
+                        text: "The specialist plan was super detailed and realistic. It fit my schedule and fixed my weak points.",
                     },
                     {
                         name: "Anna R.",
                         image: "image1",
                         rating: 5,
-                        text: "Coach feedback improved my squat technique drastically. I gained confidence under the bar.",
+                        text: "My coach adjusted exercise selection for my knees and technique. Training finally feels safe and effective.",
                     },
                     {
                         name: "David L.",
                         image: "image1",
-                        rating: 4.4,
-                        text: "Finally a fitness app without subscriptions. Pay once, train smart, repeat.",
+                        rating: 4.7,
+                        text: "No subscription is perfect. I bought tokens and ordered a specialist plan when I actually needed it.",
                     },
                     {
                         name: "Chris M.",
                         image: "image1",
                         rating: 5,
-                        text: "The token system is genius. I only pay for what I actually use.",
+                        text: "I like that specialists are the main option. The program I got looked like real coaching, not a template.",
                     },
                     {
                         name: "Elena S.",
                         image: "image1",
-                        rating: 4.5,
-                        text: "I love how structured the plans are. No more guessing what to do in the gym.",
+                        rating: 4.8,
+                        text: "Clear weekly structure and progression. I stopped guessing and started improving consistently.",
                     },
                     {
                         name: "Tom K.",
                         image: "image1",
                         rating: 4.9,
-                        text: "Progress tracking keeps me accountable. I’ve added 15kg to my deadlift in 3 months.",
+                        text: "The PDF is easy to follow and print. I’ve made steady progress for the first time in years.",
                     },
                     {
                         name: "Sophie W.",
                         image: "image1",
-                        rating: 5,
-                        text: "The AI adjusts volume when I feel fatigued. That alone saved me from burnout.",
+                        rating: 4.6,
+                        text: "AI is useful when I’m in a rush, but the specialist plan is on another level for detail.",
                     },
                     {
                         name: "Daniel P.",
                         image: "image1",
                         rating: 4.8,
-                        text: "Clean interface, clear workouts, zero fluff. Exactly what athletes need.",
+                        text: "Simple flow: form → specialist → PDF. Clean and professional.",
                     },
                 ]}
             />
 
             {/* FINAL CTA */}
             <Cta
-                title="Ready to Level Up?"
-                description="Create your account today and receive free starter tokens."
+                title="Get Your Coach-Made Program"
+                description="Create an account, buy tokens, and order a specialist plan today. AI is available if you need it faster."
                 buttonText="Create Account"
-                link="/"
+                link="/dashboard"
             />
 
             {/* FAQ */}
             <FAQ
                 items={[
                     {
-                        question: "What is the difference between AI and Coach plans?",
+                        question: "What’s the difference between a Specialist and AI program?",
                         answer:
-                            "AI plans are instant and cost fewer tokens. Coach plans are manually created and more detailed.",
+                            "Specialist programs are manually created by a coach and are the main service. AI programs are faster and simpler, best when you need a quick start.",
                     },
                     {
                         question: "Do tokens expire?",
                         answer: "No, tokens never expire.",
                     },
                     {
-                        question: "How fast do I receive my plan?",
+                        question: "How fast do I receive my program?",
                         answer:
-                            "AI plans are instant. Coach plans are delivered within 24–48 hours.",
+                            "AI programs are generated quickly. Specialist programs take longer because they’re made manually for higher quality and detail.",
                     },
                     {
-                        question: "Can I switch between AI and Coach?",
+                        question: "Can I use both options?",
                         answer:
-                            "Yes, you can use tokens for either option anytime.",
+                            "Yes. You can spend tokens on specialist programs or AI anytime, depending on your needs.",
                     },
                 ]}
             />

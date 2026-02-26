@@ -1,141 +1,231 @@
 import HeroSection from "@/components/constructor/hero/Hero";
+import ValuesIcons from "@/components/constructor/values-icons/ValuesIcons";
+import HowItWorksSection from "@/components/sections/how-it-works-section/HowItWorksSection";
+import Grid from "@/components/constructor/grid/Grid";
+import InfoBlock from "@/components/constructor/Info-block/InfoBlock";
 import FeatureStep from "@/components/constructor/feature-step/FeatureStep";
+import FeatureStepsWrapper from "@/components/constructor/feature-step/wrapper/FeatureStepsWrapper";
 import FAQ from "@/components/constructor/faq/FAQ";
 import TextWithButton from "@/components/constructor/text-with-button/TextWithButton";
-import FeatureStepsWrapper from "@/components/constructor/feature-step/wrapper/FeatureStepsWrapper";
 
 export default function GetStartedPage() {
     return (
         <>
+            {/* HERO */}
             <HeroSection
                 title={
                     <>
-                        Start Cooking <span>Smarter</span> Today.
+                        Get a Training Plan — from a <span>Specialist</span>
                     </>
                 }
-                description="From your first taste profile to chef-level results — powered by real experts and intelligent AI."
-                secondaryCta={{ text: "Meet the Chefs", link: "/extra/chefs" }}
-                image="image12"
+                description="Log in, buy tokens, fill out a quick form, and choose a certified specialist to build your program. Need it faster? Use AI as a quick alternative and receive a structured PDF plan."
+                primaryCta={{ text: "Start My Order", link: "/dashboard" }}
+                secondaryCta={{ text: "Meet the Specialists", link: "/extra/chefs" }}
+                image="image1"
+                badge={{
+                    label: "PDF Program",
+                    title: "Specialist-made",
+                }}
             />
 
+            {/* VALUES / WHY */}
+            <ValuesIcons
+                tagline="WHY THIS WORKS"
+                title="Built for Real Progress"
+                description="Coach-led programming with a simple, token-based flow."
+                values={[
+                    {
+                        title: "Flexible Tokens",
+                        description: "Buy once. Use anytime. Tokens never expire.",
+                        icon: "wallet",
+                    },
+                    {
+                        title: "Specialist Quality",
+                        description: "Manual program design based on your answers.",
+                        icon: "zap",
+                    },
+                    {
+                        title: "AI When You Need Speed",
+                        description: "A faster option for a quick start.",
+                        icon: "community",
+                    },
+                    {
+                        title: "PDF You Keep",
+                        description: "Download, print, and re-open anytime.",
+                        icon: "shield",
+                    },
+                ]}
+            />
+
+            {/* HOW IT WORKS */}
+            <HowItWorksSection
+                label="PROCESS"
+                title="How It Works"
+                description="Get your program in four simple steps."
+                highlights={[
+                    {
+                        title: "No subscriptions",
+                        description: "Pay per plan with tokens — full control.",
+                    },
+                    {
+                        title: "Specialist-first",
+                        description: "Choose a coach for the highest quality plan.",
+                    },
+                    {
+                        title: "PDF stored in your account",
+                        description: "Re-download anytime.",
+                    },
+                ]}
+                steps={[
+                    {
+                        icon: "login",
+                        title: "Create Account",
+                        description:
+                            "Log in and complete a short setup about your goal, level, equipment, and limitations.",
+                    },
+                    {
+                        icon: "coins",
+                        title: "Buy Tokens",
+                        description:
+                            "Choose a token pack based on how often you want a new program or updates.",
+                    },
+                    {
+                        icon: "brain",
+                        title: "Choose Specialist or AI",
+                        description:
+                            "Specialist is the main option for maximum detail. AI is a faster alternative when you need it now.",
+                    },
+                    {
+                        icon: "calendar",
+                        title: "Receive Your PDF Plan",
+                        description:
+                            "Download a clear weekly split with exercises, sets/reps/rest, and progression.",
+                    },
+                ]}
+                note={
+                    <>
+                        Specialist programs take longer because they’re created manually.
+                        AI programs are generated faster for a quick start.
+                    </>
+                }
+            />
+
+            {/* AI vs COACH */}
+            <Grid columns={2} gap="2rem">
+                <InfoBlock
+                    variant="dark"
+                    title="Specialist Program"
+                    badge="PRIMARY"
+                    icon="community"
+                    description="More detail. Better decisions. Better outcomes."
+                    bullets={[
+                        "Manual program design from your form",
+                        "Adjustments for injuries & limitations",
+                        "Extra coaching notes and rationale",
+                    ]}
+                />
+
+                <InfoBlock
+                    variant="light"
+                    title="AI Program"
+                    icon="brain"
+                    description="Fast option for a structured start."
+                    bullets={[
+                        "Plan generated quickly",
+                        "Built around your schedule & equipment",
+                        "Basic progression logic included",
+                    ]}
+                />
+            </Grid>
+
+            {/* DEEPER EXPLANATION */}
             <FeatureStepsWrapper>
                 <FeatureStep
                     step={1}
-                    title="Create Your Account"
-                    description="Sign up in seconds and unlock access to personalized culinary experiences."
+                    title="We Start With Your Details"
+                    description="The program is built around what actually matters for you."
                     bullets={[
-                        "Quick email or social login",
-                        "Secure personal dashboard",
-                        "Instant access to platform features",
+                        "Goal: fat loss, muscle gain, strength, endurance",
+                        "Schedule: 2–6 training days/week",
+                        "Equipment: gym, home, or minimal setup",
                     ]}
-                    image="image13"
-                    badge="Getting Started"
-                    buttonText="Create Account"
+                    image="image1"
+                    badge="Personalization"
+                    buttonText="Start Setup"
                     buttonLink="/dashboard"
                     imagePosition="left"
                 />
 
                 <FeatureStep
                     step={2}
-                    title="Purchase Cooking Tokens"
-                    description="Tokens unlock courses, AI analysis, and downloadable materials."
+                    title="A Clear Weekly Structure"
+                    description="No randomness — a real split with progression."
                     bullets={[
-                        "Flexible token packages",
-                        "Pay only for what you use",
-                        "No subscriptions required",
+                        "Weekly split based on your training frequency",
+                        "Exercise selection matched to your equipment",
+                        "Sets/reps/rest + intensity guidance",
                     ]}
-                    image="image14"
-                    badge="Flexible Pricing"
-                    buttonText="View Token Packs"
-                    buttonLink="/pricing"
+                    image="image1"
+                    badge="Structure"
                     imagePosition="right"
                 />
 
                 <FeatureStep
                     step={3}
-                    title="Choose a Chef or AI Mentor"
-                    description="Learn directly from world-renowned chefs or let AI guide your journey."
+                    title="Delivered as a Clean PDF"
+                    description="Easy to follow on your phone and ready to print."
                     bullets={[
-                        "Michelin-level professionals",
-                        "AI-powered cooking assistant",
-                        "Switch mentors anytime",
+                        "Exercises, sets, reps, rest times",
+                        "Warm-up + main work + accessories",
+                        "Progression rules week-to-week",
                     ]}
-                    image="image4"
-                    badge="Michelin Standard"
-                    buttonText="Explore Mentors"
-                    buttonLink="/chefs"
-                    imagePosition="left"
-                />
-
-                <FeatureStep
-                    step={4}
-                    title="Select Your Cuisine & Goals"
-                    description="Tell us what you want to cook and what you want to master."
-                    bullets={[
-                        "Choose global cuisines",
-                        "Set skill level & preferences",
-                        "Dietary and allergy adjustments",
-                    ]}
-                    image="image15"
-                    badge="Personalized Path"
-                    buttonText="Choose Cuisine"
-                    buttonLink="/dashboard"
-                    imagePosition="right"
-                />
-
-                <FeatureStep
-                    step={5}
-                    title="Get Your Results in PDF"
-                    description="Receive a beautifully structured PDF with recipes, techniques, and tips."
-                    bullets={[
-                        "Step-by-step instructions",
-                        "Chef notes & AI insights",
-                        "Downloadable & printable format",
-                    ]}
-                    image="image16"
-                    badge="Final Output"
+                    image="image1"
+                    badge="PDF Output"
                     imagePosition="left"
                 />
             </FeatureStepsWrapper>
 
+            {/* FAQ */}
             <FAQ
+                title="Frequently Asked Questions"
+                description="Quick answers before you get your program."
                 items={[
-                    {
-                        question: "Do I need cooking experience to start?",
-                        answer:
-                            "No. The platform adapts to your skill level, whether you're a beginner or an advanced home cook.",
-                    },
                     {
                         question: "What are tokens used for?",
                         answer:
-                            "Tokens unlock courses, AI feedback, PDF materials, and premium chef content.",
+                            "Tokens are used to order a specialist-made program (primary service) or generate an AI program (faster option). No subscriptions — you pay only when you need a plan.",
                     },
                     {
-                        question: "Can I choose between AI and real chefs?",
-                        answer:
-                            "Yes. You can learn from professional chefs, AI, or combine both approaches.",
+                        question: "Do tokens expire?",
+                        answer: "No. Tokens never expire and can be used anytime.",
                     },
                     {
-                        question: "Are the PDFs downloadable and printable?",
+                        question: "How fast will I receive my program?",
                         answer:
-                            "Absolutely. All generated PDFs are yours to download, save, and print.",
+                            "AI programs are generated quickly. Specialist programs take longer because they’re built manually with more detail and higher quality.",
                     },
                     {
-                        question: "Is there a subscription?",
+                        question: "Can you adapt the plan for injuries or limitations?",
                         answer:
-                            "No subscriptions. You only pay for what you use with flexible token packs.",
+                            "Yes. Add your limitations in the setup form. Specialists can tailor the program manually, and AI can also account for basic constraints.",
                     },
                     {
-                        question: "Can I change cuisines or mentors later?",
+                        question: "Can I switch between Specialist and AI later?",
                         answer:
-                            "Yes. You’re free to explore different cuisines and mentors at any time.",
+                            "Yes. You can use tokens for either option anytime — switch depending on what you need.",
+                    },
+                    {
+                        question: "Is the PDF downloadable and printable?",
+                        answer:
+                            "Absolutely. Your plan is provided as a PDF you can download, print, and access from your account anytime.",
                     },
                 ]}
             />
 
+            {/* FINAL CTA */}
             <TextWithButton
-                title="Ready to Start Your Culinary Journey?"
-                description="Create your account and experience a new way of learning how to cook."
+                title="Ready to Get Your Program?"
+                description="Create your account, choose a specialist (recommended) or AI, and receive your PDF plan."
                 buttonText="Get Started"
                 buttonLink="/dashboard"
             />

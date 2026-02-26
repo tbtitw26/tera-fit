@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 import styles from "./InfoBlock.module.scss";
-import { media } from "@/resources/media";
-import { renderIcon } from "@/utils/renderIcon";
-import { IconKey } from "@/resources/icons";
+import {media} from "@/resources/media";
+import {renderIcon} from "@/utils/renderIcon";
+import {IconKey} from "@/resources/icons";
+import Link from "next/link";
 
 // Проста галочка для списку (bullets)
 const CheckIcon = () => (
@@ -28,7 +29,7 @@ interface InfoBlockProps {
     variant?: "light" | "dark";
     badge?: string;
     buttonText?: string;
-    onButtonClick?: () => void;
+    buttonLink?: string;
 }
 
 const InfoBlock: React.FC<InfoBlockProps> = ({
@@ -40,17 +41,17 @@ const InfoBlock: React.FC<InfoBlockProps> = ({
                                                  variant = "light",
                                                  badge,
                                                  buttonText,
-                                                 onButtonClick
+                                                 buttonLink
                                              }) => {
     const imageSrc = image ? media[image] : null;
 
     return (
         <motion.div
             className={`${styles.infoBlock} ${styles[variant]} ${imageSrc ? styles.hasImage : ''}`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
+            initial={{opacity: 0, y: 30}}
+            whileInView={{opacity: 1, y: 0}}
+            transition={{duration: 0.5}}
+            viewport={{once: true}}
         >
             {/* Рендер великого фото (якщо передано) */}
             {imageSrc && (
@@ -88,7 +89,7 @@ const InfoBlock: React.FC<InfoBlockProps> = ({
                         {bullets.map((item, i) => (
                             <li key={i}>
                                 <span className={styles.checkWrapper}>
-                                    <CheckIcon />
+                                    <CheckIcon/>
                                 </span>
                                 {item}
                             </li>
@@ -96,13 +97,12 @@ const InfoBlock: React.FC<InfoBlockProps> = ({
                     </ul>
                 )}
 
-                {buttonText && (
-                    <button
-                        className={styles.actionButton}
-                        onClick={onButtonClick}
-                    >
-                        {buttonText}
-                    </button>
+                {buttonText && buttonLink && (
+                    <Link href={buttonLink}>
+                        <button className={styles.actionButton}>
+                            {buttonText}
+                        </button>
+                    </Link>
                 )}
             </div>
         </motion.div>

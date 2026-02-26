@@ -1,124 +1,182 @@
-.row {
+/* Card — мінімалістична “преміальна” рамка */
+.card {
   position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  padding: 0 30px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: linear-gradient(
+                  180deg,
+                  rgba(255,255,255,0.70),
+                  rgba(255,255,255,0.55)
+  );
+
+  /* дуже легка глибина без "жирних" тіней */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  overflow: hidden;
 }
 
-/* номер */
-.step {
-  width: 43px;
-  height: 43px;
-  font-size: 1.5rem;
-  border-radius: 10px;
-  background: var(--primary-color);
-  color: #fff;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* subtle “wash” щоб було цікаво але мінімально */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+          radial-gradient(900px 200px at 10% 0%, rgba(0,0,0,0.04), transparent 60%),
+          radial-gradient(700px 240px at 95% 30%, rgba(0,0,0,0.035), transparent 55%);
+  pointer-events: none;
 }
 
-.stepMod{
-  width: 43px;
-  height: 43px;
-  font-size: 1.5rem;
-  border-radius: 10px;
-  background: var(--text-secondary);
-  color: #fff;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* контентний ряд */
+/* Layout */
 .contentRow {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 2.25rem;
   align-items: center;
+  padding: 1.25rem;
 }
 
-.reverse {
-  direction: rtl;
+/* Якщо картинка справа — просто міняємо порядок, без RTL */
+.right .media { order: 2; }
+.right .content { order: 1; }
 
-  > * {
-    direction: ltr;
-  }
-}
-
-/* image */
+/* Media */
 .media {
   position: relative;
-  aspect-ratio: 16 / 9;
-  border-radius: 18px;
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+
+  /* замість тіні — тонка рамка */
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(0,0,0,0.03);
+}
+
+/* легкий overlay “film” */
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+          linear-gradient(180deg, rgba(0,0,0,0.00), rgba(0,0,0,0.08));
+  pointer-events: none;
 }
 
 .image {
   object-fit: cover;
+  transform: scale(1.02);
 }
 
-/* badge */
+/* Badge — чистий, без чорної плашки */
 .badge {
   position: absolute;
   top: 12px;
-  right: 12px;
-  background: rgba(0,0,0,0.75);
-  color: #fff;
-  font-size: 0.75rem;
+  left: 12px;
+  z-index: 2;
+
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
   padding: 6px 10px;
   border-radius: 999px;
-  z-index: 2;
+
+  color: rgba(0,0,0,0.75);
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(0,0,0,0.08);
+  backdrop-filter: blur(8px);
 }
 
-/* text */
-.content{
+/* Content */
+.content {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-}
-.content h3 {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
+  gap: 0.9rem;
+  padding: 0.25rem 0.25rem 0.25rem 0;
 }
 
-.content p {
+/* Step pill — фірмовий мінімалізм */
+.stepPill {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  border-radius: 999px;
+  padding: 0.35rem 0.6rem;
+
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.stepLabel {
+  font-size: 0.75rem;
+  color: rgba(0,0,0,0.55);
+}
+
+.stepNumber {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(0,0,0,0.82);
+}
+
+/* Typography */
+.title {
+  font-size: 1.75rem;
+  line-height: 1.15;
+  font-weight: 800;
+  margin: 0;
+}
+
+.description {
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.65;
-  margin-bottom: 1.2rem;
+  margin: 0;
 }
 
-.content ul {
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* Bullets — замість ✓ зробимо мінімальні “dots” */
+.list {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.6rem;
-
-  li {
-    padding-left: 26px;
-    position: relative;
-    margin-bottom: 0.6rem;
-
-    &::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--primary-color);
-      font-weight: 700;
-    }
-  }
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
 }
 
-/* mobile */
+.list li {
+  position: relative;
+  padding-left: 18px;
+  color: rgba(0,0,0,0.74);
+  line-height: 1.55;
+}
+
+.list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.35);
+}
+
+/* Responsive */
 @media (max-width: 900px) {
   .contentRow {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.25rem;
+    padding: 1rem;
+  }
+
+  .right .media { order: 1; }
+  .right .content { order: 2; }
+
+  .title {
+    font-size: 1.5rem;
   }
 }

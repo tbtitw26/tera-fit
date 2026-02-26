@@ -14,54 +14,56 @@ export default function AboutPage() {
         <>
             <PromoSection
                 eyebrow="About Us"
-                title="Crafting Culinary Experiences for the"
-                highlight="Modern World"
-                description="We combine tradition, innovation, and world-class chefs to redefine how people learn, cook, and connect through food."
-                image="image11"
-                imageText="Where Passion Meets Precision."
+                title="Coach-Built Training for the"
+                highlight="Real World"
+                description="We connect athletes with certified specialists who design personalized training programs. AI is available as a faster option, but expert coaching is what we’re built around."
+                image="image1"
+                imageText="Real coaches. Real programs."
             />
 
             <MissionBanner
-                image="image11"
+                image="image1"
                 cards={[
                     {
                         icon: "zap",
                         title: "The Mission",
-                        description: "To make high-performance coaching accessible to every athlete regardless of location."
+                        description:
+                            "Make high-quality, specialist-made training programs accessible to anyone, anywhere."
                     },
                     {
                         icon: "bulb",
                         title: "The Vision",
-                        description: "A world where effort is quantifiable, rewarded, and optimized by intelligence."
+                        description:
+                            "A world where every athlete can train with a clear plan, built by experts and supported by smart tools."
                     }
                 ] as const}
             />
 
             <ValuesIcons
                 tagline="Our Core Values"
-                title="What Drives Us Every Day"
-                description="Our foundation is built on passion, integrity, and relentless innovation."
+                title="What We Stand For"
+                description="We prioritize real coaching, clear systems, and measurable progress."
                 theme={"dark"}
                 values={[
                     {
                         icon: "path",
-                        title: "Excellence",
-                        description: "We aim for Michelin-level standards in every course.",
+                        title: "Quality First",
+                        description: "Specialists build your program with detail, logic, and purpose.",
                     },
                     {
                         icon: "globe",
-                        title: "Global Perspective",
-                        description: "Authentic techniques from every corner of the world.",
+                        title: "Access Anywhere",
+                        description: "Order your plan online and train from any gym or home setup.",
                     },
                     {
                         icon: "shield",
-                        title: "Passion",
-                        description: "Cooking is emotion, creativity, and connection.",
+                        title: "Trust & Privacy",
+                        description: "Your data is protected and your answers stay confidential.",
                     },
                     {
                         icon: "brain",
-                        title: "Innovation",
-                        description: "We merge culinary art with modern technology.",
+                        title: "Smart Support",
+                        description: "AI helps you start faster, while specialists deliver the best result.",
                     },
                 ]}
                 backgroundColor="surface-muted"
@@ -70,131 +72,129 @@ export default function AboutPage() {
             {/* 4️⃣ HOW WE WORK */}
             <HowItWorksSection
                 label="Our Process"
-                title="How We Build Every Course"
-                description="Every program goes through a rigorous creative and technical process."
+                title="How Your Program Is Created"
+                description="A simple flow designed to deliver a plan you can follow with confidence."
                 steps={[
                     {
-                        title: "Concept & Research",
+                        title: "Tell Us Your Goal",
                         description:
-                            "We collaborate with chefs to design authentic learning experiences.",
+                            "Fill out a short form about your experience, schedule, equipment, and preferences.",
                     },
                     {
-                        title: "Hands-on Production",
+                        title: "Choose Who Builds It",
                         description:
-                            "Each lesson is professionally filmed and tested in real kitchens.",
+                            "Pick a specialist (recommended) for maximum quality, or AI when you need it faster.",
                     },
                     {
-                        title: "Platform Optimization",
+                        title: "Program Design",
                         description:
-                            "We refine delivery, structure, and learning flow for maximum clarity.",
+                            "Your plan is structured into weeks with exercises, sets, reps, intensity, and progression.",
                     },
                     {
-                        title: "Global Launch",
+                        title: "Receive Your PDF",
                         description:
-                            "Courses are released to thousands of aspiring chefs worldwide.",
+                            "Download your personalized training program and start immediately.",
                     },
                 ]}
-                note="Every course is built with real chefs, real kitchens, and real passion."
+                note="Specialist-made programs are our primary service. AI is available as a faster alternative."
             />
 
             {/* 5️⃣ TEAM */}
             <TeamGrid
-                title="Meet Our Culinary Experts"
-                description="The masters behind every recipe and technique."
+                title="Meet Our Specialists"
+                description="Certified coaches who build programs with real training logic."
                 viewAllText="View All Trainers"
                 members={[
-                    { name: "Luca Romano", role: "Italian Cuisine", image: "team1" },
-                    { name: "Sophie Laurent", role: "French Pastry", image: "team2" },
-                    { name: "Kenji Tanaka", role: "Japanese Cuisine", image: "team3" },
-                    { name: "Maria Alvarez", role: "Spanish Cuisine", image: "team4" },
-                    { name: "James Carter", role: "Modern Fusion", image: "team5" },
-                    { name: "Elena Petrova", role: "Eastern European", image: "team6" },
+                    { name: "Luca Romano", role: "Strength & Hypertrophy", image: "image1" },
+                    { name: "Sophie Laurent", role: "Mobility & Injury Prevention", image: "image1" },
+                    { name: "Kenji Tanaka", role: "Athletic Performance", image: "image1" },
+                    { name: "Maria Alvarez", role: "Endurance & Conditioning", image: "image1" },
                 ]}
             />
 
             {/* 6️⃣ TESTIMONIALS */}
             <TestimonialsSlider
-                title="Athletes Love It"
-                description="4.9/5 average rating from real users."
+                title="Athletes Trust Our Coaches"
+                description="Real feedback from people following specialist-made programs."
                 testimonials={[
                     {
                         name: "Mark T.",
                         image: "image1",
                         rating: 5,
-                        text: "AI adapts my plan weekly based on performance and recovery. It actually feels personal, not generic.",
+                        text: "The specialist plan was extremely detailed and matched my schedule perfectly. No filler, just smart training.",
                     },
                     {
                         name: "Anna R.",
                         image: "image1",
                         rating: 5,
-                        text: "Coach feedback improved my squat technique drastically. I gained confidence under the bar.",
+                        text: "My coach fixed my squat pattern and built progressions around my weak points. Huge difference in confidence.",
                     },
                     {
                         name: "David L.",
                         image: "image1",
-                        rating: 4.4,
-                        text: "Finally a fitness app without subscriptions. Pay once, train smart, repeat.",
+                        rating: 4.6,
+                        text: "Tokens make sense: I pay when I need a new plan. The PDF is clear and easy to follow.",
                     },
                     {
                         name: "Chris M.",
                         image: "image1",
                         rating: 5,
-                        text: "The token system is genius. I only pay for what I actually use.",
+                        text: "Specialist-first is the right approach. AI is handy, but the coach plan feels professional and personalized.",
                     },
                     {
                         name: "Elena S.",
                         image: "image1",
-                        rating: 4.5,
-                        text: "I love how structured the plans are. No more guessing what to do in the gym.",
+                        rating: 4.7,
+                        text: "Structured weeks, clear progression, and realistic volume. I stopped guessing and started progressing.",
                     },
                     {
                         name: "Tom K.",
                         image: "image1",
                         rating: 4.9,
-                        text: "Progress tracking keeps me accountable. I’ve added 15kg to my deadlift in 3 months.",
+                        text: "I printed the PDF and used it in the gym. Progress tracking became effortless and consistent.",
                     },
                     {
                         name: "Sophie W.",
                         image: "image1",
-                        rating: 5,
-                        text: "The AI adjusts volume when I feel fatigued. That alone saved me from burnout.",
+                        rating: 4.6,
+                        text: "AI is fast, but the specialist program was on another level for detail and exercise selection.",
                     },
                     {
                         name: "Daniel P.",
                         image: "image1",
                         rating: 4.8,
-                        text: "Clean interface, clear workouts, zero fluff. Exactly what athletes need.",
+                        text: "Clean platform, simple process, and a real coach-designed plan. Exactly what I wanted.",
                     },
                 ]}
             />
-
+ы
             <Cta
-                title="Join Our Culinary Movement"
-                description="Discover world-class cooking techniques and elevate your skills today."
-                buttonText="Explore Courses"
-                link="/courses"
+                title="Get Your Coach-Made Program"
+                description="Create an account, buy tokens, and order a specialist plan today. Use AI anytime for a faster start."
+                buttonText="Get Started"
+                link="/get-started"
             />
 
             <FAQ
                 items={[
                     {
-                        question: "What is the difference between AI and Coach plans?",
+                        question: "What’s the difference between Specialist and AI programs?",
                         answer:
-                            "AI plans are instant and cost fewer tokens. Coach plans are manually created and more detailed.",
+                            "Specialist programs are manually created by certified coaches and are our primary service. AI programs are faster and simpler, designed as a secondary option when you need a quick start.",
                     },
                     {
                         question: "Do tokens expire?",
                         answer: "No, tokens never expire.",
                     },
                     {
-                        question: "How fast do I receive my plan?",
+                        question: "How fast do I receive my program?",
                         answer:
-                            "AI plans are instant. Coach plans are delivered within 24–48 hours.",
+                            "AI programs are generated quickly. Specialist programs take longer because they’re built manually with higher quality and detail.",
                     },
                     {
-                        question: "Can I switch between AI and Coach?",
+                        question: "Can I switch between Specialist and AI?",
                         answer:
-                            "Yes, you can use tokens for either option anytime.",
+                            "Yes. You can use tokens for either option anytime, depending on your needs.",
                     },
                 ]}
             />

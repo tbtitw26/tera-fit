@@ -15,90 +15,87 @@ export default function PricingPage() {
         <>
             <PromoSection
                 eyebrow="Pricing"
-                title="Crafting Culinary Experiences for the"
-                highlight="Modern World"
-                description="We combine tradition, innovation, and world-class chefs to redefine how people learn, cook, and connect through food."
+                title="Flexible Token Pricing for"
+                highlight="Specialist Training"
+                description="Buy tokens once and use them for specialist-made programs (primary service) or AI-generated plans (faster option). No subscriptions. No hidden fees."
             />
 
-            <Grid
-                columns={4}
-                gap="2rem"
-            >
+            <Grid columns={4} gap="2rem">
                 <PricingCard
                     index={0}
                     variant="starter"
-                    title="Kitchen Warm-Up"
+                    title="Starter Pack"
                     price="€5"
                     tokens={500}
-                    badgeTop="Starter"
-                    description="A gentle entry into smart cooking with AI guidance."
+                    badgeTop="Start"
+                    description="Perfect to explore the platform or generate a quick AI program."
                     features={[
-                        "1 week AI-guided learning",
-                        "Personalized recipe adjustments",
-                        "Skill-level adaptation",
-                        "Instant feedback",
+                        "Ideal for 1 AI program",
+                        "Can be used toward a specialist plan",
+                        "No expiration",
+                        "Full platform access",
                     ]}
-                    buttonText="Start Cooking"
+                    buttonText="Buy Tokens"
                 />
 
                 <PricingCard
                     index={1}
                     variant="pro"
-                    title="AI Chef Boost"
-                    price="€15"
-                    tokens={1500}
+                    title="Athlete Pack"
+                    price="€19"
+                    tokens={1900}
                     badgeTop="Most Popular"
-                    description="Fast results with intelligent coaching and daily guidance."
+                    description="Best for consistent training and ordering specialist-made programs."
                     features={[
-                        "Up to 3 weeks with AI Chef",
-                        "Daily cooking challenges",
-                        "Instant taste & technique feedback",
-                        "Adaptive learning speed",
+                        "Covers 1 full specialist program",
+                        "Option to use AI anytime",
+                        "Tokens never expire",
+                        "Better value per token",
                     ]}
-                    buttonText="Train with AI"
+                    buttonText="Get Started"
                 />
 
                 <PricingCard
                     index={2}
                     variant="premium"
-                    title="Master Chef Week"
-                    price="€50"
-                    tokens={5000}
+                    title="Pro Progress Pack"
+                    price="€49"
+                    tokens={4900}
                     badgeTop="Best Value"
-                    description="Learn directly from a professional chef — deeper, slower, transformational."
+                    description="Designed for serious athletes who want long-term progress with specialist support."
                     features={[
-                        "1 full week with real chef",
-                        "Structured curriculum",
-                        "Professional techniques",
-                        "Chef-reviewed progress",
+                        "Multiple specialist programs",
+                        "Use for revisions or updates",
+                        "AI access included",
+                        "Maximum token value",
                     ]}
-                    buttonText="Learn with a Chef"
+                    buttonText="Choose Pack"
                 />
 
                 <PricingCard
                     index={3}
                     variant="custom"
-                    title="Flexible Token Pack"
+                    title="Custom Token Pack"
                     price="dynamic"
                     tokens={0}
                     badgeTop="Flexible"
-                    description="Mix AI and Chef programs exactly how you want."
+                    description="Choose the exact number of tokens you need for your goals."
                     features={[
                         "Custom token amount",
-                        "Spend on AI or Chef paths",
+                        "Spend on Specialist or AI",
                         "No expiration",
-                        "Bulk discounts",
+                        "Scalable for advanced users",
                     ]}
-                    buttonText="Build My Plan"
+                    buttonText="Build My Pack"
                 />
             </Grid>
 
             <FAQ
                 items={[
                     {
-                        question: "What is the difference between AI and Coach plans?",
+                        question: "What are tokens used for?",
                         answer:
-                            "AI plans are instant and cost fewer tokens. Coach plans are manually created and more detailed.",
+                            "Tokens are used to order a specialist-made training program (our primary service) or generate an AI plan (faster alternative). You only pay when you need a plan.",
                     },
                     {
                         question: "Do tokens expire?",
@@ -107,12 +104,12 @@ export default function PricingPage() {
                     {
                         question: "How fast do I receive my plan?",
                         answer:
-                            "AI plans are instant. Coach plans are delivered within 24–48 hours.",
+                            "AI programs are generated quickly. Specialist programs take longer because they are manually created for higher quality and personalization.",
                     },
                     {
-                        question: "Can I switch between AI and Coach?",
+                        question: "Can I switch between Specialist and AI?",
                         answer:
-                            "Yes, you can use tokens for either option anytime.",
+                            "Yes, you can use your tokens for either option anytime depending on your needs.",
                     },
                 ]}
             />

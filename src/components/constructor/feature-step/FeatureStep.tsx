@@ -4,8 +4,8 @@ import React from "react";
 import styles from "./FeatureStep.module.scss";
 import Image from "next/image";
 import ButtonUI from "@/components/ui/button/ButtonUI";
-import {media} from "@/resources/media";
-import {IoIosArrowRoundForward} from "react-icons/io";
+import { media } from "@/resources/media";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 interface FeatureStepProps {
     step: number;
@@ -30,15 +30,12 @@ const FeatureStep: React.FC<FeatureStepProps> = ({
                                                      buttonLink,
                                                      imagePosition = "left",
                                                  }) => {
-
-    const getClassName = () => {
-        return step % 2 === 0 ? styles.stepMod : styles.step;
-    }
-
     return (
-        <div className={styles.row}>
+        <article className={styles.card}>
             <div
-                className={`${styles.contentRow} ${imagePosition === "right" ? styles.reverse : ""}`}
+                className={`${styles.contentRow} ${
+                    imagePosition === "right" ? styles.right : ""
+                }`}
             >
                 <div className={styles.media}>
                     {badge && <span className={styles.badge}>{badge}</span>}
@@ -51,26 +48,30 @@ const FeatureStep: React.FC<FeatureStepProps> = ({
                 </div>
 
                 <div className={styles.content}>
-                    <div className={getClassName()}>{step}
+                    <div className={styles.stepPill}>
+                        <span className={styles.stepLabel}>Step</span>
+                        <span className={styles.stepNumber}>{String(step).padStart(2, "0")}</span>
                     </div>
 
                     <div className={styles.textContainer}>
-                        <h3>{title}</h3>
-                        {description && <p>{description}</p>}
+                        <h3 className={styles.title}>{title}</h3>
+                        {description && <p className={styles.description}>{description}</p>}
+
                         {bullets && (
-                            <ul>
+                            <ul className={styles.list}>
                                 {bullets.map((b, i) => (
                                     <li key={i}>{b}</li>
                                 ))}
                             </ul>
                         )}
+
                         {buttonText && buttonLink && (
                             <ButtonUI
                                 variant="plain"
                                 shape="default"
                                 hoverEffect="none"
                                 hoverColor="none"
-                                endIcon={<IoIosArrowRoundForward style={{fontSize: 28}}/>}
+                                endIcon={<IoIosArrowRoundForward style={{ fontSize: 28 }} />}
                                 onClick={() => (window.location.href = buttonLink)}
                             >
                                 {buttonText}
@@ -79,9 +80,8 @@ const FeatureStep: React.FC<FeatureStepProps> = ({
                     </div>
                 </div>
             </div>
-        </div>
-    )
-        ;
+        </article>
+    );
 };
 
 export default FeatureStep;

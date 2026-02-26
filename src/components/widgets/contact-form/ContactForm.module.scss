@@ -1,151 +1,230 @@
 .section {
-  padding: 0 30px;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 24px;
 }
 
+/* Весь блок як “editorial panel” */
 .layout {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 3.25rem;
+  padding: 28px;
 
-  @media (max-width: 900px) {
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 28px;
+  background:
+          radial-gradient(900px 240px at 10% 0%, rgba(0,0,0,0.04), transparent 60%),
+          radial-gradient(700px 240px at 95% 40%, rgba(0,0,0,0.03), transparent 55%),
+          linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.72));
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 900px) {
+  .layout {
     grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 22px;
+    border-radius: 22px;
   }
 }
 
 /* LEFT */
-
 .left {
-  padding: 1rem 0;
+  padding: 8px 6px;
+}
+
+@media (min-width: 901px) {
+  .left {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+  }
 }
 
 .label {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--primary-color);
-  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+/* маленький “bullet” перед label */
+.label::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.22);
 }
 
 .left h2 {
-  font-size: 2.6rem;
-  font-weight: 800;
-  margin: 1rem 0;
+  margin: 14px 0 12px;
+  font-size: 2.35rem;
+  line-height: 1.08;
+  font-weight: 850;
   color: var(--text-primary);
 }
 
 .left p {
-  max-width: 420px;
+  max-width: 520px;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.75;
+  margin: 0;
 }
 
+/* “Other ways to connect” — не box, а мінімальний list з divider */
 .extra {
-  background: var(--surface-muted);
-  border-radius: 18px;
-  padding: 1.4rem;
-  max-width: 360px;
-  margin-top: 1.5rem;
+  margin-top: 22px;
+  padding-top: 16px;
+  max-width: 520px;
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
+}
 
-  strong {
-    display: block;
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-  }
+.extra strong {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: rgba(0,0,0,0.78);
+  font-weight: 700;
 }
 
 .contactItem {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+  gap: 10px;
+  padding: 10px 0;
 
-  svg {
-    color: var(--primary-color);
+  font-size: 0.92rem;
+  color: rgba(0,0,0,0.62);
+}
+
+.contactItem svg {
+  opacity: 0.55;
+}
+
+/* RIGHT / FORM CARD — тепер не “white card with big shadow” */
+.formCard {
+  border-radius: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(255,255,255,0.65);
+  padding: 26px;
+}
+
+@media (max-width: 600px) {
+  .formCard {
+    padding: 18px;
+    border-radius: 18px;
   }
 }
 
 /* FORM */
-
-.formCard {
-  background: #fff;
-  border-radius: 22px;
-  padding: 2.6rem;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
-}
-
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
+  display: grid;
+  gap: 14px;
 }
 
 .row {
-  display: flex;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
 
-  @media (max-width: 600px) {
-    flex-direction: column;
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr;
   }
 }
 
 /* FIELD */
-
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  width: 100%;
+  gap: 8px;
 }
 
+/* Мінімалістичні інпути: underline + clean background */
 .field input,
 .field textarea {
   width: 100%;
-  border: 1.5px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 0.95rem 1rem;
-  font-size: 0.95rem;
-  transition: all 0.25s ease;
-  background: #fff;
+  font-size: 0.98rem;
+  color: rgba(0,0,0,0.82);
 
-  &:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(122, 255, 80, 0.25);
-  }
+  padding: 14px 2px;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.18);
+  border-radius: 0;
+  background: transparent;
+
+  transition: border-color 160ms ease, transform 160ms ease;
 }
 
 .field textarea {
   resize: none;
-  min-height: 120px;
+  min-height: 130px;
+  padding-top: 10px;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: rgba(0,0,0,0.42);
+}
+
+/* Focus state — тонка “акцентна” лінія, без box-shadow */
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: rgba(0,0,0,0.55);
+  transform: translateY(-1px);
 }
 
 /* ERROR */
-
 .error {
-  font-size: 12px;
-  color: #e5484d;
-  margin-left: 4px;
+  font-size: 0.78rem;
+  color: #d14343;
+  margin-left: 2px;
 }
 
 /* POLICY */
-
 .policy {
-  margin-top: 0.6rem;
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: rgba(0,0,0,0.45);
   text-align: center;
 }
 
-/* SUCCESS */
+.policy b {
+  color: rgba(0,0,0,0.72);
+  font-weight: 700;
+}
 
+/* SUCCESS — мінімалістичний callout з лінією */
 .success {
-  text-align: center;
-  padding: 2.5rem;
+  padding: 18px 18px 18px 16px;
+  border-radius: 16px;
+
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.10);
+
+  color: rgba(0,0,0,0.78);
   font-weight: 600;
-  color: var(--primary-color);
-  background: rgba(122, 255, 80, 0.12);
-  border-radius: 18px;
+  line-height: 1.6;
+
+  position: relative;
+}
+
+.success::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  border-radius: 2px;
+  background: rgba(0,0,0,0.28);
 }
