@@ -21,7 +21,7 @@ export default function GetStartedPage() {
                 description="Log in, buy tokens, fill out a quick form, and choose a certified specialist to build your program. Need it faster? Use AI as a quick alternative and receive a structured PDF plan."
                 primaryCta={{ text: "Start My Order", link: "/dashboard" }}
                 secondaryCta={{ text: "Meet the Specialists", link: "/extra/chefs" }}
-                image="image1"
+                image="image5"
                 badge={{
                     label: "PDF Program",
                     title: "Specialist-made",
@@ -149,7 +149,7 @@ export default function GetStartedPage() {
                         "Schedule: 2–6 training days/week",
                         "Equipment: gym, home, or minimal setup",
                     ]}
-                    image="image1"
+                    image="image10"
                     badge="Personalization"
                     buttonText="Start Setup"
                     buttonLink="/dashboard"
@@ -165,7 +165,7 @@ export default function GetStartedPage() {
                         "Exercise selection matched to your equipment",
                         "Sets/reps/rest + intensity guidance",
                     ]}
-                    image="image1"
+                    image="image8"
                     badge="Structure"
                     imagePosition="right"
                 />
@@ -179,7 +179,7 @@ export default function GetStartedPage() {
                         "Warm-up + main work + accessories",
                         "Progression rules week-to-week",
                     ]}
-                    image="image1"
+                    image="image9"
                     badge="PDF Output"
                     imagePosition="left"
                 />

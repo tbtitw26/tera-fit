@@ -133,7 +133,7 @@ export default function HomePage() {
                 description="When you need a quick start, AI can generate a basic plan using your goals, schedule, experience, and recovery. For the most detailed program, choose a specialist."
                 actionText="Try AI"
                 actionLink="/dashboard"
-                image="image1"
+                image="image2"
                 imagePosition="right"
             />
 
@@ -216,49 +216,49 @@ export default function HomePage() {
                 testimonials={[
                     {
                         name: "Mark T.",
-                        image: "image1",
+                        image: "review1",
                         rating: 5,
                         text: "The specialist plan was super detailed and realistic. It fit my schedule and fixed my weak points.",
                     },
                     {
                         name: "Anna R.",
-                        image: "image1",
+                        image: "review3",
                         rating: 5,
                         text: "My coach adjusted exercise selection for my knees and technique. Training finally feels safe and effective.",
                     },
                     {
                         name: "David L.",
-                        image: "image1",
+                        image: "review2",
                         rating: 4.7,
                         text: "No subscription is perfect. I bought tokens and ordered a specialist plan when I actually needed it.",
                     },
                     {
                         name: "Chris M.",
-                        image: "image1",
+                        image: "review5",
                         rating: 5,
                         text: "I like that specialists are the main option. The program I got looked like real coaching, not a template.",
                     },
                     {
                         name: "Elena S.",
-                        image: "image1",
+                        image: "review4",
                         rating: 4.8,
                         text: "Clear weekly structure and progression. I stopped guessing and started improving consistently.",
                     },
                     {
                         name: "Tom K.",
-                        image: "image1",
+                        image: "review9",
                         rating: 4.9,
                         text: "The PDF is easy to follow and print. I’ve made steady progress for the first time in years.",
                     },
                     {
                         name: "Sophie W.",
-                        image: "image1",
+                        image: "review7",
                         rating: 4.6,
                         text: "AI is useful when I’m in a rush, but the specialist plan is on another level for detail.",
                     },
                     {
                         name: "Daniel P.",
-                        image: "image1",
+                        image: "review8",
                         rating: 4.8,
                         text: "Simple flow: form → specialist → PDF. Clean and professional.",
                     },

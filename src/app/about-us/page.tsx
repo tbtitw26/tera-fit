@@ -8,6 +8,7 @@ import TestimonialsSlider from "@/components/constructor/testimonials-slider/Tes
 import Cta from "@/components/constructor/cta/Cta";
 import MissionBanner from "@/components/constructor/mission-banner/MissionBanner";
 import FAQ from "@/components/constructor/faq/FAQ";
+import {experts} from "@/data/experts";
 
 export default function AboutPage() {
     return (
@@ -17,12 +18,12 @@ export default function AboutPage() {
                 title="Coach-Built Training for the"
                 highlight="Real World"
                 description="We connect athletes with certified specialists who design personalized training programs. AI is available as a faster option, but expert coaching is what we’re built around."
-                image="image1"
+                image="image3"
                 imageText="Real coaches. Real programs."
             />
 
             <MissionBanner
-                image="image1"
+                image="image4"
                 cards={[
                     {
                         icon: "zap",
@@ -104,66 +105,65 @@ export default function AboutPage() {
                 title="Meet Our Specialists"
                 description="Certified coaches who build programs with real training logic."
                 viewAllText="View All Trainers"
-                members={[
-                    { name: "Luca Romano", role: "Strength & Hypertrophy", image: "image1" },
-                    { name: "Sophie Laurent", role: "Mobility & Injury Prevention", image: "image1" },
-                    { name: "Kenji Tanaka", role: "Athletic Performance", image: "image1" },
-                    { name: "Maria Alvarez", role: "Endurance & Conditioning", image: "image1" },
-                ]}
+                members={experts.slice(0, 4).map((expert) => ({
+                    name: expert.fullName,
+                    role: expert.subtitle,
+                    image: expert.avatar,
+                }))}
             />
 
             {/* 6️⃣ TESTIMONIALS */}
             <TestimonialsSlider
-                title="Athletes Trust Our Coaches"
-                description="Real feedback from people following specialist-made programs."
+                title="People Trust Our Specialists"
+                description="Coach-made programs are the #1 choice on the platform."
                 testimonials={[
                     {
                         name: "Mark T.",
-                        image: "image1",
+                        image: "review1",
                         rating: 5,
-                        text: "The specialist plan was extremely detailed and matched my schedule perfectly. No filler, just smart training.",
+                        text: "The specialist plan was super detailed and realistic. It fit my schedule and fixed my weak points.",
                     },
                     {
                         name: "Anna R.",
-                        image: "image1",
+                        image: "review3",
                         rating: 5,
-                        text: "My coach fixed my squat pattern and built progressions around my weak points. Huge difference in confidence.",
+                        text: "My coach adjusted exercise selection for my knees and technique. Training finally feels safe and effective.",
                     },
                     {
                         name: "David L.",
-                        image: "image1",
-                        rating: 4.6,
-                        text: "Tokens make sense: I pay when I need a new plan. The PDF is clear and easy to follow.",
+                        image: "review2",
+                        rating: 4.7,
+                        text: "No subscription is perfect. I bought tokens and ordered a specialist plan when I actually needed it.",
                     },
                     {
                         name: "Chris M.",
-                        image: "image1",
+                        image: "review5",
                         rating: 5,
-                        text: "Specialist-first is the right approach. AI is handy, but the coach plan feels professional and personalized.",
+                        text: "I like that specialists are the main option. The program I got looked like real coaching, not a template.",
                     },
                     {
                         name: "Elena S.",
-                        image: "image1",
-                        rating: 4.7,
-                        text: "Structured weeks, clear progression, and realistic volume. I stopped guessing and started progressing.",
+                        image: "review4",
+                        rating: 4.8,
+                        text: "Clear weekly structure and progression. I stopped guessing and started improving consistently.",
                     },
                     {
                         name: "Tom K.",
-                        image: "image1",
+                        image: "review9",
                         rating: 4.9,
-                        text: "I printed the PDF and used it in the gym. Progress tracking became effortless and consistent.",
+                        text: "The PDF is easy to follow and print. I’ve made steady progress for the first time in years.",
                     },
                     {
                         name: "Sophie W.",
-                        image: "image1",
+                        image: "review7",
                         rating: 4.6,
-                        text: "AI is fast, but the specialist program was on another level for detail and exercise selection.",
+                        text: "AI is useful when I’m in a rush, but the specialist plan is on another level for detail.",
                     },
                     {
                         name: "Daniel P.",
-                        image: "image1",
+                        image: "review8",
                         rating: 4.8,
-                        text: "Clean platform, simple process, and a real coach-designed plan. Exactly what I wanted.",
+                        text: "Simple flow: form → specialist → PDF. Clean and professional.",
                     },
                 ]}
             />

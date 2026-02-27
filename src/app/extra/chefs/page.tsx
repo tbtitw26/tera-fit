@@ -47,7 +47,7 @@ export default function Page() {
                     </>
                 }
                 description="Browse professional trainers by specialty, experience level, and rating. Learn directly from experts who match your fitness goals."
-                image="image18"
+                image="image7"
             />
 
             <div className={styles.wrapper}>

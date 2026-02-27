@@ -7,9 +7,9 @@ export function getExpertBySlug(slug: string) {
 export const experts: Expert[] = [
     {
         id: "expert_marcus_l",
-        slug: "marcus-laurent",
-        avatar: "team4",
-        fullName: "Marcus Laurent",
+        slug: "ethan-walker",
+        avatar: "team1",
+        fullName: "Ethan Walker",
         rating: 4.9,
         subtitle: "Strength Training",
         experience: "15 Years",
@@ -22,7 +22,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Build strength with precision and discipline",
             about: [
-                "Marcus helps athletes maximize strength safely.",
+                "Ethan helps athletes maximize strength safely.",
                 "His programs are structured and data-driven."
             ],
             philosophy: "Strength is built through consistency.",
@@ -32,12 +32,11 @@ export const experts: Expert[] = [
             ],
         }
     },
-
     {
         id: "expert_sarah_j",
-        slug: "sarah-johnson",
-        avatar: "team2",
-        fullName: "Sarah Johnson",
+        slug: "olivia-hayes",
+        avatar: "team10",
+        fullName: "Olivia Hayes",
         rating: 4.8,
         subtitle: "Fat Loss Coaching",
         experience: "12 Years",
@@ -50,7 +49,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Sustainable fat loss without extremes",
             about: [
-                "Sarah combines training and nutrition.",
+                "Olivia combines training and nutrition.",
                 "She focuses on long-term lifestyle changes."
             ],
             philosophy: "Consistency beats intensity.",
@@ -60,12 +59,11 @@ export const experts: Expert[] = [
             ],
         }
     },
-
     {
         id: "expert_kenji_t",
-        slug: "kenji-tanaka",
-        avatar: "team1",
-        fullName: "Kenji Tanaka",
+        slug: "daniel-kim",
+        avatar: "team2",
+        fullName: "Daniel Kim",
         rating: 4.7,
         subtitle: "Mobility & Flexibility",
         experience: "10 Years",
@@ -78,7 +76,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Move better. Feel stronger.",
             about: [
-                "Kenji focuses on joint health and mobility.",
+                "Daniel focuses on joint health and mobility.",
                 "His sessions prevent injuries and improve performance."
             ],
             philosophy: "Quality movement first.",
@@ -88,12 +86,11 @@ export const experts: Expert[] = [
             ],
         }
     },
-
     {
         id: "expert_maria_g",
-        slug: "maria-garcia",
-        avatar: "team3",
-        fullName: "Maria Garcia",
+        slug: "isabella-martinez",
+        avatar: "team11",
+        fullName: "Isabella Martinez",
         rating: 4.6,
         subtitle: "Functional Training",
         experience: "8 Years",
@@ -106,7 +103,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Train for life, not just aesthetics",
             about: [
-                "Maria integrates strength and endurance.",
+                "Isabella integrates strength and endurance.",
                 "Her workouts improve daily performance."
             ],
             philosophy: "Train smart, not just hard.",
@@ -116,12 +113,11 @@ export const experts: Expert[] = [
             ],
         }
     },
-
     {
         id: "expert_alex_r",
-        slug: "alex-robinson",
-        avatar: "team5",
-        fullName: "Alex Robinson",
+        slug: "noah-bennett",
+        avatar: "team3",
+        fullName: "Noah Bennett",
         rating: 4.5,
         subtitle: "Beginner Fitness",
         experience: "6 Years",
@@ -134,7 +130,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Fitness made simple",
             about: [
-                "Alex helps beginners start confidently.",
+                "Noah helps beginners start confidently.",
                 "Programs are clear and easy to follow."
             ],
             philosophy: "Start small. Stay consistent.",
@@ -147,9 +143,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_luca_b",
-        slug: "luca-bianchi",
-        avatar: "team6",
-        fullName: "Luca Bianchi",
+        slug: "giovanni-moretti",
+        avatar: "team4",
+        fullName: "Giovanni Moretti",
         rating: 4.8,
         subtitle: "Italian Fitness",
         experience: "14 Years",
@@ -162,7 +158,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Tradition meets modern fitness",
             about: [
-                "Luca preserves classic methods and modernizes workouts.",
+                "Giovanni preserves classic methods and modernizes workouts.",
                 "He emphasizes proper form and results."
             ],
             philosophy: "Consistency over gimmicks.",
@@ -172,11 +168,12 @@ export const experts: Expert[] = [
             ],
         }
     },
+
     {
         id: "expert_emily_c",
-        slug: "emily-chen",
-        avatar: "team11",
-        fullName: "Emily Chen",
+        slug: "chloe-liang",
+        avatar: "team12",
+        fullName: "Chloe Liang",
         rating: 4.7,
         subtitle: "Yoga & Mindfulness",
         experience: "11 Years",
@@ -189,7 +186,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Balance your body and mind",
             about: [
-                "Emily guides clients to strength, flexibility, and mental clarity.",
+                "Chloe guides clients to strength, flexibility, and mental clarity.",
                 "Her holistic programs improve lifestyle and wellbeing."
             ],
             philosophy: "Wellness is harmony of mind and body.",
@@ -199,11 +196,12 @@ export const experts: Expert[] = [
             ],
         }
     },
+
     {
         id: "expert_david_m",
-        slug: "david-miller",
-        avatar: "team7",
-        fullName: "David Miller",
+        slug: "ryan-cooper",
+        avatar: "team5",
+        fullName: "Ryan Cooper",
         rating: 4.6,
         subtitle: "Cardio & Endurance",
         experience: "16 Years",
@@ -216,7 +214,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Push limits safely and effectively",
             about: [
-                "David designs endurance programs for athletes and hobbyists.",
+                "Ryan designs endurance programs for athletes and hobbyists.",
                 "Specializes in HIIT and long-term cardio planning."
             ],
             philosophy: "Consistency builds performance.",
@@ -226,11 +224,12 @@ export const experts: Expert[] = [
             ],
         }
     },
+
     {
         id: "expert_anna_k",
-        slug: "anna-kowalska",
-        avatar: "team12",
-        fullName: "Anna Kowalska",
+        slug: "amelia-nowak",
+        avatar: "team13",
+        fullName: "Amelia Nowak",
         rating: 4.5,
         subtitle: "Nutrition & Weight Loss",
         experience: "9 Years",
@@ -243,7 +242,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Healthy habits, real results",
             about: [
-                "Anna creates personalized plans combining training and nutrition.",
+                "Amelia creates personalized plans combining training and nutrition.",
                 "Focuses on long-term sustainable results."
             ],
             philosophy: "Small habits, big changes.",
@@ -253,11 +252,12 @@ export const experts: Expert[] = [
             ],
         }
     },
+
     {
         id: "expert_pierre_d",
-        slug: "pierre-dubois",
-        avatar: "team8",
-        fullName: "Pierre Dubois",
+        slug: "lucas-durand",
+        avatar: "team6",
+        fullName: "Lucas Durand",
         rating: 4.9,
         subtitle: "Strength & Conditioning",
         experience: "20 Years",
@@ -270,7 +270,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Maximize power and performance",
             about: [
-                "Pierre has trained professional athletes across multiple sports.",
+                "Lucas has trained professional athletes across multiple sports.",
                 "Focuses on progressive overload and recovery."
             ],
             philosophy: "Strong foundations lead to peak performance.",
@@ -280,11 +280,12 @@ export const experts: Expert[] = [
             ],
         }
     },
+
     {
         id: "expert_sofia_n",
-        slug: "sofia-novak",
-        avatar: "team13",
-        fullName: "Sofia Novak",
+        slug: "elena-popescu",
+        avatar: "team14",
+        fullName: "Elena Popescu",
         rating: 4.6,
         subtitle: "Pilates & Mobility",
         experience: "8 Years",
@@ -297,7 +298,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Strengthen your core, improve movement",
             about: [
-                "Sofia creates programs improving posture, balance, and flexibility.",
+                "Elena creates programs improving posture, balance, and flexibility.",
                 "Focuses on sustainable, injury-free training."
             ],
             philosophy: "Strong core, strong body.",
@@ -307,11 +308,12 @@ export const experts: Expert[] = [
             ],
         }
     },
+
     {
         id: "expert_omar_h",
-        slug: "omar-hassan",
-        avatar: "team9",
-        fullName: "Omar Hassan",
+        slug: "karim-nasser",
+        avatar: "team7",
+        fullName: "Karim Nasser",
         rating: 4.7,
         subtitle: "CrossFit & Functional Training",
         experience: "13 Years",
@@ -324,7 +326,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Train hard, move well",
             about: [
-                "Omar builds strength and endurance through functional movements.",
+                "Karim builds strength and endurance through functional movements.",
                 "Coaches both beginners and elite athletes."
             ],
             philosophy: "Functional strength improves life quality.",
@@ -334,11 +336,12 @@ export const experts: Expert[] = [
             ],
         }
     },
+
     {
         id: "expert_julia_s",
-        slug: "julia-schneider",
+        slug: "mia-schulz",
         avatar: "team15",
-        fullName: "Julia Schneider",
+        fullName: "Mia Schulz",
         rating: 4.5,
         subtitle: "Home Fitness",
         experience: "7 Years",
@@ -351,7 +354,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Get fit at home with ease",
             about: [
-                "Julia designs short, effective routines for home use.",
+                "Mia designs short, effective routines for home use.",
                 "Programs require minimal equipment."
             ],
             philosophy: "Consistency > complexity.",
@@ -361,11 +364,12 @@ export const experts: Expert[] = [
             ],
         }
     },
+
     {
         id: "expert_mateo_r",
-        slug: "mateo-rossi",
-        avatar: "team10",
-        fullName: "Mateo Rossi",
+        slug: "andrea-ferraro",
+        avatar: "team9",
+        fullName: "Andrea Ferraro",
         rating: 4.8,
         subtitle: "Mediterranean Fitness",
         experience: "15 Years",
@@ -378,7 +382,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Fitness inspired by lifestyle",
             about: [
-                "Mateo integrates diet, endurance, and strength training.",
+                "Andrea integrates diet, endurance, and strength training.",
                 "Focus on holistic performance and longevity."
             ],
             philosophy: "Healthy lifestyle supports fitness goals.",
@@ -388,11 +392,12 @@ export const experts: Expert[] = [
             ],
         }
     },
+
     {
         id: "expert_nina_p",
-        slug: "nina-petrov",
-        avatar: "team14",
-        fullName: "Nina Petrov",
+        slug: "katarina-ivanova",
+        avatar: "team16",
+        fullName: "Katarina Ivanova",
         rating: 4.6,
         subtitle: "Eastern European Fitness",
         experience: "12 Years",
@@ -405,7 +410,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Modern training with traditional roots",
             about: [
-                "Nina combines Eastern European strength techniques with mobility training.",
+                "Katarina combines Eastern European strength techniques with mobility training.",
                 "Focuses on safe, effective methods."
             ],
             philosophy: "Respect roots, refine execution.",
@@ -415,11 +420,12 @@ export const experts: Expert[] = [
             ],
         }
     },
+
     {
         id: "expert_ivan_v",
-        slug: "ivan-volkov",
-        avatar: "team15",
-        fullName: "Ivan Volkov",
+        slug: "maksim-orlov",
+        avatar: "team8",
+        fullName: "Maksim Orlov",
         rating: 4.7,
         subtitle: "Athletic Conditioning",
         experience: "10 Years",
@@ -432,7 +438,7 @@ export const experts: Expert[] = [
         profile: {
             headline: "Train like an athlete",
             about: [
-                "Ivan creates sport-specific conditioning programs.",
+                "Maksim creates sport-specific conditioning programs.",
                 "Improves performance, endurance, and strength."
             ],
             philosophy: "Train smart, perform better.",
