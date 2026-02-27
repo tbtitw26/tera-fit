@@ -1,15 +1,17 @@
 import { StyleSheet } from "@react-pdf/renderer";
 
 const colors = {
-    primary: "#14532D",
-    accent: "#16A34A",
-    light: "#FDF6E3",
-    text: "#1F2937",
-    muted: "#6B7280",
-    border: "#D1D5DB",
-}
+    primary: "#0B3B8C", // deep blue
+    accent: "#2563EB",  // blue
+    light: "#F8FAFF",   // almost white-blue
+    text: "#0F172A",    // slate-900
+    muted: "#475569",   // slate-600
+    border: "#CBD5E1",  // slate-300
+    chipBg: "#E8F0FF",
+    noteBg: "#EEF2FF",
+};
 
-export const culinaryTheme = StyleSheet.create({
+export const trainingTheme = StyleSheet.create({
     page: {
         padding: 50,
         backgroundColor: colors.light,
@@ -23,7 +25,7 @@ export const culinaryTheme = StyleSheet.create({
         borderBottomWidth: 2,
         borderBottomColor: colors.accent,
         paddingBottom: 12,
-        marginBottom: 22,
+        marginBottom: 18,
     },
 
     title: {
@@ -38,10 +40,28 @@ export const culinaryTheme = StyleSheet.create({
         color: colors.muted,
     },
 
+    chipsRow: {
+        marginTop: 10,
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: 6,
+    },
+
+    chip: {
+        backgroundColor: colors.chipBg,
+        borderWidth: 1,
+        borderColor: colors.border,
+        borderRadius: 999,
+        paddingVertical: 4,
+        paddingHorizontal: 10,
+        fontSize: 9.5,
+        color: colors.primary,
+    },
+
     sectionTitle: {
-        marginTop: 20,
+        marginTop: 18,
         marginBottom: 8,
-        fontSize: 14,
+        fontSize: 13.5,
         fontWeight: "bold",
         color: colors.accent,
         borderBottomWidth: 1,
@@ -72,16 +92,16 @@ export const culinaryTheme = StyleSheet.create({
         color: colors.primary,
     },
 
-    chefNoteBox: {
+    coachNoteBox: {
         marginTop: 14,
         padding: 12,
-        backgroundColor: "#ECFDF5",
+        backgroundColor: colors.noteBg,
         borderLeftWidth: 4,
         borderLeftColor: colors.accent,
         borderRadius: 4,
     },
 
-    chefNoteTitle: {
+    coachNoteTitle: {
         fontSize: 11,
         fontWeight: "bold",
         color: colors.primary,
@@ -89,7 +109,7 @@ export const culinaryTheme = StyleSheet.create({
     },
 
     footer: {
-        marginTop: 30,
+        marginTop: 28,
         borderTopWidth: 1,
         borderTopColor: colors.border,
         paddingTop: 10,

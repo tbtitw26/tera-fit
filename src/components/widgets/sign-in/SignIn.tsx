@@ -30,8 +30,8 @@ export default function SignIn() {
         >
             {({ isSubmitting }) => (
                 <FormUI
-                    title="Login to Your Kitchen"
-                    description="Continue your culinary journey with AI and master chefs."
+                    title="Sign In to Your Training Hub"
+                    description="Continue your progress with personalized workout programs and coaching."
                     submitLabel="Sign In to Dashboard"
                     isSubmitting={isSubmitting}
                     size="lg"

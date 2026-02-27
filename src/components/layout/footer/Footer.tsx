@@ -5,12 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 import styles from "./Footer.module.scss";
-import { footerContent } from "@/resources/content";
-import { footerStyles } from "@/resources/styles-config";
-import { SmartLinkProps } from "@/types/smart-link";
-import { FaCcMastercard, FaCcVisa, FaFacebookF, FaInstagram } from "react-icons/fa";
+import {footerContent} from "@/resources/content";
+import {footerStyles} from "@/resources/styles-config";
+import {SmartLinkProps} from "@/types/smart-link";
+import {FaCcMastercard, FaCcVisa, FaFacebookF, FaInstagram} from "react-icons/fa";
+import visa from "@/assets/cards/visa.png";
+import mastercard from "@/assets/cards/mastercard.png";
 
-const SmartLink: React.FC<SmartLinkProps> = ({ href, className, children, ariaLabel, title, target, rel }) => {
+const SmartLink: React.FC<SmartLinkProps> = ({href, className, children, ariaLabel, title, target, rel}) => {
     const isInternal = href?.startsWith("/");
     if (isInternal) {
         return (
@@ -27,12 +29,22 @@ const SmartLink: React.FC<SmartLinkProps> = ({ href, className, children, ariaLa
 };
 
 const Footer: React.FC = () => {
-    const { logo, columns, contact, legal } = footerContent;
+    const {logo, columns, contact, legal} = footerContent;
 
     const PaymentMethods = () => (
-        <div className={styles.payments}>
-            <FaCcVisa className={styles.paymentIcon} />
-            <FaCcMastercard className={styles.paymentIcon} />
+        <div className={styles.paymentsContent}>
+            <Image
+                src={visa}
+                alt="Visa"
+                placeholder="blur"
+                className={styles.paymentIcon}
+            />
+            <Image
+                src={mastercard}
+                alt="Mastercard"
+                placeholder="blur"
+                className={styles.paymentIcon}
+            />
         </div>
     );
 
@@ -99,24 +111,22 @@ const Footer: React.FC = () => {
 
                     <div className={styles.column}>
                         <h4 className={styles.columnTitle}>Company</h4>
-                        <LegalBlock />
+                        <LegalBlock/>
                     </div>
 
                     <div className={styles.column}>
                         <h4 className={styles.columnTitle}>Follow Us</h4>
                         <div className={styles.socials}>
-                            <a href="#" className={styles.socialLink} aria-label="Facebook"><FaFacebookF /></a>
-                            <a href="#" className={styles.socialLink} aria-label="Instagram"><FaInstagram /></a>
+                            <a href="#" className={styles.socialLink} aria-label="Facebook"><FaFacebookF/></a>
+                            <a href="#" className={styles.socialLink} aria-label="Instagram"><FaInstagram/></a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className={clsx(styles.bottomBar, footerStyles.showBottomBorder && styles.bottomBorder)}>
-                <div className={styles.bottomInner}>
-                    <p>© {new Date().getFullYear()} {legal.companyName}. All rights reserved.</p>
-                    <PaymentMethods />
-                </div>
+            <div className={styles["footer__rights"]}>
+                <p>© {new Date().getFullYear()} {legal.companyName}. All rights reserved.</p>
+                <PaymentMethods/>
             </div>
         </footer>
     );

@@ -9,14 +9,94 @@ import mongoose from "mongoose";
 const openai = new OpenAI({ apiKey: ENV.OPENAI_API_KEY });
 
 function buildPrompt(body: any): string {
-    const { fields, planType } = body;
+    const { fields } = body;
 
-    const domain = fields.domain || "general";          // culinary / fitness / business
+    const domain = fields.domain || "general";          // fitness / culinary / ...
     const mode = fields.deliveryMode || "ai";          // ai | expert
     const language = body.language || "English";
 
     const context = JSON.stringify(fields, null, 2);
 
+    // ---------- FITNESS ----------
+    const isFitness = domain === "fitness" || body.category === "training";
+
+    if (isFitness) {
+        const persona =
+            mode === "expert"
+                ? `
+You are a senior strength & conditioning coach.
+You write premium programs with clear reasoning, technique notes, and progression logic.
+Tone: confident, professional, practical.
+`
+                : `
+You are an AI fitness programming assistant.
+You create clear, structured, practical training plans.
+Tone: friendly, concise, actionable.
+`;
+
+        const task =
+            mode === "expert"
+                ? `
+Build a personalized training program with coaching-level detail.
+Include: weekly structure, exercise selection rationale, progression rules, and safety notes.
+`
+                : `
+Build a personalized training program.
+Include: weekly structure, exercises, sets/reps, and progression guidance.
+`;
+
+        const outputFormat = `
+### Output Requirements (MUST FOLLOW)
+Return a complete program in markdown with these sections:
+
+1) Overview
+- Goal, experience level, duration (weeks), schedule (days/week, minutes/session), equipment
+- Key principles (3–6 bullets)
+
+2) Weekly Plan
+For each week (or week ranges if long), list training days.
+For each workout:
+- Warm-up (short)
+- Main lifts (sets x reps, RPE or intensity guidance, rest)
+- Accessories (sets x reps)
+- Optional conditioning (if relevant)
+- Cool-down / mobility (short)
+Keep sessions realistic for the provided sessionMinutes.
+
+3) Progression
+- How to progress week to week (reps/weight/sets)
+- Deload guidance (if needed)
+- Plateau handling
+
+4) Technique & Safety
+- 6–10 key technique cues
+- Injury-risk reduction and substitutions if limitations are present
+
+5) Adjustments
+- What to do if user misses a session
+- How to scale up/down based on recovery
+
+Important:
+- Use the user's equipment constraints strictly.
+- Respect limitations/injuries.
+- FocusAreas are priorities (add extra volume/selection bias).
+`;
+
+        return `
+${persona}
+
+${task}
+
+### Client Input (JSON)
+${context}
+
+${outputFormat}
+
+Write the entire output in ${language}.
+`;
+    }
+
+    // ---------- EXISTING LOGIC (culinary/general) ----------
     const persona =
         domain === "culinary"
             ? mode === "expert"
@@ -95,9 +175,62 @@ function buildExtraPrompt(extra: string, category: string, fields: any, language
     const context = JSON.stringify(fields, null, 2);
     const langNote = language ? `Write in ${language}.` : "";
 
-    // training defaults preserved; add business extras
+    // Fitness extras (from ManualGenerator)
     switch (extra) {
-        // generic keys kept for backward-compatibility
+        case "warmupCooldown":
+            return `Create personalized warm-up + cool-down protocols for each workout day based on the plan context.
+Include mobility, activation, and time estimates. ${langNote}\n${context}`;
+
+        case "exerciseLibrary":
+            return `Create an Exercise Library (PDF-style markdown).
+For each exercise likely used in this plan:
+- technique cues
+- tempo suggestions
+- common mistakes
+- substitutions (based on equipment)
+- regressions/progressions
+Keep it structured. ${langNote}\n${context}`;
+
+        case "progressionAuto":
+            return `Write detailed progression rules:
+- how to progress loads/reps/sets
+- when to deload
+- what to do on plateaus
+- examples for main lifts and accessories
+Use tables where helpful. ${langNote}\n${context}`;
+
+        case "injurySafeAlternatives":
+            return `Provide joint-safe alternatives and modifications for knees/back/shoulders based on limitations and equipment.
+Include "if pain then" rules and safer swaps for common movements. ${langNote}\n${context}`;
+
+        case "nutritionMacros":
+            return `Create a Nutrition & Macros Guide aligned with the goal:
+- estimated calorie target method (with example)
+- protein/fat/carb ranges
+- meal structure tips
+- 7-day simple menu template (optional)
+Be practical, not medical. ${langNote}\n${context}`;
+
+        case "formVideoChecklist":
+            return `Create a Form Video Checklist:
+- filming angles per exercise type
+- checklist items to review
+- common red flags
+Keep it short and actionable. ${langNote}\n${context}`;
+
+        case "weeklyCheckins":
+            return `Create a Weekly Check-in Template:
+Include a table for sleep, stress, soreness/DOMS, steps/cardio, weights used, RPE, notes, and next-week adjustments. ${langNote}\n${context}`;
+
+        case "coachNotes":
+            return `Write Coach Notes:
+- key cues for this user
+- intensity guidance (RPE/RIR)
+- common pitfalls for this goal/experience
+- focus priorities (focusAreas)
+Premium tone. ${langNote}\n${context}`;
+
+        // legacy extras kept
         case "progressTracking":
             return `Create a weekly progress tracking table for ${category}.\n${langNote}\n${context}`;
         case "motivationTips":
@@ -105,35 +238,10 @@ function buildExtraPrompt(extra: string, category: string, fields: any, language
         case "summaryReport":
             return `Write a short summary report showing how the plan achieves goals.\n${langNote}\n${context}`;
 
-        // business-specific extras
-        case "marketingStrategy":
-            return `Create a structured Marketing Strategy (ICP, positioning, channels, messaging, KPIs) for this business.\n${langNote}\n${context}`;
-        case "financialProjection":
-            return `Produce a 3-year financial projection (revenue, COGS, gross margin, OpEx buckets, EBITDA) with key assumptions and unit economics. Use markdown tables.\n${langNote}\n${context}`;
-        case "riskAnalysis":
-            return `List top risks across Market, Product, Team, Finance, Legal and propose mitigations. Prioritize by impact x probability. Use a table.\n${langNote}\n${context}`;
-        case "growthRoadmap":
-            return `Draft a 12–24 month growth roadmap with milestones by quarter, owners, and success metrics.\n${langNote}\n${context}`;
-        case "competitorReview":
-            return `Create a competitor analysis matrix (competitors, features/pricing, strengths/weaknesses, our edge). Use a comparison table.\n${langNote}\n${context}`;
-        case "pitchDeck":
-            return `Outline a 12–15 slide investor pitch deck with slide titles and bullet points tailored to this business.\n${langNote}\n${context}`;
-        case "brandingGuide":
-            return `Write a lightweight branding & visual identity brief (voice & tone, value pillars, color/typography suggestions, logo usage ideas) suited to the target audience.\n${langNote}\n${context}`;
-        case "teamStructure":
-            return `Propose an organizational structure with key roles, responsibilities (RACI hints), and near-term hires with priorities.\n${langNote}\n${context}`;
-        case "customerJourney":
-            return `Map a customer journey (Awareness → Consideration → Purchase → Onboarding → Retention → Advocacy) with key touchpoints and metrics.\n${langNote}\n${context}`;
-        case "salesForecast":
-            return `Build a simple sales forecast table (quarters, leads, conversion rates, ACV/ARPU, bookings/revenue) with assumptions.\n${langNote}\n${context}`;
-        case "fundingPlan":
-            return `Draft a funding strategy (target round size, use of proceeds, milestones to next round, suggested investor profile) tailored to this business.\n${langNote}\n${context}`;
-
         default:
             return `Generate a useful "${extra}" section for the ${category} context.\n${langNote}\n${context}`;
     }
 }
-
 export const universalService = {
     /** create order */
     async createOrder(userId: string, email: string, body: any) {
