@@ -37,16 +37,16 @@ const PATHS: Array<{
         title: "AI Training Plan",
         desc: "Instantly creates a plan for your goal, schedule, and equipment. You can update it anytime.",
         badge: "FAST & AFFORDABLE",
-        tokens: 50,
-        icon: "brain",
+        tokens: 1500,
+        icon: "speed",
     },
     {
         id: "coach",
         title: "Coach-Led Plan",
         desc: "A coach builds your plan and adds human feedback/explanations. Premium format.",
         badge: "PREMIUM COACHING",
-        tokens: 150,
-        icon: "chef", // if missing, use 'chef'
+        tokens: 6000,
+        icon: "brain",
     },
 ];
 
@@ -122,11 +122,7 @@ const schema = Yup.object({
 type PathIconProps = { icon: IconKey; active: boolean };
 
 function PathIcon({ icon, active }: PathIconProps) {
-    return (
-        <div className={active ? styles.iconBadge : styles.iconBadgeSoft}>
-            {renderIcon(icon)}
-        </div>
-    );
+    return <div className={active ? styles.iconBadge : styles.iconBadgeSoft}>{renderIcon(icon)}</div>;
 }
 
 function CoachValue({ coachId }: { coachId: string }) {
@@ -182,34 +178,33 @@ export default function ManualGenerator() {
         extras: [],
     };
 
-    const TOKENS_PER_EXTRA_BLOCK = 40; // extra cost per +4 weeks
-    const FREE_BLOCKS = 1; // base includes up to 4 weeks
+    // ✅ culinary-style duration pricing
+    // Base includes minimal program for fitness (2 weeks), everything above is extra
+    const FREE_WEEKS = 2;
 
-    function durationToBlocks(d: Duration) {
-        if (d === "2w") return 1;
-        if (d === "4w") return 1;
-        if (d === "8w") return 2;
-        return 3;
-    }
+    function calcDurationTokens(path: PlanPath, duration: Duration) {
+        const weeks = durationToWeeks(duration);
+        const extraWeeks = Math.max(0, weeks - FREE_WEEKS);
 
-    function calcDurationTokens(duration: Duration) {
-        const blocks = durationToBlocks(duration);
-        return Math.max(0, blocks - FREE_BLOCKS) * TOKENS_PER_EXTRA_BLOCK;
+        // keep same approach as culinary: premium path costs more per extra week
+        if (path === "coach") return extraWeeks * 1000;
+        return extraWeeks * 500;
     }
 
     function calcTotalTokens(values: Values) {
         const pathTokens = PATHS.find((p) => p.id === values.path)?.tokens ?? 0;
-        const durationTokens = calcDurationTokens(values.duration);
 
-        const extrasTokens = FITNESS_EXTRAS.filter((e) => values.extras.includes(e.id)).reduce((sum, e) => sum + e.tokens, 0);
+        const durationTokens = calcDurationTokens(values.path, values.duration);
+
+        const extrasTokens = FITNESS_EXTRAS
+            .filter((e) => values.extras.includes(e.id))
+            .reduce((sum, e) => sum + e.tokens, 0);
 
         return pathTokens + durationTokens + extrasTokens;
     }
 
     const experienceLabel = (x: Experience) => (x === "beginner" ? "Beginner" : x === "intermediate" ? "Intermediate" : "Advanced");
-
     const equipmentLabel = (id: Equipment) => EQUIPMENT.find((e) => e.id === id)?.label ?? id;
-
     const goalLabel = (id: FitnessGoal) => GOALS.find((g) => g.id === id)?.label ?? id;
 
     return (
@@ -367,9 +362,7 @@ export default function ManualGenerator() {
                                                 <div className={styles.dropdown}>
                                                     <button
                                                         type="button"
-                                                        className={`${styles.dropdownTrigger} ${
-                                                            touched.coachId && errors.coachId ? styles.dropdownError : ""
-                                                        }`}
+                                                        className={`${styles.dropdownTrigger} ${touched.coachId && errors.coachId ? styles.dropdownError : ""}`}
                                                         onClick={() => setCoachOpen((v) => !v)}
                                                     >
                                                         {values.coachId ? (
@@ -712,7 +705,6 @@ export default function ManualGenerator() {
                                     className={styles.mobileCTA}
                                     disabled={isSubmitting}
                                     onClick={() => {
-                                        // keeps working even if the button isn’t type="submit"
                                         void submitForm();
                                     }}
                                 >

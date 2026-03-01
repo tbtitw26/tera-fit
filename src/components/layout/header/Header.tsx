@@ -12,10 +12,12 @@ import { headerStyles } from "@/resources/styles-config";
 import DrawerMenu from "@/components/ui/drawer/Drawer";
 import AuthButtons from "@/components/widgets/auth-buttons/AuthButtons";
 import CurrencySwitch from "@/components/widgets/currency-switch/CurrencySwitch";
+import { useUser } from "@/context/UserContext";
 
 const Header: React.FC = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const user = useUser();
 
     useEffect(() => {
         const onScroll = () => setIsScrolled(window.scrollY > 12);
@@ -67,6 +69,11 @@ const Header: React.FC = () => {
                                 {link.label}
                             </a>
                         ))}
+                        {user && (
+                            <a href="/dashboard" className={styles.link}>
+                                Dashboard
+                            </a>
+                        )}
                     </nav>
 
                     <div className={styles.actionsNav}>
