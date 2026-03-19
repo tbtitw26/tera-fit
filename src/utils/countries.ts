@@ -3,27 +3,29 @@ import en from "i18n-iso-countries/langs/en.json";
 
 countries.registerLocale(en);
 
-const BLOCKED_ISO3 = new Set([
+const RESTRICTED_ISO3 = new Set([
     "RUS",
     "BLR",
     "IRN",
     "PRK",
     "SYR",
+    "YEM",
+    "AFG",
     "SDN",
     "SSD",
-    "AFG",
-    "COD",
-    "CAF",
     "CUB",
-    "HTI",
-    "IRQ",
-    "SOM",
     "VEN",
     "ZWE",
     "MMR",
     "MLI",
-    "YEM",
+    "COD",
+    "CAF",
+    "SOM",
+    "IRQ",
+    "HTI",
 ]);
+
+const RESTRICTED_REGION_TOKENS = ["crimea", "darfur"];
 
 export type CountryOption = {
     name: string;
@@ -47,6 +49,31 @@ export function getAllowedCountries(): CountryOption[] {
             alpha3: countries.alpha2ToAlpha3(alpha2),
         }))
         .filter(hasAlpha3)
-        .filter((c) => !BLOCKED_ISO3.has(c.alpha3))
+        .filter((c) => !RESTRICTED_ISO3.has(c.alpha3))
         .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+const allowedCountries = getAllowedCountries();
+
+export function getAllowedCountryByValue(value: string) {
+    const normalizedValue = value.trim().toLowerCase();
+
+    if (!normalizedValue || isRestrictedRegion(normalizedValue)) {
+        return null;
+    }
+
+    return (
+        allowedCountries.find((country) => country.alpha2.toLowerCase() === normalizedValue) ||
+        allowedCountries.find((country) => country.alpha3.toLowerCase() === normalizedValue) ||
+        allowedCountries.find((country) => country.name.toLowerCase() === normalizedValue) ||
+        null
+    );
+}
+
+export function isAllowedCountryValue(value: string) {
+    return Boolean(getAllowedCountryByValue(value));
+}
+
+function isRestrictedRegion(value: string) {
+    return RESTRICTED_REGION_TOKENS.some((token) => value.includes(token));
 }

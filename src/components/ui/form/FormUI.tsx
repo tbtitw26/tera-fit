@@ -60,7 +60,7 @@ const FormUI: React.FC<FormUIProps> = ({
 
                     <Form className={styles.formContent}>
                         {fields.map((field) => {
-                            if (field.name === "addressCountry") {
+                            if (field.name === "country") {
                                 return (
                                     <CountrySelect
                                         key={field.name}

@@ -16,7 +16,18 @@ const InputUI: React.FC<FormikInputProps> = ({ formik, ...props }) => {
                     {...props}
                     error={showError}
                 />
-
+                {showError ? (
+                    <div
+                        style={{
+                            marginTop: 4,
+                            paddingLeft: 2,
+                            fontSize: "0.75rem",
+                            color: "var(--error-color, #d32f2f)",
+                        }}
+                    >
+                        {meta.error}
+                    </div>
+                ) : null}
             </div>
         );
     }

@@ -7,14 +7,17 @@ export interface IUser {
     lastName: string;
 
     email: string;
-    phone: string;
-    birthDate: string;
+    phoneNumber: string;
+    dateOfBirth: string;
+    phone?: string;
+    birthDate?: string;
 
     address: {
         street: string;
         city: string;
         country: string;
-        zip: string;
+        postCode: string;
+        zip?: string;
     };
 
     tokens: number;

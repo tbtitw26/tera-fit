@@ -3,86 +3,50 @@
   width: 100%;
 }
 
-/* ===== CONTROL ===== */
+.selectWrap {
+  position: relative;
+}
+
 .control {
-  height: 52px;
-  padding: 0 16px;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  background: var(--surface-color);
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: border 0.2s ease;
-
-  &:hover {
-    border-color: var(--primary-color);
-  }
-}
-
-.placeholder {
-  color: var(--text-secondary);
-}
-
-.value {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.flag {
-  font-size: 1.2rem;
-  line-height: 1;
-}
-
-/* ===== DROPDOWN ===== */
-.dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
   width: 100%;
-  background: #fff;
-  border-radius: 14px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
-  z-index: 50;
-  overflow: hidden;
-}
-
-.search {
-  height: 44px;
-  padding: 0 14px;
-  border: none;
-  border-bottom: 1px solid var(--border-color);
+  min-height: 48px;
+  padding: 11px 44px 11px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--joy-palette-neutral-outlinedBorder, rgba(0, 0, 0, 0.23));
+  background: var(--joy-palette-background-surface, #fff);
+  color: var(--joy-palette-text-primary, #171a1c);
+  font: inherit;
+  line-height: 1.5;
+  appearance: none;
   outline: none;
-  font-size: 0.95rem;
-}
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
-.list {
-  max-height: 220px;
-  overflow-y: auto;
-}
+  &:focus {
+    border-color: var(--joy-palette-primary-outlinedBorder, var(--primary-color));
+    box-shadow: 0 0 0 3px rgba(159, 122, 234, 0.12);
+  }
 
-/* ===== OPTION ===== */
-.option {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  cursor: pointer;
-  font-size: 0.95rem;
+  &[data-error="true"] {
+    border-color: var(--error-color, #d32f2f);
+  }
 
-  &:hover {
-    background: var(--surface-hover);
+  &:invalid {
+    color: var(--joy-palette-text-tertiary, #8a8f98);
   }
 }
 
-.name {
-  flex: 1;
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  color: var(--joy-palette-text-tertiary, #8a8f98);
+  pointer-events: none;
 }
 
-/* ===== ERROR ===== */
 .error {
   margin-top: 4px;
-  font-size: 0.8rem;
-  color: #dc2626;
+  padding-left: 2px;
+  font-size: 0.75rem;
+  color: var(--error-color, #d32f2f);
 }

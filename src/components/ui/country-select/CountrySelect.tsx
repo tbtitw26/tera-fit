@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useMemo, useState, useRef, useEffect } from "react";
+import React from "react";
 import { useField } from "formik";
+import { ChevronDown } from "lucide-react";
 import styles from "./CountrySelect.module.scss";
-import { countries } from "@/resources/countries";
+import { getAllowedCountries } from "@/utils/countries";
 
 interface Props {
     name: string;
@@ -12,86 +13,34 @@ interface Props {
 
 const CountrySelect: React.FC<Props> = ({ name, placeholder }) => {
     const [field, meta, helpers] = useField(name);
-    const [open, setOpen] = useState(false);
-    const [query, setQuery] = useState("");
-    const wrapperRef = useRef<HTMLDivElement>(null);
-
-    const selected = countries.find(c => c.code === field.value);
-
-    const filtered = useMemo(() => {
-        return countries.filter(c =>
-            c.name.toLowerCase().includes(query.toLowerCase())
-        );
-    }, [query]);
-
-    // ✅ CLOSE ON OUTSIDE CLICK
-    useEffect(() => {
-        if (!open) return;
-
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                wrapperRef.current &&
-                !wrapperRef.current.contains(event.target as Node)
-            ) {
-                setOpen(false);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [open]);
+    const countries = getAllowedCountries();
+    const showError = Boolean(meta.touched && meta.error);
 
     return (
-        <div className={styles.wrapper} ref={wrapperRef}>
-            {/* CONTROL */}
-            <div
-                className={styles.control}
-                onClick={() => setOpen(v => !v)}
-            >
-                {selected ? (
-                    <span className={styles.value}>
-                        <span>{selected.name}</span>
-                    </span>
-                ) : (
-                    <span className={styles.placeholder}>
-                        {placeholder || "Select country"}
-                    </span>
-                )}
+        <div className={styles.wrapper}>
+            <div className={styles.selectWrap}>
+                <select
+                    {...field}
+                    className={styles.control}
+                    data-error={showError ? "true" : "false"}
+                    onBlur={(event) => {
+                        field.onBlur(event);
+                        helpers.setTouched(true);
+                    }}
+                >
+                    <option value="" disabled>
+                        {placeholder || "Select your country"}
+                    </option>
+                    {countries.map((country) => (
+                        <option key={country.alpha2} value={country.alpha2}>
+                            {country.name}
+                        </option>
+                    ))}
+                </select>
+                <ChevronDown className={styles.chevron} size={18} aria-hidden />
             </div>
 
-            {/* DROPDOWN */}
-            {open && (
-                <div className={styles.dropdown}>
-                    <input
-                        className={styles.search}
-                        placeholder="Search country…"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        autoFocus
-                    />
-
-                    <div className={styles.list}>
-                        {filtered.map((country) => (
-                            <div
-                                key={country.code}
-                                className={styles.option}
-                                onClick={() => {
-                                    helpers.setValue(country.code);
-                                    setOpen(false);
-                                    setQuery("");
-                                }}
-                            >
-                                <span className={styles.name}>{country.name}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {meta.touched && meta.error && (
+            {showError && (
                 <div className={styles.error}>{meta.error}</div>
             )}
         </div>

@@ -3,7 +3,7 @@ import { requireAuth } from "@/backend/middlewares/auth.middleware";
 import { userController } from "@/backend/controllers/user.controller";
 import { EsimOrder } from "@/backend/models/esimOrder.model";
 import { connectDB } from "@/backend/config/db";
-import { sendEmail } from "@/backend/utils/sendEmail";
+import { emailService } from "@/backend/services/email.service";
 
 export async function POST(req: NextRequest) {
     try {
@@ -35,19 +35,29 @@ export async function POST(req: NextRequest) {
             tokensUsed: tokens,
         });
 
-        // 📧 email
-        await sendEmail(
-            user.email,
-            "eSIM purchase successful",
-            `Your eSIM order for ${country} (${plan}) was successful.`,
-            `
-        <h2>eSIM Order Confirmed ✅</h2>
-        <p><strong>Country:</strong> ${country}</p>
-        <p><strong>Plan:</strong> ${plan}</p>
-        <p><strong>Tokens spent:</strong> ${tokens}</p>
-        <p>Your QR code will be sent shortly.</p>
-      `
-        );
+        try {
+            await emailService.sendOrderConfirmationEmail({
+                email: user.email,
+                firstName: user.firstName,
+                subject: "eSIM order confirmation",
+                summaryTitle: "Order summary",
+                summaryLines: [
+                    `Service: eSIM`,
+                    `Country: ${country}`,
+                    `Plan: ${plan}`,
+                    `Status: ${order.status}`,
+                ],
+                amountLabel: "Tokens used",
+                amountValue: String(tokens),
+                transactionDate: order.createdAt || new Date(),
+            });
+        } catch (error) {
+            console.error("❌ eSIM confirmation email failed:", {
+                orderId: order._id,
+                email: user.email,
+                error,
+            });
+        }
 
         return NextResponse.json({ success: true, order });
     } catch (err: any) {

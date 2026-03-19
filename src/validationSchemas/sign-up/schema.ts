@@ -1,34 +1,67 @@
 import { AlertColor } from "@mui/material/Alert";
+import { isAllowedCountryValue } from "@/utils/countries";
 
 export const signUpInitialValues = {
     firstName: "",
     lastName: "",
+    dateOfBirth: "",
     email: "",
+    phoneNumber: "",
+    street: "",
+    city: "",
+    country: "",
+    postCode: "",
     password: "",
-    phone: "",
-    birthDate: "",
-    addressStreet: "",
-    addressCity: "",
-    addressCountry: "",
-    addressZip: "",
+    confirmPassword: "",
     terms: false,
 };
 
 type SignUpErrors = Partial<Record<keyof typeof signUpInitialValues, string>>;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
 export const signUpValidation = (values: typeof signUpInitialValues) => {
     const errors: SignUpErrors = {};
+    const firstName = values.firstName.trim();
+    const lastName = values.lastName.trim();
+    const email = values.email.trim();
+    const phoneNumber = values.phoneNumber.trim();
+    const street = values.street.trim();
+    const city = values.city.trim();
+    const country = values.country.trim();
+    const postCode = values.postCode.trim();
+    const password = values.password;
+    const confirmPassword = values.confirmPassword;
 
-    if (!values.firstName) errors.firstName = "Required";
-    if (!values.lastName) errors.lastName = "Required";
-    if (!values.email) errors.email = "Required";
-    if (!values.password) errors.password = "Required";
-    if (!values.phone) errors.phone = "Required";
-    if (!values.birthDate) errors.birthDate = "Required";
-    if (!values.addressStreet) errors.addressStreet = "Required";
-    if (!values.addressCity) errors.addressCity = "Required";
-    if (!values.addressCountry) errors.addressCountry = "Required";
-    if (!values.addressZip) errors.addressZip = "Required";
+    if (!firstName) errors.firstName = "First name is required";
+    if (!lastName) errors.lastName = "Last name is required";
+    if (!values.dateOfBirth) {
+        errors.dateOfBirth = "Date of birth is required";
+    } else if (!DATE_REGEX.test(values.dateOfBirth) || Number.isNaN(Date.parse(values.dateOfBirth))) {
+        errors.dateOfBirth = "Enter a valid date";
+    }
+    if (!email) {
+        errors.email = "Email is required";
+    } else if (!EMAIL_REGEX.test(email)) {
+        errors.email = "Enter a valid email address";
+    }
+    if (!phoneNumber) errors.phoneNumber = "Phone number is required";
+    if (!street) errors.street = "Street is required";
+    if (!city) errors.city = "City is required";
+    if (!country) {
+        errors.country = "Country is required";
+    } else if (!isAllowedCountryValue(country)) {
+        errors.country = "Select a supported country";
+    }
+    if (!postCode) errors.postCode = "Post code is required";
+    if (!password) {
+        errors.password = "Password is required";
+    }
+    if (!confirmPassword) {
+        errors.confirmPassword = "Please confirm your password";
+    } else if (password !== confirmPassword) {
+        errors.confirmPassword = "Passwords must match";
+    }
 
     if (!values.terms) {
         errors.terms = "You must agree to the Terms and Conditions";
@@ -44,10 +77,24 @@ export const signUpOnSubmit = async (
     router: { replace: (url: string) => void; refresh: () => void }
 ) => {
     try {
+        const payload = {
+            firstName: values.firstName.trim(),
+            lastName: values.lastName.trim(),
+            dateOfBirth: values.dateOfBirth,
+            email: values.email.trim(),
+            phoneNumber: values.phoneNumber.trim(),
+            street: values.street.trim(),
+            city: values.city.trim(),
+            country: values.country.trim(),
+            postCode: values.postCode.trim(),
+            password: values.password,
+            confirmPassword: values.confirmPassword,
+        };
+
         const res = await fetch("/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(values),
+            body: JSON.stringify(payload),
         });
 
         const data = await res.json();
