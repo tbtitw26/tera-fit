@@ -8,9 +8,10 @@ import styles from "./Footer.module.scss";
 import {footerContent} from "@/resources/content";
 import {footerStyles} from "@/resources/styles-config";
 import {SmartLinkProps} from "@/types/smart-link";
-import {FaCcMastercard, FaCcVisa, FaFacebookF, FaInstagram} from "react-icons/fa";
+import {FaFacebookF, FaInstagram} from "react-icons/fa";
 import visa from "@/assets/cards/visa.png";
 import mastercard from "@/assets/cards/mastercard.png";
+import pciDss from "@/assets/cards/pci-dss-compliant-logo-vector.svg";
 
 const SmartLink: React.FC<SmartLinkProps> = ({href, className, children, ariaLabel, title, target, rel}) => {
     const isInternal = href?.startsWith("/");
@@ -43,6 +44,11 @@ const Footer: React.FC = () => {
                 src={mastercard}
                 alt="Mastercard"
                 placeholder="blur"
+                className={styles.paymentIcon}
+            />
+            <Image
+                src={pciDss}
+                alt="PCI DSS Compliant"
                 className={styles.paymentIcon}
             />
         </div>
