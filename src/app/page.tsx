@@ -158,7 +158,7 @@ export default function HomePage() {
                     variant="pro"
                     title="Athlete"
                     price="€19"
-                    tokens={2500}
+                    tokens={1900}
                     badgeTop="Popular"
                     description="Great for regular updates and specialist-made programs when your goals change."
                     buttonText="Get Started"
@@ -168,7 +168,7 @@ export default function HomePage() {
                     variant="premium"
                     title="Pro"
                     price="€49"
-                    tokens={7000}
+                    tokens={4900}
                     badgeTop="Best Value"
                     description="Best choice for serious progress with detailed specialist programming and periodic revisions."
                     buttonText="Choose Plan"

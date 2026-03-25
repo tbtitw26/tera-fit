@@ -20,73 +20,50 @@ export default function PricingPage() {
                 description="Buy tokens once and use them for specialist-made programs (primary service) or AI-generated plans (faster option). No subscriptions. No hidden fees."
             />
 
-            <Grid columns={4} gap="2rem">
+            <Grid
+                title="Token Packages"
+                description="No subscriptions. Tokens let you choose specialist work or AI anytime."
+                columns={4}
+                gap="2rem"
+            >
                 <PricingCard
-                    index={0}
                     variant="starter"
-                    title="Starter Pack"
+                    title="Starter"
                     price="€5"
                     tokens={500}
                     badgeTop="Start"
-                    description="Perfect to explore the platform or generate a quick AI program."
-                    features={[
-                        "Ideal for 1 AI program",
-                        "Can be used toward a specialist plan",
-                        "No expiration",
-                        "Full platform access",
-                    ]}
+                    description="Ideal to test the platform, generate an AI plan, or cover part of a specialist order."
                     buttonText="Buy Tokens"
                 />
 
                 <PricingCard
-                    index={1}
                     variant="pro"
-                    title="Athlete Pack"
+                    title="Athlete"
                     price="€19"
                     tokens={1900}
-                    badgeTop="Most Popular"
-                    description="Best for consistent training and ordering specialist-made programs."
-                    features={[
-                        "Covers 1 full specialist program",
-                        "Option to use AI anytime",
-                        "Tokens never expire",
-                        "Better value per token",
-                    ]}
+                    badgeTop="Popular"
+                    description="Great for regular updates and specialist-made programs when your goals change."
                     buttonText="Get Started"
                 />
 
                 <PricingCard
-                    index={2}
                     variant="premium"
-                    title="Pro Progress Pack"
+                    title="Pro"
                     price="€49"
                     tokens={4900}
                     badgeTop="Best Value"
-                    description="Designed for serious athletes who want long-term progress with specialist support."
-                    features={[
-                        "Multiple specialist programs",
-                        "Use for revisions or updates",
-                        "AI access included",
-                        "Maximum token value",
-                    ]}
-                    buttonText="Choose Pack"
+                    description="Best choice for serious progress with detailed specialist programming and periodic revisions."
+                    buttonText="Choose Plan"
                 />
 
                 <PricingCard
-                    index={3}
                     variant="custom"
-                    title="Custom Token Pack"
+                    title="Custom"
                     price="dynamic"
                     tokens={0}
                     badgeTop="Flexible"
-                    description="Choose the exact number of tokens you need for your goals."
-                    features={[
-                        "Custom token amount",
-                        "Spend on Specialist or AI",
-                        "No expiration",
-                        "Scalable for advanced users",
-                    ]}
-                    buttonText="Build My Pack"
+                    description="Choose the exact amount of tokens you need for your next plan or upgrade."
+                    buttonText="Continue"
                 />
             </Grid>
 
