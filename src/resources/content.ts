@@ -26,7 +26,7 @@ export const headerContent = {
         {label: "Our Trainers", href: "/extra/chefs"},
         {label: "Plans", href: "/pricing"},
         {label: "Contact", href: "/contact-us"},
-        {label: "Join to Us", href: "/join-team"},
+        {label: "Career", href: "/join-team"},
         {label: "Faq", href: "/faq"},
     ]
 };

@@ -167,7 +167,7 @@ export default function AboutPage() {
                     },
                 ]}
             />
-ы
+
             <Cta
                 title="Get Your Coach-Made Program"
                 description="Create an account, buy tokens, and order a specialist plan today. Use AI anytime for a faster start."
