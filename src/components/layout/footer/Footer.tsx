@@ -8,7 +8,7 @@ import styles from "./Footer.module.scss";
 import {footerContent} from "@/resources/content";
 import {footerStyles} from "@/resources/styles-config";
 import {SmartLinkProps} from "@/types/smart-link";
-import {FaFacebookF, FaInstagram} from "react-icons/fa";
+import {FaFacebookF, FaInstagram, FaPinterest} from "react-icons/fa";
 import visa from "@/assets/cards/visa.png";
 import mastercard from "@/assets/cards/mastercard.png";
 import pciDss from "@/assets/cards/pci-dss-compliant-logo-vector.svg";
@@ -123,8 +123,10 @@ const Footer: React.FC = () => {
                     <div className={styles.column}>
                         <h4 className={styles.columnTitle}>Follow Us</h4>
                         <div className={styles.socials}>
-                            <a href="#" className={styles.socialLink} aria-label="Facebook"><FaFacebookF/></a>
-                            <a href="#" className={styles.socialLink} aria-label="Instagram"><FaInstagram/></a>
+                            {/*<a href="#" className={styles.socialLink} aria-label="Facebook"><FaFacebookF/></a>
+                            <a href="#" className={styles.socialLink} aria-label="Instagram"><FaInstagram/></a>*/}
+                            <a href="https://www.pinterest.com/terafitgo/" className={styles.socialLink}
+                               aria-label="Pinterest"><FaPinterest/></a>
                         </div>
                     </div>
                 </div>
