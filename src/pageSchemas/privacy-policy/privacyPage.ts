@@ -1,24 +1,32 @@
 import { PageSchema } from "@/components/constructor/page-render/types";
+import {
+    COMPANY_NAME,
+    COMPANY_ADDRESS,
+    COMPANY_PHONE,
+    COMPANY_LEGAL_NAME,
+    COMPANY_NUMBER,
+    COMPANY_EMAIL,
+} from "@/resources/constants";
 
 const privacyPolicySchema: PageSchema = {
     meta: {
-        title: "Privacy Policy – Averis",
+        title: `Privacy Policy – ${COMPANY_NAME ?? "Tera Fit"}`,
         description:
-            "Averis Privacy Policy: details on what data we collect, how we use it, retention, transfers, and your rights under UK GDPR.",
+            "Tera Fit Privacy Policy: details on what data we collect, how we use it, retention, transfers, and your rights under GDPR.",
         keywords: [
             "privacy policy",
             "GDPR",
             "data protection",
-            "averis",
-            "fitness AI",
+            "tera fit",
+            "fitness",
             "personal data",
-            "uk gdpr",
+            "privacy",
         ],
         canonical: "/privacy-policy",
         ogImage: {
-            title: "Averis – Privacy Policy",
+            title: `Privacy Policy – ${COMPANY_NAME ?? "Tera Fit"}`,
             description:
-                "Transparent privacy practices for Averis AI fitness platform under UK GDPR.",
+                "Transparent privacy practices for Tera Fit digital fitness platform under GDPR.",
             bg: "#ffffff",
             color: "#000000",
         },
@@ -27,182 +35,388 @@ const privacyPolicySchema: PageSchema = {
         {
             type: "text",
             title: "Privacy Policy",
-            description: "Effective date: 18 October 2025",
-        },
-        {
-            type: "text",
-            title: "1. Introduction",
             description:
-                "We value and respect your privacy. This Privacy Policy explains what personal data we collect, why we use it, how long we retain it, and how you can exercise your rights when using averis.co.uk and related services (the “Service”).",
+                "Effective date: 26 March 2026\n\nThis Privacy Policy explains how LOOTERA IT MB (“we”, “us”, “our”) collects, uses, shares, stores, and protects personal data when you use Tera Fit and related services available at tera-fit.eu (the “Service”).\n\nData Controller\n" +
+                `${COMPANY_LEGAL_NAME}\n` +
+                `Company number: ${COMPANY_NUMBER}\n` +
+                `Address: ${COMPANY_ADDRESS}\n` +
+                `Email: ${COMPANY_EMAIL}\n` +
+                `Phone: ${COMPANY_PHONE}\n\n` +
+                "This Policy applies to personal data collected through the website, account registration, contact forms, questionnaires, checkout, customer support, and related digital service delivery.",
+        },
+        {
+            type: "text",
+            title: "1. General Principles",
             bullets: [
-                "Controller: SHIREDON LIMITED (Company No. 15799662), Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, United Kingdom, CF31 1JF (“Averis”, “we”, “us”, “our”).",
-                "Contact: info@averis.co.uk",
-                "Scope: This Policy applies to users of the Service. The Service is intended for individuals 18+.",
+                "1.1 We process personal data in accordance with the EU General Data Protection Regulation (GDPR), applicable laws of the Republic of Lithuania, and other applicable data protection laws.",
+                "1.2 We collect and use only the personal data that is reasonably necessary for legitimate business purposes, including providing the Service, managing accounts, processing payments, delivering Programs, responding to enquiries, ensuring security, and complying with legal obligations.",
+                "1.3 By using the Service, you acknowledge that your personal data will be processed as described in this Privacy Policy.",
             ],
         },
         {
             type: "text",
-            title: "2. Data We Collect",
-            description: "We collect only the data needed to operate, secure, and improve the Service.",
-        },
-        {
-            type: "text",
-            title: "2.1. Data You Provide Directly",
-            bullets: [
-                "Name and contact details (e.g., email).",
-                "Account credentials (stored securely in hashed form).",
-                "Billing details (billing address; optional VAT information for invoices).",
-                "Inputs for plan generation: fitness goals, target muscle groups, current level, age range, height/weight ranges, injuries/limitations, available equipment, preferred training style/schedule, and other free-form prompts you choose to provide.",
-                "Support requests and communications.",
-            ],
-        },
-        {
-            type: "text",
-            title: "2.2. Collected Automatically",
-            bullets: [
-                "IP address, device and browser information, timezone, language, access logs, and security telemetry (e.g., failed logins).",
-                "Usage data: page views, clicks, token purchases/redemptions, generation attempts, error logs, and aggregate performance metrics.",
-            ],
-        },
-        {
-            type: "text",
-            title: "2.3. From Third Parties (as Needed)",
-            bullets: [
-                "Payment processors (transaction references and status; never full card numbers).",
-                "Fraud-prevention/anti-abuse providers (risk signals).",
-            ],
+            title: "2. Personal Data We Collect",
             description:
-                "Special category data: information about injuries, health conditions, or mobility limitations that you voluntarily provide may qualify as special category data. We process such data only to personalise workout plans, and only with your consent.",
+                "Depending on how you use the Service, we may collect the following categories of personal data:",
         },
         {
             type: "text",
-            title: "3. Why We Process Your Data & Legal Bases",
+            title: "2.1 Identity and contact data",
+            description: "This may include:",
+            bullets: [
+                "• name;",
+                "• email address;",
+                "• billing details;",
+                "• country or location information;",
+                "• phone number, where provided.",
+            ],
+        },
+        {
+            type: "text",
+            title: "2.2 Account data",
+            description: "This may include:",
+            bullets: [
+                "• login credentials;",
+                "• hashed password;",
+                "• account preferences;",
+                "• profile information;",
+                "• token balance and account status.",
+            ],
+        },
+        {
+            type: "text",
+            title: "2.3 Order and transaction data",
             description:
-                "We process personal data under the UK GDPR and the Data Protection Act 2018 on the following bases:",
-        },
-        {
-            type: "text",
-            title: "3.1. Performance of a Contract",
+                "This may include:",
             bullets: [
-                "To register and maintain your account.",
-                "To process token top-ups and deliver digital content (Workout Plans/PDFs).",
-                "To provide customer support and handle refunds or queries.",
+                "• order references;",
+                "• purchase history;",
+                "• Token purchases and redemptions;",
+                "• transaction dates;",
+                "• payment status;",
+                "• payment processor references;",
+                "• refund and chargeback information.",
             ],
         },
         {
             type: "text",
-            title: "3.2. Consent (Including Special Category Data)",
-            bullets: [
-                "To use health/fitness details (e.g., injuries, limitations) that you input to tailor results.",
-                "To send marketing emails/newsletters where you opt in.",
-                "To use your content/feedback for model improvement where you opt in (we do not use personal data for training unless you consent).",
-            ],
+            title: "2.3 Order and transaction data",
             description:
-                "You can withdraw consent at any time via account settings or by contacting us. Withdrawal does not affect prior lawful processing but may reduce the relevance of generated results.",
+                "We do not store full card numbers or card security codes. Payment transactions are handled by third-party payment providers.",
         },
         {
             type: "text",
-            title: "3.3. Legitimate Interests",
+            title: "2.4 Service and usage data",
+            description: "This may include:",
             bullets: [
-                "To keep the Service secure (fraud detection, abuse prevention, logging).",
-                "To measure and improve performance and user experience.",
-                "To communicate important non-marketing updates about the Service.",
+                "• submitted questionnaires and intake form responses;",
+                "• selected services or Programs;",
+                "• download and access history;",
+                "• interaction with the Service;",
+                "• timestamps and activity logs.",
             ],
         },
         {
             type: "text",
-            title: "3.4. Legal Obligation",
-            bullets: [
-                "Tax, accounting, and compliance record-keeping.",
-                "Responding to lawful requests from authorities.",
-            ],
-        },
-        {
-            type: "text",
-            title: "4. AI, Profiling and Automated Decisions",
-            bullets: [
-                "The Service uses AI to generate workout plans based on your inputs. This involves automated processing and limited profiling to match exercises to your preferences and goals.",
-                "We do not make legal or similarly significant decisions about you solely by automated means.",
-                "You can choose not to provide health-related data (results may be less relevant). You may also request human review of any support outcome.",
-            ],
-        },
-        {
-            type: "text",
-            title: "5. Sharing and International Transfers",
-            bullets: [
-                "Payment processing: card acquirers/processors (we receive transaction references/status, not full card details).",
-                "Hosting & IT: secure cloud infrastructure, content delivery, storage, and backups.",
-                "Product & support tooling: analytics (aggregated/pseudonymised where possible), helpdesk, and email delivery.",
-                "Professional advisers: legal, accounting, and compliance where required.",
-                "Some providers may be located outside the UK/EEA. Appropriate safeguards (e.g., UK adequacy, SCCs) are applied.",
-                "We do not sell your personal data.",
-            ],
-        },
-        {
-            type: "text",
-            title: "6. Cookies",
+            title: "2.5 Fitness and questionnaire data",
             description:
-                "We use cookies and similar technologies (e.g., localStorage) to run the Service, remember preferences, measure performance, and—where you consent—enable analytics or marketing. Essential cookies are required for security and core functionality. See our Cookie Policy for full details.",
-        },
-        {
-            type: "text",
-            title: "7. Retention",
+                "Where relevant to the requested Service, we may collect information you voluntarily provide about:",
             bullets: [
-                "Orders, tokens & transactions: retained for at least 24 months, and up to 6 years where required.",
-                "Account & profile data: retained while your account is active and up to 24 months after closure, unless needed longer for legal or security reasons.",
-                "Logs & security telemetry: typically 6–24 months depending on purpose.",
-                "Where possible, data is minimised, pseudonymised, or anonymised before deletion.",
+                "• fitness goals;",
+                "• training level;",
+                "• exercise preferences;",
+                "• physical limitations;",
+                "• injuries;",
+                "• lifestyle factors; and",
+                "• other information relevant to preparing a personalised Program.",
             ],
         },
         {
             type: "text",
-            title: "8. Your Rights",
+            title: "2.5 Fitness and questionnaire data",
+            description:
+                "Some of this information may, depending on its content, qualify as health-related personal data or other special category data under the GDPR.",
+        },
+        {
+            type: "text",
+            title: "2.6 Technical data",
+            description: "This may include:",
             bullets: [
-                "Access your data.",
-                "Rectification of inaccurate data.",
-                "Erasure ('right to be forgotten').",
-                "Restriction of processing.",
-                "Data portability.",
-                "Object to processing based on legitimate interests.",
-                "Withdraw consent at any time (for marketing, fitness data, or model improvement).",
+                "• IP address;",
+                "• browser type;",
+                "• operating system;",
+                "• device information;",
+                "• language settings;",
+                "• referral data;",
+                "• cookies and similar technologies;",
+                "• log data and diagnostic information.",
             ],
-            description:
-                "To exercise your rights, email info@averis.co.uk from your account address. Proof of identity may be required. We aim to respond within one month, extendable by two months for complex requests.",
         },
         {
             type: "text",
-            title: "9. Security",
+            title: "2.7 Communications and support data",
+            description: "This may include:",
             bullets: [
-                "Access controls, role-based permissions, and MFA for admin interfaces.",
-                "Encryption in transit (HTTPS/TLS) and at rest where applicable.",
-                "Network segregation, firewalls, and backups.",
-                "Logging, monitoring, and incident-response processes.",
-                "Vendor due diligence and processor safeguards.",
+                "• emails;",
+                "• support requests;",
+                "• chat or contact form messages;",
+                "• attachments;",
+                "• complaint correspondence;",
+                "• refund request information.",
             ],
-            description:
-                "No system is 100% secure, but we continuously improve protections and promptly investigate incidents.",
         },
         {
             type: "text",
-            title: "10. Children’s Data",
-            description:
-                "The Service is for users 18+. We do not knowingly collect data from children. If you believe a child has provided data to us, contact info@averis.co.uk to have it deleted.",
-        },
-        {
-            type: "text",
-            title: "11. Changes",
-            description:
-                "We may update this Policy periodically. Material changes will be notified by email and/or prominent in-product notice. Updates apply prospectively.",
-        },
-        {
-            type: "text",
-            title: "12. Contact & Complaints",
+            title: "2.8 Marketing and consent data",
+            description: "Where relevant, this may include:",
             bullets: [
-                "Controller: SHIREDON LIMITED",
-                "Address: Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, United Kingdom, CF31 1JF",
-                "Email (privacy): info@averis.co.uk",
-                "If you are unsatisfied with our response, you may lodge a complaint with the UK Information Commissioner’s Office (ICO) or your local data protection authority within the EEA.",
+                "• newsletter preferences;",
+                "• marketing opt-in records;",
+                "• consent timestamps;",
+                "• campaign interaction data.",
             ],
+        },
+        {
+            type: "text",
+            title: "3. How and Why We Use Personal Data",
+            description:
+                "We process personal data only where we have a valid legal basis under the GDPR.",
+        },
+        {
+            type: "text",
+            title: "3.1 Performance of a contract",
+            description: "We process personal data where necessary to:",
+            bullets: [
+                "• create and manage your Account;",
+                "• provide access to the Service;",
+                "• process Token purchases;",
+                "• deliver Programs and digital content;",
+                "• provide customer support;",
+                "• manage refunds, cancellations, and account-related matters.",
+            ],
+        },
+        {
+            type: "text",
+            title: "3.2 Compliance with legal obligations",
+            description: "We process personal data where necessary to:",
+            bullets: [
+                "• comply with tax, accounting, and financial reporting obligations;",
+                "• comply with consumer protection obligations;",
+                "• respond to lawful requests from authorities;",
+                "• keep records required by law;",
+                "• prevent unlawful activity where legally required.",
+            ],
+        },
+        {
+            type: "text",
+            title: "3.3 Legitimate interests",
+            description:
+                "We may process personal data where necessary for our legitimate interests, provided those interests are not overridden by your rights and freedoms. These interests may include:",
+            bullets: [
+                "• operating and improving the Service;",
+                "• fraud prevention and account security;",
+                "• platform administration;",
+                "• internal reporting and service analytics;",
+                "• defending legal claims;",
+                "• enforcing our legal terms and policies;",
+                "• preventing abuse and misuse of the Service.",
+            ],
+        },
+        {
+            type: "text",
+            title: "3.4 Consent",
+            description: "We rely on consent where required, including:",
+            bullets: [
+                "• sending marketing communications where applicable;",
+                "• placing non-essential cookies or similar technologies, where required by law;",
+                "• processing health-related or other special category data, where explicit consent is required.",
+            ],
+        },
+        {
+            type: "text",
+            title: "3.4 Consent",
+            description:
+                "You may withdraw consent at any time, but this does not affect the lawfulness of processing carried out before withdrawal.",
+        },
+        {
+            type: "text",
+            title: "3.5 Establishment, exercise, or defence of legal claims",
+            description:
+                "Where necessary, we may process personal data in connection with disputes, complaints, chargebacks, legal claims, and enforcement of our rights.",
+        },
+        {
+            type: "text",
+            title: "4. Special Category Data",
+            bullets: [
+                "4.1 Some information you provide through fitness questionnaires or personalised intake forms may reveal information about your health, physical condition, injuries, limitations, or similar sensitive matters.",
+                "4.2 We do not seek to collect medical records or clinical health data unless this is specifically and clearly required for the requested Service.",
+                "4.3 Where special category personal data is processed, we do so only where permitted by law and, where required, on the basis of your explicit consent or another valid legal basis under Article 9 of the GDPR.",
+                "4.4 If you do not want us to process health-related information, you should not provide it through the Service. However, this may limit our ability to provide certain personalised Programs safely or accurately.",
+            ],
+        },
+        {
+            type: "text",
+            title: "5. Cookies and Similar Technologies",
+            bullets: [
+                "5.1 We use cookies and similar technologies, including local storage and session storage, to operate the Service, maintain login sessions, remember preferences, improve performance, and understand how users interact with the website.",
+                "5.2 Some cookies are strictly necessary for the website to function and do not require consent under applicable law.",
+                "5.3 Other cookies or similar technologies, such as analytics or marketing tools, may be used only where required legal consent has been obtained.",
+                "5.4 Further information is provided in our Cookie Policy.",
+            ],
+        },
+        {
+            type: "text",
+            title: "6. How We Share Personal Data",
+            description:
+                "We do not sell your personal data. We may share personal data only where reasonably necessary, including with:",
+        },
+        {
+            type: "text",
+            title: "6.1 Payment service providers",
+            description:
+                "To process payments, refunds, and payment-related verification.",
+        },
+        {
+            type: "text",
+            title: "6.2 Hosting, infrastructure, and technology providers",
+            description:
+                "To host, maintain, secure, and operate the website, databases, storage systems, and communication tools.",
+        },
+        {
+            type: "text",
+            title: "6.3 Analytics, communications, and support providers",
+            description:
+                "To help us understand usage, manage support, send service messages, or improve operations.",
+        },
+        {
+            type: "text",
+            title: "6.4 Professional advisers and service providers",
+            description:
+                "Including legal advisers, accountants, auditors, insurers, and consultants where necessary for legitimate business or legal purposes.",
+        },
+        {
+            type: "text",
+            title: "6.5 Authorities and law enforcement",
+            description:
+                "Where disclosure is required by law, court order, regulatory requirement, or where necessary to protect legal rights, prevent fraud, or respond to unlawful conduct.",
+        },
+        {
+            type: "text",
+            title: "6.6 Business transfers",
+            description:
+                "If we are involved in a merger, acquisition, restructuring, asset sale, or similar corporate transaction, personal data may be disclosed as part of that process, subject to appropriate confidentiality and legal safeguards.",
+        },
+        {
+            type: "text",
+            title: "7. International Transfers",
+            bullets: [
+                "7.1 Some service providers may process personal data outside the European Economic Area (EEA).",
+                "7.2 Where personal data is transferred outside the EEA, we take reasonable steps to ensure that appropriate safeguards are in place, including:",
+                "• transfers to countries recognised as providing an adequate level of protection;",
+                "• use of the European Commission’s Standard Contractual Clauses;",
+                "• or other lawful transfer mechanisms recognised under the GDPR.",
+                "7.3 You may contact us if you would like more information about the safeguards used for relevant international transfers.",
+            ],
+        },
+        {
+            type: "text",
+            title: "8. Data Retention",
+            bullets: [
+                "8.1 We retain personal data only for as long as reasonably necessary for the purposes for which it was collected, including for legal, accounting, tax, fraud prevention, consumer protection, and dispute-handling purposes.",
+                "8.2 Retention periods may vary depending on the nature of the data and the reason for processing. In general:",
+                "• Account data is kept while your Account remains active and for a reasonable period afterwards;",
+                "• transaction, payment, and refund-related records may be kept for several years where required for legal, tax, accounting, fraud prevention, or dispute purposes;",
+                "• support correspondence is kept for as long as reasonably necessary to manage the matter and maintain appropriate records;",
+                "• technical logs are retained for a limited period unless longer retention is required for security or investigation purposes;",
+                "• marketing data is retained until you withdraw consent or object, unless we must retain limited suppression records to respect your request.",
+                "8.3 When data is no longer required, we will delete, anonymise, or securely archive it in accordance with applicable law and internal retention practices.",
+            ],
+        },
+        {
+            type: "text",
+            title: "9. Your Rights",
+            description:
+                "Under the GDPR and applicable law, you may have the right to:",
+            bullets: [
+                "9.1 Access the personal data we hold about you;",
+                "9.2 Rectify inaccurate or incomplete personal data;",
+                "9.3 Erase your personal data in certain circumstances;",
+                "9.4 Restrict the processing of your personal data in certain circumstances;",
+                "9.5 Object to processing based on legitimate interests, including direct marketing;",
+                "9.6 Withdraw consent where processing is based on consent;",
+                "9.7 Receive portability of certain personal data in a structured, commonly used, machine-readable format, where applicable;",
+                "9.8 Lodge a complaint with the competent supervisory authority in Lithuania or in the EU Member State of your habitual residence.",
+            ],
+        },
+        {
+            type: "text",
+            title: "9. Your Rights",
+            description:
+                "To exercise your rights, contact us at info@tera-fit.eu. We may request reasonable proof of identity before acting on your request.\n\nWe will respond within the time periods required by applicable law. Some rights are not absolute and may be limited where we have overriding legal grounds or are required to retain certain data.",
+        },
+        {
+            type: "text",
+            title: "10. Marketing Communications",
+            bullets: [
+                "10.1 Where permitted by law, we may send you service-related communications necessary for your Account, Orders, Programs, payments, or support matters.",
+                "10.2 Where marketing consent is required, we will send promotional communications only if you have opted in.",
+                "10.3 You may unsubscribe from marketing emails at any time by using the unsubscribe link or contacting us directly.",
+                "10.4 Even if you opt out of marketing, we may still send essential service or transactional communications.",
+            ],
+        },
+        {
+            type: "text",
+            title: "11. Security",
+            bullets: [
+                "11.1 We implement reasonable technical and organisational measures designed to protect personal data against unauthorised access, loss, misuse, alteration, or disclosure.",
+                "11.2 Such measures may include access controls, encryption in transit where appropriate, logging, credential protections, secure hosting practices, backups, and role-based access restrictions.",
+                "11.3 No system is completely secure, and we cannot guarantee absolute security. You are also responsible for maintaining the confidentiality of your Account credentials.",
+            ],
+        },
+        {
+            type: "text",
+            title: "12. Children",
+            bullets: [
+                "12.1 The Service is not intended for persons under the age of 18.",
+                "12.2 We do not knowingly collect personal data from children.",
+                "12.3 If you believe that personal data of a child has been provided to us, please contact us at info@tera-fit.eu, and we will take appropriate steps to investigate and, where appropriate, delete the data.",
+            ],
+        },
+        {
+            type: "text",
+            title: "13. Automated Decision-Making",
+            bullets: [
+                "13.1 We may use automated tools, including AI-assisted processes, in connection with creating or supporting certain digital fitness outputs.",
+                "13.2 However, we do not currently intend to make decisions based solely on automated processing that produce legal effects or similarly significant effects on you without appropriate safeguards and notice, where required by law.",
+            ],
+        },
+        {
+            type: "text",
+            title: "14. Changes to This Privacy Policy",
+            bullets: [
+                "14.1 We may update this Privacy Policy from time to time for legal, technical, operational, or commercial reasons.",
+                "14.2 The latest version will be published on the Service with the updated effective date.",
+                "14.3 Where changes are material, we may provide additional notice through the website, your Account, or by email where appropriate.",
+            ],
+        },
+        {
+            type: "text",
+            title: "15. Contact and Complaints",
+            description:
+                "If you have any questions about this Privacy Policy or wish to exercise your rights, please contact:",
+            bullets: [
+                `${COMPANY_LEGAL_NAME}`,
+                `Company number: ${COMPANY_NUMBER}`,
+                `Address: ${COMPANY_ADDRESS}`,
+                `Email: ${COMPANY_EMAIL}`,
+                `Phone: ${COMPANY_PHONE}`,
+            ],
+        },
+        {
+            type: "text",
+            title: "15. Contact and Complaints",
+            description:
+                "If you believe that your data protection rights have been violated, you may also submit a complaint to the competent supervisory authority in Lithuania or in the EU Member State where you live or work.",
         },
     ],
 };

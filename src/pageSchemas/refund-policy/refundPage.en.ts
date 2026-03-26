@@ -1,24 +1,32 @@
 import { PageSchema } from "@/components/constructor/page-render/types";
+import {
+    COMPANY_NAME,
+    COMPANY_ADDRESS,
+    COMPANY_PHONE,
+    COMPANY_LEGAL_NAME,
+    COMPANY_NUMBER,
+    COMPANY_EMAIL,
+} from "@/resources/constants";
 
 const refundPolicySchema: PageSchema = {
     meta: {
-        title: "Refund / Return Policy – Averis",
+        title: `Refund & Returns Policy – ${COMPANY_NAME ?? "Tera Fit"}`,
         description:
-            "Official Refund / Return Policy for Averis: refunds for tokens, workout plans, digital services, and consumer rights.",
+            "Official Refund & Returns Policy for Tera Fit: refunds for tokens, digital fitness services, and consumer rights.",
         keywords: [
             "refund policy",
-            "return policy",
-            "averis",
+            "returns policy",
+            "tera fit",
             "tokens",
-            "AI fitness",
-            "digital content",
+            "digital fitness services",
             "consumer rights",
+            "refunds",
         ],
         canonical: "/refund-policy",
         ogImage: {
-            title: "Jetreex – Refund / Return Policy",
+            title: `Refund & Returns Policy – ${COMPANY_NAME ?? "Tera Fit"}`,
             description:
-                "Transparent refund and return policy for Jetreex AI workout plans and token system.",
+                "Transparent refund and returns policy for Tera Fit digital fitness services and token system.",
             bg: "#ffffff",
             color: "#000000",
         },
@@ -26,120 +34,184 @@ const refundPolicySchema: PageSchema = {
     blocks: [
         {
             type: "text",
-            title: "Refund / Return Policy",
-            description: "Effective date: 18 October 2025",
+            title: "Refund & Returns Policy",
+            description:
+                "Effective date: 26 March 2026\n\nThis Refund Policy applies to the digital services offered through Tera Fit at tera-fit.eu and is issued by:\n" +
+                `${COMPANY_LEGAL_NAME}\n` +
+                `Company number: ${COMPANY_NUMBER}\n` +
+                `Address: ${COMPANY_ADDRESS}\n` +
+                `Email: ${COMPANY_EMAIL}\n` +
+                `Phone: ${COMPANY_PHONE}\n\n` +
+                "Tera Fit provides digital fitness services only. No physical goods are sold or shipped. As a result, this Policy governs refunds only. It does not create any right to return physical products.\n\nNothing in this Policy limits any mandatory rights you may have under the laws of the Republic of Lithuania or under applicable EU consumer protection law.",
         },
         {
             type: "text",
-            title: "1. Summary (customer-facing)",
+            title: "1. Summary",
             bullets: [
-                "Refunds are assessed under this Policy and applicable consumer law.",
-                "Typical processing time: 5–10 business days after approval (payment-provider timelines may vary).",
-                "A refund will not exceed the amount originally paid for the relevant Token top-up or transaction.",
-                "Spent Tokens (i.e., redeemed for Workout Plans/Services) are non-refundable, except as set out in §4.2.",
-                "Tokens are account-bound, non-transferable, and cannot be exchanged for real currency.",
-                "Promotional/bonus Tokens are non-refundable in all circumstances.",
-                "Submit requests to info@averis.co.uk with your order reference and details.",
-                "This Policy may be updated; material changes will be notified as described in §8.",
-                "If you consented to immediate supply and opened/downloaded the digital content, your statutory right to cancel may be lost (see §4.7).",
-                "Accepted currencies: GBP (£), EUR (€). Payment methods: Visa, Mastercard.",
+                "1.1 Refund requests are assessed in accordance with this Policy, applicable Lithuanian law, and mandatory EU consumer rights.",
+                "1.2 Refunds, where approved, are usually processed within 5 to 10 business days after approval. The time for funds to appear may vary depending on your payment provider.",
+                "1.3 Refunds will not exceed the amount originally paid by you for the relevant transaction.",
+                "1.4 Tokens already used to obtain a Program or other paid digital service are generally non-refundable, except where required by law or where we fail to provide the purchased service as described.",
+                "1.5 Tokens are account-bound, non-transferable, and cannot be exchanged for cash except where required by law or expressly stated by us.",
+                "1.6 Promotional or bonus Tokens are non-refundable, unless the relevant promotion expressly states otherwise.",
+                "1.7 If you expressly request immediate supply of digital content or digital services and acknowledge the loss of your withdrawal right where applicable, your statutory right to withdraw may end once supply begins.",
+                "1.8 Refund requests must be sent to info@tera-fit.eu with sufficient details to allow us to review the matter.",
             ],
         },
         {
             type: "text",
-            title: "2. Scope and Legal Note",
-            description:
-                "This Policy governs refunds for Tokens (internal credits) and digital Workout Plans/Services supplied by SHIREDON LIMITED via averis.co.uk. Nothing in this Policy overrides statutory consumer rights under UK law, including the Consumer Contracts Regulations 2013 and the Consumer Rights Act 2015.",
+            title: "2. Scope",
+            bullets: [
+                "2.1 This Policy applies to:",
+                "(a) purchases of Tokens;",
+                "(b) redemption of Tokens for Programs or other digital services; and",
+                "(c) refund requests relating to digital fitness content delivered through Tera Fit.",
+                "2.2 This Policy applies to both AI-generated and specialist-prepared Programs made available through the Service.",
+                "2.3 This Policy does not apply to third-party products or services purchased outside Tera Fit, even if linked from our website.",
+            ],
         },
         {
             type: "text",
             title: "3. Definitions",
+            description: "For the purposes of this Policy:",
             bullets: [
-                "Tokens / Credits — internal prepaid credits used on the Service. The current purchase rate (e.g., £1.00 ≈ 100 Tokens or €1.17 ≈ 100 Tokens) is displayed at the time of purchase and may change from time to time.",
-                "Unused Tokens — Tokens credited to your Account but not yet redeemed.",
-                "Redeemed / Spent Tokens — Tokens already used to access or generate a Workout Plan/Service.",
-                "Promotional / Bonus Tokens — Tokens issued as part of a promotion, bonus, or incentive and marked as such.",
+                "Tokens means internal digital credits used solely within Tera Fit to obtain Programs and related paid services.",
+                "Unused Tokens means Tokens credited to your Account that have not been redeemed, spent, or consumed.",
+                "Used Tokens means Tokens that have been redeemed for a Program or other paid digital service, or where performance of the relevant service has already begun.",
+                "Program means any digital fitness-related product, including training plans, workout guidance, recommendations, schedules, trackers, downloadable PDFs, and similar content.",
+                "Promotional or Bonus Tokens means Tokens granted free of charge, at a discount, or as part of a promotion, incentive, or goodwill gesture.",
+                "Custom or Specialist Program means a Program prepared, reviewed, adapted, or structured by a human coach, trainer, or specialist, including work involving manual review or personalised effort.",
             ],
         },
         {
             type: "text",
-            title: "4. Refund Principles (binding rules)",
-            description:
-                "4.1. Refund amount cap. Any refund will not exceed the original amount paid for the relevant Token top-up or transaction, net of any non-refundable processor fees (where permitted by law and the provider’s rules).\n\n" +
-                "4.2. No refund for spent Tokens (exceptions). Redeemed Tokens are non-refundable, except where:\n(a) the Workout Plan or Service is defective or not as described; or\n(b) Averis fails to supply the Service as contracted; or\n(c) a refund is otherwise required by law.\n\n" +
-                "4.3. Unused Tokens. Unused Tokens are generally refundable at the original purchase price if requested before any redemption from that top-up. Non-recoverable payment-processing fees may be deducted.\n\n" +
-                "4.4. Account-bound. Tokens are tied to your Account and cannot be transferred between accounts.\n\n" +
-                "4.5. No cash-out. Tokens cannot be exchanged for cash or other currencies, unless required by law.\n\n" +
-                "4.6. Promotional Tokens. Bonus/promotional Tokens are non-refundable under all circumstances.\n\n" +
-                "4.7. Immediate supply of digital content. If you consent to immediate delivery and open/download the content (e.g., generated PDF), you acknowledge your statutory right to cancel may not apply. Refunds are only available under §4.2 or where required by law.\n\n" +
-                "4.8. Bespoke/custom work. Custom Workout Plans are non-refundable once preparation has substantially begun, unless otherwise agreed in writing.\n\n" +
-                "4.9. Standard plan & add-ons (pricing clarity). Standard generation and add-ons have clear token prices shown before confirmation; once redeemed, non-refundable except under §4.2.",
-        },
-        {
-            type: "text",
-            title: "5. How to Request a Refund (Procedure)",
+            title: "4. General Refund Principles",
             bullets: [
-                "Order reference number.",
-                "Account email used for purchase.",
-                "Whether the request concerns Unused Tokens or a Redeemed item.",
-                "For redeemed items: a description of the issue and supporting evidence (screenshots, file details).",
-                "Preferred refund method (original payment method is standard).",
-                "Upon receipt we will: acknowledge within 5 business days, investigate and, if needed, request more details, provide a decision, and if approved, process the refund within 5–10 business days (subject to provider timelines).",
+                "4.1 Refund limit. Any refund will be limited to the amount actually paid by you for the relevant transaction.",
+                "4.2 Used Tokens are generally non-refundable. Once Tokens have been used to obtain a Program or once performance of the relevant digital service has begun, those Tokens are generally non-refundable, except:",
+                "(a) where required by applicable law;",
+                "(b) where we fail to provide the purchased service;",
+                "(c) where the delivered Program is materially defective; or",
+                "(d) where the delivered Program is materially not as described.",
+                "4.3 Unused Tokens. Unused Tokens may be eligible for refund if you request a refund before they are redeemed or used.",
+                "4.4 Account-bound Tokens. Tokens are linked to the Account to which they were credited and may not be transferred to another user or account unless we expressly agree otherwise in writing.",
+                "4.5 No cash-out. Tokens are not redeemable for cash or other currency except where required by law.",
+                "4.6 Promotional or bonus Tokens. Promotional or bonus Tokens are non-refundable and have no cash value unless the relevant promotion expressly states otherwise.",
+                "4.7 Immediate digital supply. If, at checkout or before fulfilment, you expressly request immediate supply of digital content or immediate performance of digital services and acknowledge that your statutory withdrawal right may be lost, then your right of withdrawal may no longer apply once supply or performance begins, to the extent permitted by law.",
+                "4.8 Custom or specialist work. Where a Program involves personalised manual work, specialist review, or bespoke preparation, refunds may be refused once substantial work has begun, except where required by law or where the delivered output is materially defective or materially not as described.",
             ],
         },
         {
             type: "text",
-            title: "6. Investigation, Evidence and Decisions",
+            title: "5. When Refunds May Be Approved",
             description:
-                "6.1. For claims involving redeemed content, we may review token transaction logs, checkout confirmations, delivery/access logs, and customer evidence.\n\n" +
-                "6.2. Refunds are normally processed to the original payment method; if not possible, an alternative (e.g., bank transfer) may be offered after verification.\n\n" +
-                "6.3. If a claim is rejected, we will provide reasons and inform you of options to escalate or pursue legal remedies.",
-        },
-        {
-            type: "text",
-            title: "7. Chargebacks, Fraud and Abuse",
-            description:
-                "If a chargeback is initiated while a refund request is pending, we treat it as a dispute and submit full transaction evidence to the payment provider. We may refuse refunds and suspend Accounts in cases of suspected fraud, abuse, or repeated chargebacks. Where funds are reversed, equivalent Tokens and access to related content may be removed.",
-        },
-        {
-            type: "text",
-            title: "8. Changes to this Policy",
-            description:
-                "We may update this Policy at any time. Material changes will be notified by email or in-product notice. Changes apply prospectively and do not affect previously completed transactions unless required by law.",
-        },
-        {
-            type: "text",
-            title: "9. Record Keeping and Retention",
-            description:
-                "We retain records relevant to refund requests and disputes — including order IDs, token purchase/redemption history, checkout acceptance, timestamps, IP, and device information — for at least 24 months, and up to 6 years for enterprise or disputed transactions, in line with our Privacy Policy and applicable data-protection law.",
-        },
-        {
-            type: "text",
-            title: "10. Escalation and Disputes",
-            description:
-                "If you disagree with a decision, you may escalate by emailing info@averis.co.uk with full reasons and your order reference. We will review within 10 business days. This Policy does not affect your statutory rights; you may pursue ADR or court proceedings as applicable.",
-        },
-        {
-            type: "text",
-            title: "11. Examples (Practical, Illustrative)",
+                "We may approve a full or partial refund, replacement, re-delivery, or restoration of Tokens where appropriate, including where:",
             bullets: [
-                "Unused Tokens (GBP): Purchase 2,000 Tokens; spend 300; unused 1,700 → refund equals the pro-rata amount based on the original GBP purchase price (minus fees).",
-                "Unused Tokens (EUR): Same as above, but refund is in EUR at the original amount paid.",
-                "Opened Workout Plan: If you consented to immediate supply and downloaded the PDF, refunds apply only if defective or not as described (§4.2).",
-                "Promotional Tokens: 100 bonus Tokens awarded in a promotion → non-refundable.",
-                "Add-ons: Base 60 Tokens + add-on Token prices displayed before confirmation; once redeemed, non-refundable except under §4.2.",
+                "5.1 you paid for Tokens but they were not credited to your Account due to a technical failure attributable to us;",
+                "5.2 you redeemed Tokens for a Program that was not delivered within a reasonable time and the failure is attributable to us;",
+                "5.3 the delivered Program is materially corrupted, inaccessible, or technically unusable due to an issue attributable to us;",
+                "5.4 the delivered Program materially differs from the service description shown at the time of purchase;",
+                "5.5 duplicate payment has been taken for the same transaction; or",
+                "5.6 a refund is otherwise required by applicable law.",
             ],
         },
         {
             type: "text",
-            title: "12. Contact Details",
+            title: "6. When Refunds Will Normally Not Be Approved",
+            description: "Refunds will normally not be approved where:",
             bullets: [
-                "SHIREDON LIMITED",
-                "Registered office: Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, United Kingdom, CF31 1JF",
-                "Email: info@averis.co.uk",
-                "Tel: +44 7441 393249",
-                "Accepted currencies: GBP (£), EUR (€)",
-                "Payment methods: Visa, Mastercard",
+                "6.1 Tokens have already been used or consumed, unless clause 5 applies or applicable law requires otherwise;",
+                "6.2 you changed your mind after delivery began or after the Program was made available to you, where your withdrawal right has been validly lost under applicable law;",
+                "6.3 the issue arises from incomplete, inaccurate, misleading, or contradictory information submitted by you;",
+                "6.4 the Program matches the description generally, but you are dissatisfied due to personal preference, training style preference, or subjective expectations;",
+                "6.5 the issue results from your device, software, internet connection, or failure to follow access or download instructions;",
+                "6.6 the claim concerns promotional or bonus Tokens;",
+                "6.7 a Custom or Specialist Program has already entered substantial preparation or delivery, unless the service is materially defective or not as described; or",
+                "6.8 we reasonably suspect fraud, abuse, manipulation, or misuse of the refund process.",
+            ],
+        },
+        {
+            type: "text",
+            title: "7. How to Request a Refund",
+            bullets: [
+                "7.1 To request a refund, you must contact us at info@tera-fit.eu.",
+                "7.2 Your request should include, where applicable:",
+                "(a) your Account email address;",
+                "(b) your order or transaction reference;",
+                "(c) the date of purchase;",
+                "(d) whether your request relates to Unused Tokens, Used Tokens, or a delivered Program;",
+                "(e) a clear description of the issue; and",
+                "(f) any supporting evidence, such as screenshots, file names, payment confirmation, or a description of the technical problem.",
+                "7.3 If you do not provide enough information for us to assess the request, we may ask for further details before making a decision.",
+            ],
+        },
+        {
+            type: "text",
+            title: "8. Review Procedure and Decisions",
+            bullets: [
+                "8.1 We will review refund requests within a reasonable time.",
+                "8.2 We may examine relevant records, including:",
+                "(a) transaction logs;",
+                "(b) Token credit and redemption history;",
+                "(c) checkout and payment confirmations;",
+                "(d) delivery records;",
+                "(e) download or access timestamps; and",
+                "(f) correspondence and evidence provided by you.",
+                "8.3 If the refund is approved, we will normally issue it to the original payment method used for the transaction, unless this is not reasonably possible.",
+                "8.4 Where appropriate, instead of a monetary refund, we may:",
+                "(a) re-deliver the Program;",
+                "(b) correct the technical issue;",
+                "(c) replace the Program; or",
+                "(d) restore the relevant Tokens to your Account.",
+                "8.5 If we reject the request, we may provide a brief explanation of the outcome.",
+            ],
+        },
+        {
+            type: "text",
+            title: "9. Chargebacks, Fraud, and Abuse",
+            bullets: [
+                "9.1 If you open a chargeback or payment dispute with your payment provider, we may suspend the related refund review while the payment dispute is being handled.",
+                "9.2 We may submit relevant evidence to the payment provider or financial institution, including transaction logs, checkout confirmations, delivery records, timestamps, and account activity records.",
+                "9.3 We reserve the right to suspend access to the Service, reverse Token balances where justified, refuse future purchases, or close Accounts where we reasonably suspect fraud, abuse, bad-faith refund claims, repeated unjustified chargebacks, or misuse of the Service.",
+            ],
+        },
+        {
+            type: "text",
+            title: "10. Processing Time",
+            bullets: [
+                "10.1 If a refund is approved, we typically process it within 5 to 10 business days from the approval date.",
+                "10.2 Actual receipt times depend on your payment provider, card issuer, bank, or payment method.",
+                "10.3 We are not responsible for delays caused by third-party banking or payment systems once the refund has been processed by us.",
+            ],
+        },
+        {
+            type: "text",
+            title: "11. Changes to This Policy",
+            bullets: [
+                "11.1 We may update this Refund Policy from time to time for legal, regulatory, operational, or commercial reasons.",
+                "11.2 The latest version will be published on the Service with the updated effective date.",
+                "11.3 Any changes will apply prospectively unless otherwise required by law.",
+            ],
+        },
+        {
+            type: "text",
+            title: "12. Governing Law and Consumer Rights",
+            bullets: [
+                "12.1 This Policy shall be governed by the laws of the Republic of Lithuania.",
+                "12.2 Nothing in this Policy excludes, restricts, or limits any mandatory rights or remedies available to consumers under Lithuanian law or applicable EU law.",
+                "12.3 If you are a consumer resident in another EU country, you may also benefit from mandatory consumer protections applicable in your country of habitual residence where such protections cannot be contractually excluded.",
+            ],
+        },
+        {
+            type: "text",
+            title: "13. Contact Details",
+            description: "For refund-related questions or requests, contact:",
+            bullets: [
+                `${COMPANY_LEGAL_NAME}`,
+                `Company number: ${COMPANY_NUMBER}`,
+                `Address: ${COMPANY_ADDRESS}`,
+                `Email: ${COMPANY_EMAIL}`,
+                `Phone: ${COMPANY_PHONE}`,
             ],
         },
     ],
