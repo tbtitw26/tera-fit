@@ -123,8 +123,8 @@ const Footer: React.FC = () => {
                     <div className={styles.column}>
                         <h4 className={styles.columnTitle}>Follow Us</h4>
                         <div className={styles.socials}>
-                            {/*<a href="#" className={styles.socialLink} aria-label="Facebook"><FaFacebookF/></a>
-                            <a href="#" className={styles.socialLink} aria-label="Instagram"><FaInstagram/></a>*/}
+                            {/*<a href="#" className={styles.socialLink} aria-label="Facebook"><FaFacebookF/></a>*/}
+                            <a href="https://www.instagram.com/terafit.eu" className={styles.socialLink} aria-label="Instagram"><FaInstagram/></a>
                             <a href="https://www.pinterest.com/terafitgo/" className={styles.socialLink}
                                aria-label="Pinterest"><FaPinterest/></a>
                         </div>
