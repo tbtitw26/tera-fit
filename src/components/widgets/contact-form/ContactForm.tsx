@@ -7,8 +7,15 @@ import ButtonUI from "@/components/ui/button/ButtonUI";
 import { useAlert } from "@/context/AlertContext";
 import { validationSchema, initialValues, sendContactRequest } from "./schema";
 
-import { FaClock, FaEnvelope } from "react-icons/fa";
-import { COMPANY_EMAIL } from "@/resources/constants";
+import { FaBuilding, FaClock, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import {
+    COMPANY_ADDRESS,
+    COMPANY_EMAIL,
+    COMPANY_LEGAL_NAME,
+    COMPANY_NAME,
+    COMPANY_NUMBER,
+    COMPANY_PHONE,
+} from "@/resources/constants";
 import styles from "./ContactForm.module.scss";
 
 interface ContactFormValues {
@@ -22,6 +29,7 @@ interface ContactFormValues {
 const ContactSupport: React.FC = () => {
     const { showAlert } = useAlert();
     const [successMsg, setSuccessMsg] = useState("");
+    const companyName = COMPANY_NAME || "Tera Fit";
 
     const handleSubmit = async (
         values: ContactFormValues,
@@ -36,7 +44,7 @@ const ContactSupport: React.FC = () => {
             await sendContactRequest(payload);
             resetForm();
             setSuccessMsg(
-                "Your message has been sent. Our culinary team will get back to you shortly."
+                "Your message has been sent. Our team will get back to you shortly."
             );
             showAlert("Success", "Message sent successfully", "success");
         } catch {
@@ -56,29 +64,58 @@ const ContactSupport: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <span className={styles.label}>Support Center</span>
+                    <span className={styles.label}>Contact Details</span>
 
                     <h2>
-                        We’re here to help <br /> you master the kitchen.
+                        Contact {companyName}
                     </h2>
 
                     <p>
-                        Have questions about AI cooking plans, chef-led programs,
-                        or your learning tokens? Send us a message — our team
-                        responds within 24 hours.
+                        Find the main company information below or send us a message
+                        and our support team will respond during business hours.
                     </p>
 
                     <div className={styles.extra}>
-                        <strong>Other ways to connect</strong>
+                        <strong>Company information</strong>
 
-                        <div className={styles.contactItem}>
-                            <FaEnvelope />
-                            <span>{COMPANY_EMAIL}</span>
-                        </div>
+                        {COMPANY_LEGAL_NAME && (
+                            <div className={styles.contactItem}>
+                                <FaBuilding />
+                                <span>{COMPANY_LEGAL_NAME}</span>
+                            </div>
+                        )}
+
+                        {COMPANY_NUMBER && (
+                            <div className={styles.contactItem}>
+                                <FaBuilding />
+                                <span>Company number: {COMPANY_NUMBER}</span>
+                            </div>
+                        )}
+
+                        {COMPANY_ADDRESS && (
+                            <div className={styles.contactItem}>
+                                <FaMapMarkerAlt />
+                                <span>{COMPANY_ADDRESS}</span>
+                            </div>
+                        )}
+
+                        {COMPANY_EMAIL && (
+                            <div className={styles.contactItem}>
+                                <FaEnvelope />
+                                <a href={`mailto:${COMPANY_EMAIL}`}>{COMPANY_EMAIL}</a>
+                            </div>
+                        )}
+
+                        {COMPANY_PHONE && (
+                            <div className={styles.contactItem}>
+                                <FaPhoneAlt />
+                                <a href={`tel:${COMPANY_PHONE.replace(/\s/g, "")}`}>{COMPANY_PHONE}</a>
+                            </div>
+                        )}
 
                         <div className={styles.contactItem}>
                             <FaClock />
-                            <span>Replies within 24 hours</span>
+                            <span>Business hours: Monday to Friday, 9:00-18:00</span>
                         </div>
                     </div>
                 </motion.div>

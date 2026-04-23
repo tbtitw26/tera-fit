@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireAuth } from "@/backend/middlewares/auth.middleware";
 import { userController } from "@/backend/controllers/user.controller";
 
-const TOKENS_PER_GBP = 100;
-const RATES_TO_GBP = { GBP: 1, EUR: 1.17 };
+const TOKENS_PER_EUR = 100;
+const RATES_FROM_EUR = { EUR: 1, GBP: 0.84 };
 
 export async function POST(req: NextRequest) {
     try {
@@ -16,12 +16,12 @@ export async function POST(req: NextRequest) {
                 return NextResponse.json({ message: "Unsupported currency" }, { status: 400 });
             }
 
-            const gbpEquivalent = amount / RATES_TO_GBP[currency as "GBP" | "EUR"];
-            if (gbpEquivalent < 0.01) {
+            const eurEquivalent = amount / RATES_FROM_EUR[currency as "GBP" | "EUR"];
+            if (eurEquivalent < 0.01) {
                 return NextResponse.json({ message: "Minimum is 0.01" }, { status: 400 });
             }
 
-            const tokens = Math.floor(gbpEquivalent * TOKENS_PER_GBP);
+            const tokens = Math.round(eurEquivalent * TOKENS_PER_EUR);
 
             // 🧾 запис транзакції вже всередині userController.buyTokens()
             const user = await userController.buyTokens(payload.sub, tokens);
@@ -36,7 +36,8 @@ export async function POST(req: NextRequest) {
 
         const user = await userController.buyTokens(payload.sub, amount);
         return NextResponse.json({ user });
-    } catch (err: any) {
-        return NextResponse.json({ message: err.message }, { status: 400 });
+    } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : "Payment failed";
+        return NextResponse.json({ message }, { status: 400 });
     }
 }

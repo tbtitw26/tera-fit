@@ -1,10 +1,10 @@
 import { PageSchema } from "@/components/constructor/page-render/types";
-import { COMPANY_NAME, COMPANY_EMAIL, COMPANY_ADDRESS, COMPANY_NUMBER } from "@/resources/constants";
+import { COMPANY_NAME } from "@/resources/constants";
 
 const contactPage: PageSchema = {
     meta: {
         title: `Contact Us — ${COMPANY_NAME}`,
-        description: `Reach out to ${COMPANY_NAME}. Whether you have questions, need support, or want to collaborate — we’re here to help.`,
+        description: `Contact ${COMPANY_NAME} for company details, address, business hours, phone support, or customer service requests.`,
         keywords: [
             `${COMPANY_NAME} contact`,
             "support",
@@ -14,7 +14,7 @@ const contactPage: PageSchema = {
         canonical: "/contact-us",
         ogImage: {
             title: `Contact ${COMPANY_NAME}`,
-            description: "Your message matters — let’s talk.",
+            description: "Company details, address, hours, and customer support.",
             bg: "#f9fafb",
             color: "#111827",
         },
