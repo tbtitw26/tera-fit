@@ -4,14 +4,20 @@ import { UserType } from "@/backend/types/user.types";
 import { transactionService } from "@/backend/services/transaction.service";
 import { emailService } from "@/backend/services/email.service";
 
+type BuyTokensOptions = {
+    digitalServiceImmediateConsent?: boolean;
+};
+
 export const userController = {
-    async buyTokens(userId: string, amount: number): Promise<UserType> {
+    async buyTokens(userId: string, amount: number, options?: BuyTokensOptions): Promise<UserType> {
         await connectDB();
 
         const user = await userService.addTokens(userId, amount);
 
         console.log("💳 Adding tokens for user:", userId);
-        await transactionService.record(user._id, user.email, amount, "add", user.tokens);
+        await transactionService.record(user._id, user.email, amount, "add", user.tokens, {
+            digitalServiceImmediateConsent: options?.digitalServiceImmediateConsent,
+        });
         console.log("✅ Transaction created successfully");
 
         try {

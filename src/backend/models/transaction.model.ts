@@ -6,6 +6,7 @@ export interface TransactionDocument extends Document {
     amount: number;
     type: "add" | "spend";
     balanceAfter: number;
+    digitalServiceImmediateConsent?: boolean;
     createdAt: Date;
 }
 
@@ -15,6 +16,7 @@ const transactionSchema = new Schema<TransactionDocument>({
     amount: { type: Number, required: true },
     type: { type: String, enum: ["add", "spend"], required: true },
     balanceAfter: { type: Number, required: true },
+    digitalServiceImmediateConsent: { type: Boolean, default: undefined },
     createdAt: { type: Date, default: Date.now },
 });
 

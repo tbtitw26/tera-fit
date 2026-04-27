@@ -9,11 +9,19 @@ export async function POST(req: NextRequest) {
     try {
         const payload = await requireAuth(req);
         const body = await req.json();
+        const { digitalServiceImmediateConsent } = body;
 
         if (body.currency && body.amount) {
             const { currency, amount } = body;
             if (!["GBP", "EUR"].includes(currency)) {
                 return NextResponse.json({ message: "Unsupported currency" }, { status: 400 });
+            }
+
+            if (digitalServiceImmediateConsent !== true) {
+                return NextResponse.json(
+                    { message: "Immediate digital service consent is required" },
+                    { status: 400 },
+                );
             }
 
             const eurEquivalent = amount / RATES_FROM_EUR[currency as "GBP" | "EUR"];
@@ -24,7 +32,9 @@ export async function POST(req: NextRequest) {
             const tokens = Math.round(eurEquivalent * TOKENS_PER_EUR);
 
             // 🧾 запис транзакції вже всередині userController.buyTokens()
-            const user = await userController.buyTokens(payload.sub, tokens);
+            const user = await userController.buyTokens(payload.sub, tokens, {
+                digitalServiceImmediateConsent,
+            });
 
             return NextResponse.json({ user, info: `Converted ${amount} ${currency} → ${tokens} tokens` });
         }

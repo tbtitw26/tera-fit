@@ -247,7 +247,17 @@
 .agreement {
   margin: 1rem 0;
   font-size: 0.9rem;
-  color: #444;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.45;
+  }
 
   a {
     color: #2563eb;
@@ -255,9 +265,77 @@
   }
 
   input {
-    margin-right: 6px;
     transform: scale(1.1);
+    margin-top: 3px;
+    flex-shrink: 0;
   }
+}
+
+.agreementLabel {
+  cursor: pointer;
+}
+
+.agreementText {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.45;
+}
+
+.agreementToggle {
+  align-self: flex-start;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: #2563eb;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.agreementError {
+  margin: 0;
+  padding-left: 30px;
+  color: var(--error-color);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.consentDisclosure {
+  position: relative;
+  display: inline-flex;
+  align-self: flex-start;
+}
+
+.consentDisclosureOpen .agreementPopover,
+.consentDisclosure:hover .agreementPopover,
+.consentDisclosure:focus-within .agreementPopover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.agreementPopover {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  z-index: 10;
+  width: min(380px, calc(100vw - 64px));
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
 }
 
 .payButton {
@@ -276,7 +354,7 @@
     background: #1e40af;
   }
 
-  &.disabled {
+  &:disabled {
     background: #ccc;
     cursor: not-allowed;
   }
@@ -296,4 +374,28 @@
   height: 38px;
   object-fit: contain;
   opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .consentDisclosure {
+    display: flex;
+    width: 100%;
+    margin-left: 30px;
+  }
+
+  .agreementPopover {
+    position: static;
+    width: 100%;
+    margin-top: 8px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    display: none;
+  }
+
+  .consentDisclosureOpen .agreementPopover,
+  .consentDisclosure:focus-within .agreementPopover {
+    display: block;
+  }
 }

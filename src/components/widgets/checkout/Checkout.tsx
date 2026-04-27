@@ -4,7 +4,7 @@ import React, {useEffect, useMemo, useState} from "react";
 import Image from "next/image";
 import styles from "./Checkout.module.scss";
 import {useCurrency} from "@/context/CurrencyContext";
-import {useCheckoutStore} from "@/utils/store";
+import {CheckoutPlan, useCheckoutStore} from "@/utils/store";
 import {
     COMPANY_ADDRESS,
     COMPANY_EMAIL,
@@ -19,13 +19,7 @@ import pciDss from "@/assets/cards/pci-dss-compliant-logo-vector.svg";
 
 const TOKENS_PER_EUR = 100; // 100 tokens = 1 EUR (base)
 
-type Plan = {
-    title: string;
-    price: number; // EUR (base)
-    tokens: number;
-    variant?: string;
-    currency?: string;
-};
+type Plan = CheckoutPlan;
 
 type PaymentErrorResponse = {
     message?: string;
@@ -38,11 +32,19 @@ type BillingDetails = {
     country: string;
 };
 
+type ConsentField = "agreed" | "expressConsent";
+
 const Checkout = () => {
     const {plan, setPlan, clearPlan} = useCheckoutStore();
 
     const [activePlan, setActivePlan] = useState<Plan | null>(plan ?? null);
     const [agreed, setAgreed] = useState(false);
+    const [expressConsent, setExpressConsent] = useState(false);
+    const [showExpressConsentDetails, setShowExpressConsentDetails] = useState(false);
+    const [consentTouched, setConsentTouched] = useState<Record<ConsentField, boolean>>({
+        agreed: false,
+        expressConsent: false,
+    });
     const [loading, setLoading] = useState(false);
     const [billingDetails, setBillingDetails] = useState<BillingDetails>({
         address: "",
@@ -53,6 +55,8 @@ const Checkout = () => {
 
     const {currency, sign, convertFromBase} = useCurrency();
     const merchantName = COMPANY_LEGAL_NAME || COMPANY_NAME || "Tera Fit";
+    const expressConsentSummary = "I expressly agree that Tera Fit may begin providing the digital service immediately...";
+    const expressConsentNotice = "I expressly agree that Tera Fit may begin providing the digital service immediately after my purchase. I acknowledge that once the digital content or service has been delivered or performance has begun, I may lose my right of withdrawal.";
 
     // hydrate plan from localStorage / store
     useEffect(() => {
@@ -104,12 +108,33 @@ const Checkout = () => {
         return convertFromBase(amountEur);
     }, [activePlan, convertFromBase]);
 
+    const hasBillingDetails = useMemo(
+        () => Object.values(billingDetails).every((value) => value.trim().length > 0),
+        [billingDetails],
+    );
+    const hasRequiredConsents = agreed && expressConsent;
+    const isPayDisabled = !hasRequiredConsents || loading;
+    const showAgreedError = consentTouched.agreed && !agreed;
+    const showExpressConsentError = consentTouched.expressConsent && !expressConsent;
+
+    const markConsentTouched = (field: ConsentField) => {
+        setConsentTouched((current) => ({
+            ...current,
+            [field]: true,
+        }));
+    };
+
     const handlePay = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!activePlan) return;
-        if (!agreed || loading) return;
+        if (!agreed || !expressConsent || loading) {
+            setConsentTouched({
+                agreed: true,
+                expressConsent: true,
+            });
+            return;
+        }
 
-        const hasBillingDetails = Object.values(billingDetails).every((value) => value.trim().length > 0);
         if (!hasBillingDetails) {
             alert("Please complete all billing address fields.");
             return;
@@ -136,6 +161,7 @@ const Checkout = () => {
                 body: JSON.stringify({
                     currency,                 // ✅ required by backend
                     amount: amountForBackend, // ✅ required by backend
+                    digitalServiceImmediateConsent: expressConsent,
                 }),
             });
 
@@ -312,22 +338,89 @@ const Checkout = () => {
                         </div>
 
                         <div className={styles.agreement}>
-                            <label>
+                            <label className={styles.agreementLabel}>
                                 <input
                                     type="checkbox"
                                     checked={agreed}
-                                    onChange={(e) => setAgreed(e.target.checked)}
+                                    required
+                                    aria-invalid={showAgreedError}
+                                    aria-describedby={showAgreedError ? "checkout-terms-error" : undefined}
+                                    onBlur={() => markConsentTouched("agreed")}
+                                    onChange={(e) => {
+                                        setAgreed(e.target.checked);
+                                        markConsentTouched("agreed");
+                                    }}
                                 />{" "}
                                 I agree to the{" "}
-                                <a href="/terms" target="_blank" rel="noreferrer">
+                                <a href="/terms-and-conditions" target="_blank" rel="noreferrer">
                                     terms & conditions
                                 </a>
                             </label>
+                            {showAgreedError && (
+                                <p id="checkout-terms-error" className={styles.agreementError}>
+                                    You must agree to the terms & conditions.
+                                </p>
+                            )}
+                        </div>
+
+                        <div className={styles.agreement}>
+                            <label className={styles.agreementLabel}>
+                                <input
+                                    type="checkbox"
+                                    checked={expressConsent}
+                                    required
+                                    aria-invalid={showExpressConsentError}
+                                    aria-describedby={
+                                        showExpressConsentError
+                                            ? "express-consent-details express-consent-error"
+                                            : "express-consent-details"
+                                    }
+                                    onBlur={() => markConsentTouched("expressConsent")}
+                                    onChange={(e) => {
+                                        setExpressConsent(e.target.checked);
+                                        markConsentTouched("expressConsent");
+                                    }}
+                                />
+                                <span className={styles.agreementText}>
+                                    {expressConsentSummary}
+                                </span>
+                            </label>
+                            <div
+                                className={`${styles.consentDisclosure} ${showExpressConsentDetails ? styles.consentDisclosureOpen : ""}`}
+                            >
+                                <button
+                                    type="button"
+                                    className={styles.agreementToggle}
+                                    aria-expanded={showExpressConsentDetails}
+                                    aria-controls="express-consent-details"
+                                    onClick={() => setShowExpressConsentDetails((current) => !current)}
+                                    onBlur={() => markConsentTouched("expressConsent")}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Escape") {
+                                            setShowExpressConsentDetails(false);
+                                        }
+                                    }}
+                                >
+                                    Read full consent
+                                </button>
+                                <div
+                                    id="express-consent-details"
+                                    className={styles.agreementPopover}
+                                    role="tooltip"
+                                >
+                                    {expressConsentNotice}
+                                </div>
+                            </div>
+                            {showExpressConsentError && (
+                                <p id="express-consent-error" className={styles.agreementError}>
+                                    You must confirm immediate digital service delivery before purchase.
+                                </p>
+                            )}
                         </div>
 
                         <button
                             type="submit"
-                            disabled={!agreed || loading}
+                            disabled={isPayDisabled}
                             className={styles.payButton}
                         >
                             {loading ? "Processing..." : `Pay ${sign}${total.toFixed(2)} ${currency}`}
