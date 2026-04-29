@@ -350,7 +350,7 @@ export const experts: Expert[] = [
         itemsCount: 140,
         bio: "Provides beginner-friendly home workouts.",
         categories: ["Beginner"],
-        specialties: ["Bodyweight Training", "Home Fitness"],
+        specialties: ["Body Training", "Home Fitness"],
         profile: {
             headline: "Get fit at home with ease",
             about: [
