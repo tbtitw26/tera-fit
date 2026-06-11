@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useAllOrders } from "@/context/AllOrdersContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import styles from "./AllOrders.module.scss";
 import ButtonUI from "@/components/ui/button/ButtonUI";
 import Link from "next/link";
@@ -10,6 +11,7 @@ import { UniversalOrderUI } from "@/types/universal-order";
 
 const AllOrders: React.FC = () => {
     const { aiOrders, loading, refreshOrders } = useAllOrders();
+    const { sign, convertFromBase } = useCurrency();
     const orders = aiOrders as unknown as UniversalOrderUI[];
 
     const formatDate = (dateStr: string) =>
@@ -96,7 +98,7 @@ const AllOrders: React.FC = () => {
                         </span>
 
                         <span className={styles.tokens}>
-                            -€{(order.totalTokens / 100).toFixed(2)}
+                            -{sign}{convertFromBase(order.totalTokens / 100).toFixed(2)}
                         </span>
 
                         <span className={order.status === "ready" ? styles.statusReady : styles.statusPending}>

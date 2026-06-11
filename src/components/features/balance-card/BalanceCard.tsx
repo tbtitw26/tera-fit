@@ -2,15 +2,17 @@
 
 import Link from "next/link";
 import { useUser } from "@/context/UserContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import styles from "./BalanceCard.module.scss";
 import ButtonUI from "@/components/ui/button/ButtonUI";
 
 export default function BalanceCard() {
     const user = useUser();
+    const { sign, convertFromBase } = useCurrency();
 
     if (!user) return null;
 
-    const balanceEur = (user.tokens / 100).toFixed(2);
+    const balanceConverted = convertFromBase(user.tokens / 100).toFixed(2);
 
     return (
         <section className={styles.card}>
@@ -20,7 +22,7 @@ export default function BalanceCard() {
             </div>
 
             <div className={styles.amountRow}>
-                <h3 className={styles.amount}>€{balanceEur}</h3>
+                <h3 className={styles.amount}>{sign}{balanceConverted}</h3>
             </div>
 
             <p className={styles.desc}>Use your balance to order specialist-made training programs.</p>

@@ -74,7 +74,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 
         const finalTokens = effectiveTokens;
         if (isCustom && finalTokens < 100) {
-            showAlert("Minimum amount", "Please enter at least €1.00", "warning");
+            showAlert("Minimum amount", `Please enter at least ${sign}1.00`, "warning");
             return;
         }
 
@@ -122,7 +122,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
                 {isCustom ? (
                     <div className={styles.customSection}>
                         <div className={styles.divider} />
-                        <label className={styles.inputLabel}>AMOUNT (€)</label>
+                        <label className={styles.inputLabel}>AMOUNT ({sign})</label>
                         <Input
                             type="number"
                             variant="plain"
@@ -153,7 +153,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 
             <div className={styles.cta}>
                 <ButtonUI fullWidth variant="soft" onClick={handleBuy}>
-                    {isCustom ? "Calculate Price" : user ? buttonText : "Sign in to top up"}
+                    {isCustom ? "Calculate Price" : user ? `Top Up ${sign}${convertedPrice.toFixed(0)}` : "Sign in to top up"}
                 </ButtonUI>
             </div>
         </motion.div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useCurrency } from "@/context/CurrencyContext";
 import styles from "./AllTransactions.module.scss";
 
 interface Transaction {
@@ -14,6 +15,7 @@ interface Transaction {
 export default function TransactionHistory() {
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [loading, setLoading] = useState(true);
+    const { sign, convertFromBase } = useCurrency();
 
     useEffect(() => {
         (async () => {
@@ -92,11 +94,11 @@ export default function TransactionHistory() {
                                     : styles.amountSpend
                             }
                         >
-                            {t.type === "add" ? "+" : "-"}€{(t.amount / 100).toFixed(2)}
+                            {t.type === "add" ? "+" : "-"}{sign}{convertFromBase(t.amount / 100).toFixed(2)}
                         </span>
 
                         <span className={styles.balance}>
-                            €{(t.balanceAfter / 100).toFixed(2)}
+                            {sign}{convertFromBase(t.balanceAfter / 100).toFixed(2)}
                         </span>
                     </div>
                 ))}

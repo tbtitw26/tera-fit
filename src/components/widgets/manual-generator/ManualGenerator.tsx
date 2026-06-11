@@ -9,6 +9,7 @@ import styles from "./ManualGenerator.module.scss";
 
 import { useAlert } from "@/context/AlertContext";
 import { useUser } from "@/context/UserContext";
+import { useCurrency } from "@/context/CurrencyContext";
 
 import { experts } from "@/data/experts";
 import { media } from "@/resources/media";
@@ -117,13 +118,12 @@ function durationToPercent(d: Duration) {
     return 100;
 }
 
-function tokensToEur(tokens: number) {
-    return (tokens / 100).toFixed(2);
-}
-
 export default function ManualGenerator() {
     const { showAlert } = useAlert();
     const user = useUser();
+    const { sign, convertFromBase } = useCurrency();
+
+    const tokensToDisplay = (tokens: number) => convertFromBase(tokens / 100).toFixed(2);
 
     const [coachOpen, setCoachOpen] = useState(false);
 
@@ -220,7 +220,7 @@ export default function ManualGenerator() {
         >
             {({ values, setFieldValue, errors, touched, isSubmitting, submitForm }) => {
                 const estimatedTokens = useMemo(() => calcTotalTokens(values), [values.duration, values.extras]);
-                const estimatedEur = tokensToEur(estimatedTokens);
+                const estimatedPrice = tokensToDisplay(estimatedTokens);
 
                 const selectedExtras = FITNESS_EXTRAS.filter((e) => values.extras.includes(e.id));
                 const durationWeeks = durationToWeeks(values.duration);
@@ -537,7 +537,7 @@ export default function ManualGenerator() {
                                                         <div className={styles.extraBottomNew}>
                                                             <div className={styles.extraPrice}>
                                                                 <span className={styles.dot} />
-                                                                <span>+€{tokensToEur(extra.tokens)}</span>
+                                                                <span>+{sign}{tokensToDisplay(extra.tokens)}</span>
                                                             </div>
                                                             <div className={styles.goalCheck}>
                                                                 <span className={active ? styles.selectOn : styles.selectOff} />
@@ -565,7 +565,7 @@ export default function ManualGenerator() {
                                                 <div className={styles.summaryLabel}>Estimated cost</div>
                                                 <div className={styles.summaryCost}>
                                                     <span className={styles.dotBig} />
-                                                    <span className={styles.summaryCostNum}>€{estimatedEur}</span>
+                                                    <span className={styles.summaryCostNum}>{sign}{estimatedPrice}</span>
                                                 </div>
                                             </div>
 
@@ -592,7 +592,7 @@ export default function ManualGenerator() {
                                             <ul className={styles.summaryBullets}>
                                                 {selectedExtras.map((e) => (
                                                     <li key={e.id}>
-                                                        {e.title} <span className={styles.muted}>+€{tokensToEur(e.tokens)}</span>
+                                                        {e.title} <span className={styles.muted}>+{sign}{tokensToDisplay(e.tokens)}</span>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -613,7 +613,7 @@ export default function ManualGenerator() {
                             <div className={styles.mobileFooter}>
                                 <div className={styles.mobileCost}>
                                     <span className={styles.dotBig} />
-                                    <span className={styles.mobileCostNum}>€{estimatedEur}</span>
+                                    <span className={styles.mobileCostNum}>{sign}{estimatedPrice}</span>
                                 </div>
 
                                 <button
