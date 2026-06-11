@@ -16,7 +16,6 @@ import { IconKey } from "@/resources/icons";
 import { renderIcon } from "@/utils/renderIcon";
 import { FITNESS_EXTRAS } from "@/components/widgets/manual-generator/extra/fitnes-extra";
 
-type PlanPath = "ai" | "coach";
 type Experience = "beginner" | "intermediate" | "advanced";
 type Duration = "2w" | "4w" | "8w" | "12w";
 type FitnessGoal = "fat_loss" | "muscle_gain" | "strength" | "endurance" | "mobility";
@@ -24,31 +23,9 @@ type TrainingDays = "2" | "3" | "4" | "5" | "6";
 type SessionMinutes = "30" | "45" | "60" | "75" | "90";
 type Equipment = "gym" | "home_basic" | "home_full" | "no_equipment";
 
-const PATHS: Array<{
-    id: PlanPath;
-    title: string;
-    desc: string;
-    badge: string;
-    tokens: number;
-    icon: IconKey;
-}> = [
-    {
-        id: "ai",
-        title: "AI Training Plan",
-        desc: "Instantly creates a plan for your goal, schedule, and equipment. You can update it anytime.",
-        badge: "FAST & AFFORDABLE",
-        tokens: 1500,
-        icon: "speed",
-    },
-    {
-        id: "coach",
-        title: "Coach-Led Plan",
-        desc: "A coach builds your plan and adds human feedback/explanations. Premium format.",
-        badge: "PREMIUM COACHING",
-        tokens: 6000,
-        icon: "brain",
-    },
-];
+const BASE_TOKENS = 3000;
+const TOKENS_PER_EXTRA_WEEK = 800;
+const FREE_WEEKS = 2;
 
 const GOALS: Array<{ id: FitnessGoal; label: string; sub: string; icon?: IconKey }> = [
     { id: "fat_loss", label: "Fat Loss", sub: "calorie deficit + tone", icon: "path" as IconKey },
@@ -75,8 +52,6 @@ const EQUIPMENT: Array<{ id: Equipment; label: string; sub: string }> = [
 const FOCUS_AREAS = ["Glutes", "Core", "Upper body", "Lower body", "Cardio", "Mobility"] as const;
 
 interface Values {
-    path: PlanPath;
-
     goal: FitnessGoal;
     experience: Experience;
     duration: Duration;
@@ -88,13 +63,11 @@ interface Values {
     focusAreas: string[];
     limitations: string;
 
-    coachId?: string;
+    coachId: string;
     extras: string[];
 }
 
 const schema = Yup.object({
-    path: Yup.mixed<PlanPath>().oneOf(["ai", "coach"]).required(),
-
     goal: Yup.mixed<FitnessGoal>()
         .oneOf(["fat_loss", "muscle_gain", "strength", "endurance", "mobility"])
         .required("Required"),
@@ -110,20 +83,10 @@ const schema = Yup.object({
     focusAreas: Yup.array().of(Yup.string()).required(),
     limitations: Yup.string().max(400, "Too long"),
 
-    coachId: Yup.string().when("path", {
-        is: "coach",
-        then: (s) => s.required("Choose a coach"),
-        otherwise: (s) => s.optional(),
-    }),
+    coachId: Yup.string().required("Choose a trainer"),
 
     extras: Yup.array().of(Yup.string()).required(),
 });
-
-type PathIconProps = { icon: IconKey; active: boolean };
-
-function PathIcon({ icon, active }: PathIconProps) {
-    return <div className={active ? styles.iconBadge : styles.iconBadgeSoft}>{renderIcon(icon)}</div>;
-}
 
 function CoachValue({ coachId }: { coachId: string }) {
     const coach = experts.find((c) => c.id === coachId);
@@ -154,6 +117,10 @@ function durationToPercent(d: Duration) {
     return 100;
 }
 
+function tokensToEur(tokens: number) {
+    return (tokens / 100).toFixed(2);
+}
+
 export default function ManualGenerator() {
     const { showAlert } = useAlert();
     const user = useUser();
@@ -161,8 +128,6 @@ export default function ManualGenerator() {
     const [coachOpen, setCoachOpen] = useState(false);
 
     const initialValues: Values = {
-        path: "ai",
-
         goal: "fat_loss",
         experience: "beginner",
         duration: "4w",
@@ -174,33 +139,24 @@ export default function ManualGenerator() {
         focusAreas: ["Core"],
         limitations: "",
 
-        coachId: undefined,
+        coachId: "",
         extras: [],
     };
 
-    // ✅ culinary-style duration pricing
-    // Base includes minimal program for fitness (2 weeks), everything above is extra
-    const FREE_WEEKS = 2;
-
-    function calcDurationTokens(path: PlanPath, duration: Duration) {
+    function calcDurationTokens(duration: Duration) {
         const weeks = durationToWeeks(duration);
         const extraWeeks = Math.max(0, weeks - FREE_WEEKS);
-
-        // keep same approach as culinary: premium path costs more per extra week
-        if (path === "coach") return extraWeeks * 1000;
-        return extraWeeks * 500;
+        return extraWeeks * TOKENS_PER_EXTRA_WEEK;
     }
 
     function calcTotalTokens(values: Values) {
-        const pathTokens = PATHS.find((p) => p.id === values.path)?.tokens ?? 0;
-
-        const durationTokens = calcDurationTokens(values.path, values.duration);
+        const durationTokens = calcDurationTokens(values.duration);
 
         const extrasTokens = FITNESS_EXTRAS
             .filter((e) => values.extras.includes(e.id))
             .reduce((sum, e) => sum + e.tokens, 0);
 
-        return pathTokens + durationTokens + extrasTokens;
+        return BASE_TOKENS + durationTokens + extrasTokens;
     }
 
     const experienceLabel = (x: Experience) => (x === "beginner" ? "Beginner" : x === "intermediate" ? "Intermediate" : "Advanced");
@@ -218,7 +174,7 @@ export default function ManualGenerator() {
                 try {
                     const payload = {
                         category: "training",
-                        planType: values.path === "coach" ? "reviewed" : "default",
+                        planType: "reviewed",
                         language: "English",
                         extras: values.extras,
                         totalTokens: calcTotalTokens(values),
@@ -226,7 +182,7 @@ export default function ManualGenerator() {
 
                         fields: {
                             domain: "fitness",
-                            deliveryMode: values.path === "coach" ? "expert" : "ai",
+                            deliveryMode: "expert",
 
                             goal: values.goal,
                             experience: values.experience,
@@ -241,7 +197,7 @@ export default function ManualGenerator() {
                             focusAreas: values.focusAreas,
                             limitations: values.limitations?.trim() || undefined,
 
-                            coach: values.path === "coach" ? experts.find((c) => c.id === values.coachId)?.fullName : undefined,
+                            coach: experts.find((c) => c.id === values.coachId)?.fullName,
                         },
                     };
 
@@ -253,7 +209,7 @@ export default function ManualGenerator() {
                     });
 
                     const data = await res.json();
-                    if (res.ok) showAlert("Success", "Training plan request saved!", "success");
+                    if (res.ok) showAlert("Success", "Your training plan has been ordered! Your trainer will prepare it within 12–24 hours.", "success");
                     else showAlert("Error", data?.message || "Failed to save", "error");
                 } catch {
                     showAlert("Error", "Network or server issue", "error");
@@ -263,13 +219,14 @@ export default function ManualGenerator() {
             }}
         >
             {({ values, setFieldValue, errors, touched, isSubmitting, submitForm }) => {
-                const estimatedTokens = useMemo(() => calcTotalTokens(values), [values.path, values.duration, values.extras]);
+                const estimatedTokens = useMemo(() => calcTotalTokens(values), [values.duration, values.extras]);
+                const estimatedEur = tokensToEur(estimatedTokens);
 
                 const selectedExtras = FITNESS_EXTRAS.filter((e) => values.extras.includes(e.id));
                 const durationWeeks = durationToWeeks(values.duration);
 
                 const summaryRows = [
-                    { k: "Mode", v: values.path === "coach" ? "Coach" : "AI" },
+                    { k: "Trainer", v: values.coachId ? (experts.find(c => c.id === values.coachId)?.fullName ?? "—") : "Not selected" },
                     { k: "Goal", v: goalLabel(values.goal) },
                     { k: "Experience", v: experienceLabel(values.experience) },
                     { k: "Schedule", v: `${values.daysPerWeek}x / ${values.sessionMinutes} min` },
@@ -283,8 +240,8 @@ export default function ManualGenerator() {
                             {/* HERO */}
                             <div className={styles.hero}>
                                 <div className={styles.heroText}>
-                                    <h1>Create your fitness program</h1>
-                                    <p>Pick a mode, goal, and setup — you’ll get a clear plan: workouts, progression, and adjustments.</p>
+                                    <h1>Order your fitness program</h1>
+                                    <p>Choose a trainer, set your goal and preferences — your personalized plan will be ready within 12–24 hours.</p>
                                 </div>
 
                                 <div className={styles.heroSteps}>
@@ -294,7 +251,7 @@ export default function ManualGenerator() {
                                         <span className={styles.stepPill}>3</span>
                                         <span className={styles.stepPill}>4</span>
                                     </div>
-                                    <div className={styles.stepTrail}>Mode → Goal → Setup → Add-ons</div>
+                                    <div className={styles.stepTrail}>Trainer → Goal → Setup → Add-ons</div>
                                 </div>
                             </div>
 
@@ -302,103 +259,58 @@ export default function ManualGenerator() {
                             <div className={styles.shell}>
                                 {/* MAIN */}
                                 <div className={styles.main}>
-                                    {/* BLOCK 1 */}
+                                    {/* BLOCK 1 — TRAINER SELECTION */}
                                     <section className={styles.block}>
                                         <div className={styles.blockHeader}>
                                             <div className={styles.blockKicker}>STEP 1</div>
                                             <div>
-                                                <div className={styles.blockTitle}>Coaching mode</div>
-                                                <div className={styles.blockSub}>AI is fast and affordable. Coach is premium with human feedback.</div>
+                                                <div className={styles.blockTitle}>Choose your trainer</div>
+                                                <div className={styles.blockSub}>Select a certified specialist who will create your personalized program.</div>
                                             </div>
                                         </div>
 
-                                        <div className={styles.heroCards}>
-                                            {PATHS.map((p) => {
-                                                const active = values.path === p.id;
+                                        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className={styles.coachBlock}>
+                                            <div className={styles.fieldTitle}>Your trainer</div>
 
-                                                return (
-                                                    <button
-                                                        key={p.id}
-                                                        type="button"
-                                                        className={`${styles.heroCard} ${active ? styles.heroCardActive : ""}`}
-                                                        onClick={() => {
-                                                            setFieldValue("path", p.id);
-                                                            if (p.id === "ai") {
-                                                                setFieldValue("coachId", undefined);
-                                                                setCoachOpen(false);
-                                                            }
-                                                        }}
-                                                    >
-                                                        <div className={styles.heroCardTop}>
-                                                            <PathIcon icon={p.icon} active={active} />
-                                                            <div className={styles.heroCardMeta}>
-                                                                <div className={styles.heroCardRow}>
-                                                                    <div className={styles.heroCardTitle}>{p.title}</div>
-                                                                    <span className={styles.heroCardBadge}>{p.badge}</span>
-                                                                </div>
-                                                                <div className={styles.heroCardDesc}>{p.desc}</div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className={styles.heroCardBottom}>
-                                                            <div className={styles.heroCardPrice}>
-                                                                <span className={styles.dot} />
-                                                                <span className={styles.heroCardTokens}>{p.tokens} tokens</span>
-                                                            </div>
-
-                                                            <div className={styles.selectMark} aria-hidden>
-                                                                <span className={active ? styles.selectOn : styles.selectOff} />
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                );
-                                            })}
-                                        </div>
-
-                                        {values.path === "coach" && (
-                                            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className={styles.coachBlock}>
-                                                <div className={styles.fieldTitle}>Choose your coach</div>
-
-                                                <div className={styles.dropdown}>
-                                                    <button
-                                                        type="button"
-                                                        className={`${styles.dropdownTrigger} ${touched.coachId && errors.coachId ? styles.dropdownError : ""}`}
-                                                        onClick={() => setCoachOpen((v) => !v)}
-                                                    >
-                                                        {values.coachId ? (
-                                                            <CoachValue coachId={values.coachId} />
-                                                        ) : (
-                                                            <span className={styles.dropdownPlaceholder}>
-                                {touched.coachId && errors.coachId ? String(errors.coachId) : "Select a coach"}
-                              </span>
-                                                        )}
-                                                        <span className={styles.dropdownChevron}>▾</span>
-                                                    </button>
-
-                                                    {coachOpen && (
-                                                        <div className={styles.dropdownMenu}>
-                                                            {experts.map((coach) => (
-                                                                <button
-                                                                    key={coach.id}
-                                                                    type="button"
-                                                                    className={styles.dropdownItem}
-                                                                    onClick={() => {
-                                                                        setFieldValue("coachId", coach.id);
-                                                                        setCoachOpen(false);
-                                                                    }}
-                                                                >
-                                                                    <img src={media[coach.avatar].src} alt={coach.fullName} className={styles.coachAvatar} />
-                                                                    <div className={styles.dropdownItemMeta}>
-                                                                        <div className={styles.dropdownItemName}>{coach.fullName}</div>
-                                                                        <div className={styles.dropdownItemSub}>⭐ {coach.rating} · {coach.subtitle}</div>
-                                                                    </div>
-                                                                </button>
-                                                            ))}
-                                                        </div>
+                                            <div className={styles.dropdown}>
+                                                <button
+                                                    type="button"
+                                                    className={`${styles.dropdownTrigger} ${touched.coachId && errors.coachId ? styles.dropdownError : ""}`}
+                                                    onClick={() => setCoachOpen((v) => !v)}
+                                                >
+                                                    {values.coachId ? (
+                                                        <CoachValue coachId={values.coachId} />
+                                                    ) : (
+                                                        <span className={styles.dropdownPlaceholder}>
+                                                            {touched.coachId && errors.coachId ? String(errors.coachId) : "Select a trainer"}
+                                                        </span>
                                                     )}
-                                                </div>
-                                            </motion.div>
-                                        )}
+                                                    <span className={styles.dropdownChevron}>▾</span>
+                                                </button>
+
+                                                {coachOpen && (
+                                                    <div className={styles.dropdownMenu}>
+                                                        {experts.map((coach) => (
+                                                            <button
+                                                                key={coach.id}
+                                                                type="button"
+                                                                className={styles.dropdownItem}
+                                                                onClick={() => {
+                                                                    setFieldValue("coachId", coach.id);
+                                                                    setCoachOpen(false);
+                                                                }}
+                                                            >
+                                                                <img src={media[coach.avatar].src} alt={coach.fullName} className={styles.coachAvatar} />
+                                                                <div className={styles.dropdownItemMeta}>
+                                                                    <div className={styles.dropdownItemName}>{coach.fullName}</div>
+                                                                    <div className={styles.dropdownItemSub}>⭐ {coach.rating} · {coach.subtitle}</div>
+                                                                </div>
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </motion.div>
                                     </section>
 
                                     {/* BLOCK 2 */}
@@ -594,12 +506,12 @@ export default function ManualGenerator() {
                                             <div className={styles.blockKicker}>STEP 4</div>
                                             <div>
                                                 <div className={styles.blockTitle}>Add-ons (extra cost)</div>
-                                                <div className={styles.blockSub}>Optional paid add-ons for your PDF/plan (tokens are added to the total).</div>
+                                                <div className={styles.blockSub}>Optional paid add-ons for your PDF/plan.</div>
                                             </div>
                                         </div>
 
                                         <div className={styles.extrasGridNew}>
-                                            {FITNESS_EXTRAS.filter((e) => !e.coachOnly || values.path === "coach").map((extra) => {
+                                            {FITNESS_EXTRAS.map((extra) => {
                                                 const active = values.extras.includes(extra.id);
 
                                                 return (
@@ -625,7 +537,7 @@ export default function ManualGenerator() {
                                                         <div className={styles.extraBottomNew}>
                                                             <div className={styles.extraPrice}>
                                                                 <span className={styles.dot} />
-                                                                <span>+{extra.tokens} tokens</span>
+                                                                <span>+€{tokensToEur(extra.tokens)}</span>
                                                             </div>
                                                             <div className={styles.goalCheck}>
                                                                 <span className={active ? styles.selectOn : styles.selectOff} />
@@ -640,7 +552,7 @@ export default function ManualGenerator() {
                                     {/* DESKTOP FOOTER (main) */}
                                     <div className={styles.bottomNote}>
                                         <span>✅ Tailored plan</span>
-                                        <span>🧠 AI mode 24/7</span>
+                                        <span>🏋️ Built by a specialist</span>
                                         <span>📈 Progression built-in</span>
                                     </div>
                                 </div>
@@ -653,13 +565,12 @@ export default function ManualGenerator() {
                                                 <div className={styles.summaryLabel}>Estimated cost</div>
                                                 <div className={styles.summaryCost}>
                                                     <span className={styles.dotBig} />
-                                                    <span className={styles.summaryCostNum}>{estimatedTokens}</span>
-                                                    <span className={styles.summaryCostUnit}>tokens</span>
+                                                    <span className={styles.summaryCostNum}>€{estimatedEur}</span>
                                                 </div>
                                             </div>
 
                                             <button type="submit" className={styles.ctaButton} disabled={isSubmitting}>
-                                                {isSubmitting ? "Saving..." : "Save Draft"}
+                                                {isSubmitting ? "Ordering..." : "Order Program"}
                                             </button>
                                         </div>
 
@@ -681,13 +592,19 @@ export default function ManualGenerator() {
                                             <ul className={styles.summaryBullets}>
                                                 {selectedExtras.map((e) => (
                                                     <li key={e.id}>
-                                                        {e.title} <span className={styles.muted}>+{e.tokens}</span>
+                                                        {e.title} <span className={styles.muted}>+€{tokensToEur(e.tokens)}</span>
                                                     </li>
                                                 ))}
                                             </ul>
                                         ) : (
                                             <div className={styles.muted}>No add-ons selected</div>
                                         )}
+
+                                        <div className={styles.summaryDivider} />
+
+                                        <div className={styles.muted} style={{ fontSize: "0.8rem", lineHeight: 1.4 }}>
+                                            Your trainer will prepare your program within 12–24 hours. You'll receive an email when it's ready to download.
+                                        </div>
                                     </div>
                                 </aside>
                             </div>
@@ -696,8 +613,7 @@ export default function ManualGenerator() {
                             <div className={styles.mobileFooter}>
                                 <div className={styles.mobileCost}>
                                     <span className={styles.dotBig} />
-                                    <span className={styles.mobileCostNum}>{estimatedTokens}</span>
-                                    <span className={styles.mobileCostUnit}>tokens</span>
+                                    <span className={styles.mobileCostNum}>€{estimatedEur}</span>
                                 </div>
 
                                 <button
@@ -708,7 +624,7 @@ export default function ManualGenerator() {
                                         void submitForm();
                                     }}
                                 >
-                                    {isSubmitting ? "Saving..." : "Continue"}
+                                    {isSubmitting ? "Ordering..." : "Order Program"}
                                 </button>
                             </div>
                         </div>

@@ -4,7 +4,7 @@ export interface UniversalOrderDocument extends Document {
     userId: mongoose.Types.ObjectId;
     email: string;
 
-    category: string; // e.g. "training", "cv", "marketing"
+    category: string;
     fields: Record<string, any>;
     extras: string[];
     totalTokens: number;
@@ -16,6 +16,7 @@ export interface UniversalOrderDocument extends Document {
 
     status: "pending" | "ready";
     readyAt: Date;
+    notified: boolean;
     createdAt: Date;
 }
 
@@ -36,8 +37,9 @@ const universalOrderSchema = new Schema<UniversalOrderDocument>(
         response: { type: String, default: "" },
         extrasData: { type: Map, of: String, default: {} },
 
-        status: { type: String, enum: ["pending", "ready"], default: "ready" },
+        status: { type: String, enum: ["pending", "ready"], default: "pending" },
         readyAt: { type: Date },
+        notified: { type: Boolean, default: false },
         createdAt: { type: Date, default: Date.now },
     },
     { strict: false }

@@ -17,7 +17,7 @@ export default function AboutPage() {
                 eyebrow="About Us"
                 title="Coach-Built Training for the"
                 highlight="Real World"
-                description="We connect athletes with certified specialists who design personalized training programs. AI is available as a faster option, but expert coaching is what we’re built around."
+                description="We connect athletes with certified specialists who design personalized training programs. Expert coaching is what we're built around — every plan is crafted with real training logic."
                 image="image3"
                 imageText="Real coaches. Real programs."
             />
@@ -35,7 +35,7 @@ export default function AboutPage() {
                         icon: "bulb",
                         title: "The Vision",
                         description:
-                            "A world where every athlete can train with a clear plan, built by experts and supported by smart tools."
+                            "A world where every athlete can train with a clear plan, built by experts who understand the science of programming."
                     }
                 ] as const}
             />
@@ -62,15 +62,15 @@ export default function AboutPage() {
                         description: "Your data is protected and your answers stay confidential.",
                     },
                     {
-                        icon: "brain",
-                        title: "Smart Support",
-                        description: "AI helps you start faster, while specialists deliver the best result.",
+                        icon: "community",
+                        title: "Expert-Driven",
+                        description: "Every program reflects years of coaching experience and proven methodology.",
                     },
                 ]}
                 backgroundColor="surface-muted"
             />
 
-            {/* 4️⃣ HOW WE WORK */}
+            {/* HOW WE WORK */}
             <HowItWorksSection
                 label="Our Process"
                 title="How Your Program Is Created"
@@ -82,14 +82,14 @@ export default function AboutPage() {
                             "Fill out a short form about your experience, schedule, equipment, and preferences.",
                     },
                     {
-                        title: "Choose Who Builds It",
+                        title: "Choose Your Trainer",
                         description:
-                            "Pick a specialist (recommended) for maximum quality, or AI when you need it faster.",
+                            "Pick a certified specialist based on their expertise, rating, and specialty.",
                     },
                     {
                         title: "Program Design",
                         description:
-                            "Your plan is structured into weeks with exercises, sets, reps, intensity, and progression.",
+                            "Your trainer creates a plan with exercises, sets, reps, intensity, and progression.",
                     },
                     {
                         title: "Receive Your PDF",
@@ -97,10 +97,10 @@ export default function AboutPage() {
                             "Download your personalized training program and start immediately.",
                     },
                 ]}
-                note="Specialist-made programs are our primary service. AI is available as a faster alternative."
+                note="Programs are prepared by your chosen specialist within 12–24 hours."
             />
 
-            {/* 5️⃣ TEAM */}
+            {/* TEAM */}
             <TeamGrid
                 title="Meet Our Specialists"
                 description="Certified coaches who build programs with real training logic."
@@ -114,7 +114,7 @@ export default function AboutPage() {
 
             <Cta
                 title="Get Your Coach-Made Program"
-                description="Create an account, buy tokens, and order a specialist plan today. Use AI anytime for a faster start."
+                description="Create an account, top up your balance, and order a specialist plan today."
                 buttonText="Get Started"
                 link="/get-started"
             />
@@ -122,23 +122,23 @@ export default function AboutPage() {
             <FAQ
                 items={[
                     {
-                        question: "What’s the difference between Specialist and AI programs?",
+                        question: "How are the programs created?",
                         answer:
-                            "Specialist programs are manually created by certified coaches and are our primary service. AI programs are faster and simpler, designed as a secondary option when you need a quick start.",
+                            "Every program is designed by a certified specialist based on your goals, experience, schedule, and equipment. You receive a detailed PDF within 12–24 hours.",
                     },
                     {
-                        question: "Do tokens expire?",
-                        answer: "No, tokens never expire.",
+                        question: "Does my balance expire?",
+                        answer: "No, your balance never expires.",
                     },
                     {
                         question: "How fast do I receive my program?",
                         answer:
-                            "AI programs are generated quickly. Specialist programs take longer because they’re built manually with higher quality and detail.",
+                            "Your trainer prepares your plan within 12–24 hours. You'll receive an email when it's ready to download.",
                     },
                     {
-                        question: "Can I switch between Specialist and AI?",
+                        question: "Can I choose a specific trainer?",
                         answer:
-                            "Yes. You can use tokens for either option anytime, depending on your needs.",
+                            "Yes. Browse our team, check their specialties and ratings, and select the trainer that best fits your goals.",
                     },
                 ]}
             />

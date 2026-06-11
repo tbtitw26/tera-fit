@@ -68,6 +68,5 @@ export const FITNESS_EXTRAS: FitnessExtra[] = [
         description: "Coach notes: key cues, intensity guidance, and personalized focus points.",
         tokens: 500,
         icon: "chef", // if there's no 'coach' icon, use 'chef' or 'brain'
-        coachOnly: true,
     },
 ];

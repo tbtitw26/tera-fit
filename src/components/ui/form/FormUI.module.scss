@@ -1,233 +1,363 @@
+/* ===== WRAPPER ===== */
+
 .wrapper {
-  height: fit-content;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 32px;
   min-height: 70vh;
-
+  overflow: hidden;
 }
+
+.bgGlow {
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+/* ===== FORM CONTAINER ===== */
 
 .formContainer {
+  position: relative;
   width: 100%;
-  background: var(--surface-color);
-  border-radius: 22px;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.06),
-  0 10px 30px rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.03),
+    0 24px 48px -12px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  animation: cardEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.sm {
-  max-width: 420px;
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-.md {
-  max-width: 560px;
-}
+/* ===== SIZES ===== */
 
-.lg {
-  max-width: 980px;
-}
+.sm { max-width: 420px; }
+.md { max-width: 520px; }
+.lg { max-width: 1020px; }
+
+/* ===== AUTH VARIANT ===== */
 
 .auth {
-  padding: 12px;
+  padding: 0;
+  max-width: 480px;
 }
+
+/* ===== REGISTER VARIANT ===== */
 
 .register {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.15fr;
+  overflow: hidden;
 }
 
-.aside {
-  background: linear-gradient(
-                  180deg,
-                  var(--tertiary-color),
-                  #f6f9f2
-  );
-  padding: 64px 56px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 28px;
-
-  h3 {
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--text-primary);
-  }
-
-  p {
-    font-size: 15px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  ul {
-    margin-top: 12px;
-    list-style: none;
-
-    li {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--text-secondary);
-
-      &::before {
-        content: "";
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: var(--primary-color);
-        box-shadow: 0 4px 12px rgba(107, 143, 42, 0.35);
-      }
-    }
-  }
-}
-
+/* ===== FORM BLOCK ===== */
 
 .formBlock {
-  padding: 30px;
+  padding: 44px 40px 36px;
 }
 
+/* ===== HEADER ===== */
 
 .header {
   margin-bottom: 32px;
+  animation: fadeSlide 0.5s 0.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.headerIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
 }
 
 .title {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 .description {
-  margin-top: 6px;
+  margin-top: 8px;
   font-size: 15px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
+  line-height: 1.5;
 }
+
+/* ===== FORM CONTENT ===== */
 
 .formContent {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   overflow: visible;
 }
 
-.register .formContent {
+.fieldsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  animation: fadeSlide 0.5s 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.register .fieldsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  gap: 20px;
 }
 
-.register .termsBlock,
-.register button {
-  grid-column: span 2;
-}
-
-/* ======================
-   TERMS
-====================== */
+/* ===== TERMS ===== */
 
 .termsBlock {
-  margin-top: 4px;
+  margin-top: 8px;
+  animation: fadeSlide 0.5s 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.register .termsBlock {
+  grid-column: span 2;
 }
 
 .termsLabel {
   display: flex;
+  align-items: center;
   gap: 10px;
   font-size: 14px;
-  color: var(--text-secondary);
-
-  input {
-    margin-top: 3px;
-  }
+  color: var(--text-muted);
+  cursor: pointer;
 
   a {
-    color: var(--link-color);
-    text-decoration: underline;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .errorText {
   margin-top: 6px;
   font-size: 13px;
   color: var(--error-color);
+  font-weight: 500;
 }
 
-/* ======================
-   RESPONSIVE
-====================== */
+/* ===== SUBMIT BUTTON ===== */
+
+.submitBtn {
+  position: relative;
+  width: 100%;
+  margin-top: 12px;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 50%, #6366f1 100%);
+  background-size: 200% auto;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: hidden;
+  transition: background-position 0.4s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  animation: fadeSlide 0.5s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  &:hover:not(:disabled) {
+    background-position: right center;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover:not(:disabled) svg {
+    transform: translateX(3px);
+  }
+}
+
+.register .submitBtn {
+  grid-column: span 2;
+}
+
+/* ===== SPINNER ===== */
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== SWITCH LINK ===== */
+
+.switchLink {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  animation: fadeSlide 0.5s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* ===== RESPONSIVE ===== */
 
 @media (max-width: 900px) {
   .register {
     grid-template-columns: 1fr;
   }
 
-  .aside {
-    display: none;
+  .register .fieldsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .register .termsBlock,
+  .register .submitBtn {
+    grid-column: span 2;
   }
 
   .formBlock {
-    padding: 44px;
+    padding: 36px 28px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .wrapper {
-    align-items: flex-start;      /* ❗ не центруємо по вертикалі */
+    align-items: flex-start;
     padding: 16px;
   }
 
   .formContainer {
     max-width: 100%;
-    border-radius: 16px;
-    box-shadow: none;             /* ❗ прибираємо heavy card */
-  }
-
-  .auth {
-    padding: 24px 16px;
+    border-radius: 18px;
   }
 
   .formBlock {
-    padding: 16px;
-  }
-
-  /* ❗ header */
-  .header {
-    margin-bottom: 20px;
-    text-align: left;
+    padding: 28px 20px;
   }
 
   .title {
-    font-size: 22px;              /* ❗ не ламається */
-    line-height: 1.25;
+    font-size: 22px;
   }
 
-  .description {
-    font-size: 14px;
+  .headerIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 
-  /* ❗ завжди 1 колонка */
-  .register {
+  .register .fieldsGrid {
     grid-template-columns: 1fr;
-  }
-
-  .register .formContent {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    gap: 18px;
   }
 
   .register .termsBlock,
-  .register button {
+  .register .submitBtn {
     grid-column: auto;
   }
 
-  /* ❗ inputs + button */
-  .formContent {
-    gap: 10px;
+  .fieldsGrid {
+    gap: 18px;
+  }
+
+  .submitBtn {
+    padding: 14px 20px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+
+  .bgGlow {
+    display: none;
   }
 }
-

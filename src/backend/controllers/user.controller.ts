@@ -14,7 +14,7 @@ export const userController = {
 
         const user = await userService.addTokens(userId, amount);
 
-        console.log("💳 Adding tokens for user:", userId);
+        console.log("💳 Adding balance for user:", userId);
         await transactionService.record(user._id, user.email, amount, "add", user.tokens, {
             digitalServiceImmediateConsent: options?.digitalServiceImmediateConsent,
         });
@@ -24,19 +24,19 @@ export const userController = {
             await emailService.sendOrderConfirmationEmail({
                 email: user.email,
                 firstName: user.firstName,
-                subject: "Token purchase confirmation",
+                subject: "Balance top-up confirmation",
                 summaryTitle: "Payment summary",
                 summaryLines: [
-                    `Order: Token purchase`,
-                    `Tokens added: ${amount}`,
-                    `Balance after payment: ${user.tokens}`,
+                    `Order: Balance top-up`,
+                    `Amount added: €${(amount / 100).toFixed(2)}`,
+                    `Balance after payment: €${(user.tokens / 100).toFixed(2)}`,
                 ],
-                amountLabel: "Tokens purchased",
-                amountValue: String(amount),
+                amountLabel: "Amount added",
+                amountValue: `€${(amount / 100).toFixed(2)}`,
                 transactionDate: new Date(),
             });
         } catch (error) {
-            console.error("❌ Token purchase email failed:", {
+            console.error("❌ Balance top-up email failed:", {
                 userId,
                 email: user.email,
                 amount,

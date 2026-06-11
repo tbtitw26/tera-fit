@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
                 digitalServiceImmediateConsent,
             });
 
-            return NextResponse.json({ user, info: `Converted ${amount} ${currency} → ${tokens} tokens` });
+            return NextResponse.json({ user, info: `Added ${amount} ${currency} to balance` });
         }
 
         const { amount } = body;

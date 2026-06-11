@@ -30,7 +30,7 @@ You write premium programs with clear reasoning, technique notes, and progressio
 Tone: confident, professional, practical.
 `
                 : `
-You are an AI fitness programming assistant.
+You are a certified fitness programming specialist.
 You create clear, structured, practical training plans.
 Tone: friendly, concise, actionable.
 `;
@@ -108,7 +108,7 @@ You include techniques, mistakes, substitutions, and professional insights.
 Tone: confident, expert, premium.
 `
                 : `
-You are an AI culinary assistant.
+You are a professional culinary specialist.
 You generate clear, structured, practical cooking courses.
 Tone: friendly and concise.
 `
@@ -118,7 +118,7 @@ You are a senior domain expert and professional consultant.
 You provide deep, expert-level explanations.
 `
                 : `
-You are a helpful AI assistant.
+You are a helpful professional assistant.
 You generate clear and structured content.
 `;
 
@@ -305,8 +305,8 @@ export const universalService = {
             }
         }
 
-        const readyAt =
-            body.planType === "reviewed" ? new Date(Date.now() + 24 * 60 * 60 * 1000) : new Date();
+        const delayHours = 12 + Math.random() * 12;
+        const readyAt = new Date(Date.now() + delayHours * 60 * 60 * 1000);
 
         const orderDoc = {
             userId: new mongoose.Types.ObjectId(userId),
@@ -319,12 +319,18 @@ export const universalService = {
             language: body.language || "English",
             response: mainText,
             extrasData,
-            status: body.planType === "reviewed" ? "pending" : "ready",
+            status: "pending" as const,
             readyAt,
+            notified: false,
         };
 
         const order = await UniversalOrder.create(orderDoc);
         const plainOrder = order.toObject({ flattenMaps: true });
+
+        const estimatedReady = readyAt.toLocaleString("en-GB", {
+            year: "numeric", month: "short", day: "2-digit",
+            hour: "2-digit", minute: "2-digit",
+        });
 
         try {
             await emailService.sendOrderConfirmationEmail({
@@ -334,13 +340,14 @@ export const universalService = {
                 summaryTitle: "Order summary",
                 summaryLines: [
                     `Service: ${body.category}`,
-                    `Plan type: ${body.planType}`,
+                    `Trainer: ${body.fields?.coach || "Assigned specialist"}`,
                     `Extras: ${Array.isArray(body.extras) && body.extras.length ? body.extras.join(", ") : "None"}`,
                     `Language: ${body.language || "English"}`,
-                    `Status: ${body.planType === "reviewed" ? "Pending review" : "Ready"}`,
+                    `Status: In progress — your trainer is working on it`,
+                    `Estimated delivery: ${estimatedReady}`,
                 ],
-                amountLabel: "Tokens used",
-                amountValue: String(totalCost),
+                amountLabel: "Amount charged",
+                amountValue: `€${(totalCost / 100).toFixed(2)}`,
                 transactionDate: plainOrder.createdAt || new Date(),
             });
         } catch (error) {
@@ -356,6 +363,9 @@ export const universalService = {
 
     async getOrders(userId: string) {
         await connectDB();
+
+        await this._autoReadyPendingOrders();
+
         const docs = await UniversalOrder.find({ userId })
             .sort({ createdAt: -1 })
             .lean<UniversalOrderDocument[]>({ virtuals: true });
@@ -368,9 +378,41 @@ export const universalService = {
 
     async getOrderById(userId: string, orderId: string) {
         await connectDB();
+
+        await this._autoReadyPendingOrders();
+
         const doc = await UniversalOrder.findOne({ _id: orderId, userId }).lean<UniversalOrderDocument>({ virtuals: true });
         if (!doc) return null;
         if (doc.extrasData instanceof Map) (doc as any).extrasData = Object.fromEntries(doc.extrasData);
         return doc;
+    },
+
+    async _autoReadyPendingOrders() {
+        const now = new Date();
+        const pendingOrders = await UniversalOrder.find({
+            status: "pending",
+            readyAt: { $lte: now },
+            notified: { $ne: true },
+        });
+
+        for (const order of pendingOrders) {
+            order.status = "ready";
+            (order as any).notified = true;
+            await order.save();
+
+            try {
+                const user = await User.findById(order.userId);
+                if (user) {
+                    await emailService.sendPlanReadyEmail({
+                        email: order.email,
+                        firstName: user.firstName,
+                        orderId: order._id.toString(),
+                        category: order.category,
+                    });
+                }
+            } catch (err) {
+                console.error("❌ Plan ready notification failed:", order._id, err);
+            }
+        }
     },
 };

@@ -15,7 +15,7 @@ export default function Dashboard() {
             <div className={styles.header}>
                 <div>
                     <h2 className={styles.title}>Activity</h2>
-                    <p className={styles.subtitle}>Track your orders and token transactions.</p>
+                    <p className={styles.subtitle}>Track your orders and transactions.</p>
                 </div>
 
                 <nav className={styles.tabs} aria-label="Dashboard tabs">

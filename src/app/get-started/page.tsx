@@ -18,7 +18,7 @@ export default function GetStartedPage() {
                         Get a Training Plan — from a <span>Specialist</span>
                     </>
                 }
-                description="Log in, buy tokens, fill out a quick form, and choose a certified specialist to build your program. Need it faster? Use AI as a quick alternative and receive a structured PDF plan."
+                description="Log in, top up your balance, fill out a quick form, and choose a certified specialist to build your program. Receive a structured PDF plan within 12–24 hours."
                 primaryCta={{ text: "Start My Order", link: "/dashboard" }}
                 secondaryCta={{ text: "Meet the Specialists", link: "/extra/chefs" }}
                 image="image5"
@@ -32,12 +32,12 @@ export default function GetStartedPage() {
             <ValuesIcons
                 tagline="WHY THIS WORKS"
                 title="Built for Real Progress"
-                description="Coach-led programming with a simple, token-based flow."
+                description="Coach-led programming with a simple, pay-as-you-go flow."
                 values={[
                     {
-                        title: "Flexible Tokens",
-                        description: "Buy once. Use anytime. Tokens never expire.",
-                        icon: "wallet",
+                        title: "Flexible Balance",
+                        description: "Top up once. Use anytime. Your balance never expires.",
+                        icon: "pay",
                     },
                     {
                         title: "Specialist Quality",
@@ -45,9 +45,9 @@ export default function GetStartedPage() {
                         icon: "zap",
                     },
                     {
-                        title: "AI When You Need Speed",
-                        description: "A faster option for a quick start.",
-                        icon: "community",
+                        title: "Fast Turnaround",
+                        description: "Your plan is ready within 12–24 hours.",
+                        icon: "speed",
                     },
                     {
                         title: "PDF You Keep",
@@ -65,11 +65,11 @@ export default function GetStartedPage() {
                 highlights={[
                     {
                         title: "No subscriptions",
-                        description: "Pay per plan with tokens — full control.",
+                        description: "Pay per plan — full control over your spending.",
                     },
                     {
-                        title: "Specialist-first",
-                        description: "Choose a coach for the highest quality plan.",
+                        title: "Specialist quality",
+                        description: "Choose a trainer for the highest quality plan.",
                     },
                     {
                         title: "PDF stored in your account",
@@ -84,16 +84,16 @@ export default function GetStartedPage() {
                             "Log in and complete a short setup about your goal, level, equipment, and limitations.",
                     },
                     {
-                        icon: "coins",
-                        title: "Buy Tokens",
+                        icon: "pay",
+                        title: "Top Up Balance",
                         description:
-                            "Choose a token pack based on how often you want a new program or updates.",
+                            "Add funds to your account based on how often you want a new program or updates.",
                     },
                     {
-                        icon: "brain",
-                        title: "Choose Specialist or AI",
+                        icon: "community",
+                        title: "Choose a Specialist",
                         description:
-                            "Specialist is the main option for maximum detail. AI is a faster alternative when you need it now.",
+                            "Pick a certified trainer and fill out the form. Your specialist builds the program for you.",
                     },
                     {
                         icon: "calendar",
@@ -104,18 +104,18 @@ export default function GetStartedPage() {
                 ]}
                 note={
                     <>
-                        Specialist programs take longer because they’re created manually.
-                        AI programs are generated faster for a quick start.
+                        Programs are prepared by your chosen specialist within 12–24 hours.
+                        You&apos;ll receive an email notification when your plan is ready.
                     </>
                 }
             />
 
-            {/* AI vs COACH */}
+            {/* WHAT YOU GET */}
             <Grid columns={2} gap="2rem">
                 <InfoBlock
                     variant="dark"
                     title="Specialist Program"
-                    badge="PRIMARY"
+                    badge="COACH-LED"
                     icon="community"
                     description="More detail. Better decisions. Better outcomes."
                     bullets={[
@@ -127,13 +127,14 @@ export default function GetStartedPage() {
 
                 <InfoBlock
                     variant="light"
-                    title="AI Program"
-                    icon="brain"
-                    description="Fast option for a structured start."
+                    title="Delivered as PDF"
+                    badge="CONVENIENT"
+                    icon="path"
+                    description="Clear, printable format you can take anywhere."
                     bullets={[
-                        "Plan generated quickly",
+                        "Weekly structure with exercises & sets",
                         "Built around your schedule & equipment",
-                        "Basic progression logic included",
+                        "Progression logic included",
                     ]}
                 />
             </Grid>
@@ -191,28 +192,28 @@ export default function GetStartedPage() {
                 description="Quick answers before you get your program."
                 items={[
                     {
-                        question: "What are tokens used for?",
+                        question: "What is the balance used for?",
                         answer:
-                            "Tokens are used to order a specialist-made program (primary service) or generate an AI program (faster option). No subscriptions — you pay only when you need a plan.",
+                            "Your balance is used to order specialist-made training programs. No subscriptions — you pay only when you need a plan.",
                     },
                     {
-                        question: "Do tokens expire?",
-                        answer: "No. Tokens never expire and can be used anytime.",
+                        question: "Does my balance expire?",
+                        answer: "No. Your balance never expires and can be used anytime.",
                     },
                     {
                         question: "How fast will I receive my program?",
                         answer:
-                            "AI programs are generated quickly. Specialist programs take longer because they’re built manually with more detail and higher quality.",
+                            "Your trainer prepares the program within 12–24 hours. You'll get an email notification when it's ready to download.",
                     },
                     {
                         question: "Can you adapt the plan for injuries or limitations?",
                         answer:
-                            "Yes. Add your limitations in the setup form. Specialists can tailor the program manually, and AI can also account for basic constraints.",
+                            "Yes. Add your limitations in the setup form and your specialist will tailor the program accordingly.",
                     },
                     {
-                        question: "Can I switch between Specialist and AI later?",
+                        question: "Can I choose a specific trainer?",
                         answer:
-                            "Yes. You can use tokens for either option anytime — switch depending on what you need.",
+                            "Yes. Browse our certified trainers, see their specialties and ratings, and pick the one that fits your goals.",
                     },
                     {
                         question: "Is the PDF downloadable and printable?",
@@ -225,7 +226,7 @@ export default function GetStartedPage() {
             {/* FINAL CTA */}
             <TextWithButton
                 title="Ready to Get Your Program?"
-                description="Create your account, choose a specialist (recommended) or AI, and receive your PDF plan."
+                description="Create your account, choose a specialist, and receive your PDF plan within 12–24 hours."
                 buttonText="Get Started"
                 buttonLink="/dashboard"
             />

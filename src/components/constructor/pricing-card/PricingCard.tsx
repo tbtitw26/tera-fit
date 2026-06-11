@@ -45,11 +45,15 @@ const PricingCard: React.FC<PricingCardProps> = ({
 
     const isCustom = variant === "custom";
     const [customTokenAmount, setCustomTokenAmount] = useState<string>("");
+    const [customEurAmount, setCustomEurAmount] = useState<string>("");
 
     const effectiveTokens = useMemo(() => {
-        const val = parseInt(customTokenAmount);
-        return isNaN(val) ? 0 : val;
-    }, [customTokenAmount]);
+        if (isCustom) {
+            const val = parseFloat(customEurAmount);
+            return isNaN(val) ? 0 : Math.round(val * TOKENS_PER_UNIT);
+        }
+        return tokens;
+    }, [customEurAmount, isCustom, tokens]);
 
     const basePriceEUR = useMemo(() => {
         if (isCustom) return effectiveTokens / TOKENS_PER_UNIT;
@@ -68,9 +72,9 @@ const PricingCard: React.FC<PricingCardProps> = ({
             return;
         }
 
-        const finalTokens = isCustom ? effectiveTokens : tokens;
+        const finalTokens = effectiveTokens;
         if (isCustom && finalTokens < 100) {
-            showAlert("Minimum tokens", "Please enter at least 100 tokens", "warning");
+            showAlert("Minimum amount", "Please enter at least €1.00", "warning");
             return;
         }
 
@@ -105,16 +109,12 @@ const PricingCard: React.FC<PricingCardProps> = ({
                 <div className={styles.priceContainer}>
                     <span className={styles.priceValue}>
                         {sign}
-                        {convertedPrice.toFixed(
-                            isCustom && effectiveTokens === 0 ? 2 : isCustom ? 2 : 0
-                        )}
+                        {convertedPrice.toFixed(isCustom && effectiveTokens === 0 ? 2 : isCustom ? 2 : 0)}
                     </span>
                     <span className={styles.oneTime}>one-time</span>
                 </div>
                 <div className={styles.tokenHighlight}>
-                    {isCustom
-                        ? `${effectiveTokens.toLocaleString()} Tokens`
-                        : `${tokens.toLocaleString()} Tokens`}
+                    Balance top-up
                 </div>
             </div>
 
@@ -122,19 +122,19 @@ const PricingCard: React.FC<PricingCardProps> = ({
                 {isCustom ? (
                     <div className={styles.customSection}>
                         <div className={styles.divider} />
-                        <label className={styles.inputLabel}>TOKENS</label>
+                        <label className={styles.inputLabel}>AMOUNT (€)</label>
                         <Input
                             type="number"
                             variant="plain"
-                            placeholder="100"
-                            value={customTokenAmount}
-                            onChange={(e) => setCustomTokenAmount(e.target.value)}
+                            placeholder="10.00"
+                            value={customEurAmount}
+                            onChange={(e) => setCustomEurAmount(e.target.value)}
                             endDecorator={<PiPencilSimpleLineBold size={18} />}
                             className={styles.tokenInput}
                             slotProps={{
                                 input: {
-                                    min: 0,
-                                    step: 10,
+                                    min: 1,
+                                    step: 1,
                                 },
                             }}
                         />
@@ -153,7 +153,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 
             <div className={styles.cta}>
                 <ButtonUI fullWidth variant="soft" onClick={handleBuy}>
-                    {isCustom ? "Calculate Price" : user ? buttonText : "Sign in to buy"}
+                    {isCustom ? "Calculate Price" : user ? buttonText : "Sign in to top up"}
                 </ButtonUI>
             </div>
         </motion.div>

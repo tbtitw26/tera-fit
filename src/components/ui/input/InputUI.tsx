@@ -1,38 +1,69 @@
-import * as React from "react";
-import Input, { InputProps } from "@mui/joy/Input";
+"use client";
+
+import React, { useState, useRef } from "react";
 import { useField } from "formik";
+import styles from "./InputUI.module.scss";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
-type FormikInputProps = InputProps & { name: string; formik?: boolean };
+type InputUIProps = {
+    name: string;
+    type?: string;
+    placeholder?: string;
+    formik?: boolean;
+};
 
-const InputUI: React.FC<FormikInputProps> = ({ formik, ...props }) => {
-    if (formik && props.name) {
-        const [field, meta] = useField(props.name);
-        const showError = Boolean(meta.touched && meta.error);
+const InputUI: React.FC<InputUIProps> = ({ formik, name, type = "text", placeholder, ...rest }) => {
+    const [field, meta] = useField(name);
+    const [focused, setFocused] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-        return (
-            <div style={{ display: "flex", flexDirection: "column" }}>
-                <Input
-                    {...field}
-                    {...props}
-                    error={showError}
-                />
-                {showError ? (
-                    <div
-                        style={{
-                            marginTop: 4,
-                            paddingLeft: 2,
-                            fontSize: "0.75rem",
-                            color: "var(--error-color, #d32f2f)",
-                        }}
-                    >
-                        {meta.error}
-                    </div>
-                ) : null}
-            </div>
-        );
-    }
+    const showError = Boolean(meta.touched && meta.error);
+    const hasValue = Boolean(field.value);
+    const isDate = type === "date";
+    const isActive = focused || hasValue || isDate;
+    const isPassword = type === "password";
+    const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
-    return <Input {...props} />;
+    return (
+        <div
+            className={`${styles.field} ${isActive ? styles.active : ""} ${showError ? styles.error : ""} ${focused ? styles.focused : ""}`}
+            onClick={() => inputRef.current?.focus()}
+        >
+            <label className={styles.label}>{placeholder}</label>
+            <input
+                ref={inputRef}
+                {...field}
+                type={inputType}
+                className={`${styles.input} ${hasValue ? styles.hasValue : ""}`}
+                autoComplete={type === "email" ? "email" : type === "password" ? "current-password" : "off"}
+                onFocus={() => {
+                    setFocused(true);
+                }}
+                onBlur={(e) => {
+                    setFocused(false);
+                    field.onBlur(e);
+                }}
+            />
+
+            {isPassword && (
+                <button
+                    type="button"
+                    className={styles.toggle}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setShowPassword((v) => !v);
+                        inputRef.current?.focus();
+                    }}
+                    tabIndex={-1}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                    {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+                </button>
+            )}
+
+        </div>
+    );
 };
 
 export default InputUI;

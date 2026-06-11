@@ -17,5 +17,6 @@ export interface UniversalOrderUI {
 
     status: "pending" | "ready";
     readyAt?: string;
+    notified?: boolean;
     createdAt: string;
 }

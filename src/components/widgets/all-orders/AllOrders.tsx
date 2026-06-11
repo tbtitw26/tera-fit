@@ -75,7 +75,8 @@ const AllOrders: React.FC = () => {
                     <span>ID</span>
                     <span>Email</span>
                     <span>Date</span>
-                    <span>Tokens</span>
+                    <span>Cost</span>
+                    <span>Status</span>
                     <span className={styles.actionsHead}>Actions</span>
                 </div>
 
@@ -95,16 +96,26 @@ const AllOrders: React.FC = () => {
                         </span>
 
                         <span className={styles.tokens}>
-                            -{order.totalTokens}
+                            -€{(order.totalTokens / 100).toFixed(2)}
+                        </span>
+
+                        <span className={order.status === "ready" ? styles.statusReady : styles.statusPending}>
+                            {order.status === "ready"
+                                ? "Ready"
+                                : order.readyAt && new Date(order.readyAt).getTime() > Date.now()
+                                    ? `~${Math.ceil((new Date(order.readyAt).getTime() - Date.now()) / 3600000)}h left`
+                                    : "Processing"
+                            }
                         </span>
 
                         <div className={styles.actions}>
                             <button
                                 type="button"
                                 className={styles.download}
+                                disabled={order.status !== "ready"}
                                 onClick={() => handleDownload(order)}
                             >
-                                Download
+                                {order.status === "ready" ? "Download" : "Pending"}
                             </button>
                         </div>
                     </div>

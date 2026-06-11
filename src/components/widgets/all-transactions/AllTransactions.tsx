@@ -92,12 +92,11 @@ export default function TransactionHistory() {
                                     : styles.amountSpend
                             }
                         >
-                            {t.type === "add" ? "+" : "-"}
-                            {t.amount}
+                            {t.type === "add" ? "+" : "-"}€{(t.amount / 100).toFixed(2)}
                         </span>
 
                         <span className={styles.balance}>
-                            {t.balanceAfter}
+                            €{(t.balanceAfter / 100).toFixed(2)}
                         </span>
                     </div>
                 ))}

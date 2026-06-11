@@ -15,7 +15,7 @@ import HowItWorksSection from "@/components/sections/how-it-works-section/HowItW
 export const metadata: Metadata = {
     title: `${COMPANY_NAME} — Coach-Led Fitness Programs`,
     description:
-        "Buy tokens, fill out a short form, choose a certified coach (primary) or AI (faster), and receive a personalized training program as a PDF.",
+        "Top up your balance, fill out a short form, choose a certified trainer, and receive a personalized training program as a PDF.",
     alternates: { canonical: "/" },
 };
 
@@ -29,7 +29,7 @@ export default function HomePage() {
                         Your Training Program, Built by a <span>Coach</span>
                     </>
                 }
-                description="Token-based platform for personalized training plans. Log in, buy tokens, complete a short form, and get a coach-made PDF program. AI is available when you need it faster."
+                description="Choose a certified trainer, fill out a short form, and get a personalized PDF program designed specifically for your goals, schedule, and experience level."
                 primaryCta={{ text: "Get Started", link: "/get-started" }}
                 secondaryCta={{ text: "Start Training", link: "/dashboard" }}
                 image="image1"
@@ -46,9 +46,9 @@ export default function HomePage() {
                 description="Real specialists first. Clear process. Results-focused plans."
                 values={[
                     {
-                        title: "Token Payments",
-                        description: "Buy tokens once and use them when you need a plan.",
-                        icon: "wallet",
+                        title: "Flexible Balance",
+                        description: "Top up once and use your balance when you need a plan.",
+                        icon: "pay",
                     },
                     {
                         title: "Coach-Made PDF",
@@ -68,14 +68,14 @@ export default function HomePage() {
                 ]}
             />
 
-            {/* AI vs TRAINER */}
+            {/* WHAT YOU GET */}
             <Grid columns={2} gap="2rem">
                 <InfoBlock
                     variant="dark"
                     title="Personal Specialist"
-                    badge="PRIMARY"
+                    badge="COACH-LED"
                     icon="community"
-                    description="More time. More detail. Best results."
+                    description="Your program is crafted by a real trainer with coaching experience."
                     bullets={[
                         "Manually built program from your form",
                         "Exercise selection tailored to you",
@@ -86,15 +86,16 @@ export default function HomePage() {
                 />
                 <InfoBlock
                     variant="light"
-                    title="AI Program"
-                    icon="brain"
-                    description="Fast option when you need it now."
+                    title="Delivered as PDF"
+                    badge="CONVENIENT"
+                    icon="path"
+                    description="Easy to follow on your phone and ready to print."
                     bullets={[
-                        "Quick plan generation",
-                        "Simple progression logic",
-                        "Good for a rapid start",
+                        "Exercises, sets, reps, rest times",
+                        "Weekly structure with warm-ups",
+                        "Progression rules and deload guidance",
                     ]}
-                    buttonText="Generate with AI"
+                    buttonText="Order a Plan"
                     buttonLink="/dashboard"
                 />
             </Grid>
@@ -110,37 +111,37 @@ export default function HomePage() {
                         description: "Log in to access your dashboard and plan history.",
                     },
                     {
-                        icon: "coins",
-                        title: "Buy Tokens",
-                        description: "Pick a token package and pay only when you need a plan.",
+                        icon: "pay",
+                        title: "Top Up Balance",
+                        description: "Add funds to your account and pay only when you need a plan.",
                     },
                     {
-                        icon: "brain",
-                        title: "Fill the Form & Choose Creator",
-                        description: "Answer key questions and choose a specialist (recommended) or AI (faster).",
+                        icon: "community",
+                        title: "Choose a Trainer",
+                        description: "Pick a certified specialist and fill out a short form about your goals.",
                     },
                     {
                         icon: "calendar",
                         title: "Receive Your PDF Program",
-                        description: "Download your personalized plan and start training with confidence.",
+                        description: "Your trainer prepares the plan within 12–24 hours. Download and start training.",
                     },
                 ]}
             />
 
             <PromoFeatureCard
-                icon="settings"
-                title="AI Is a Fast Alternative"
-                description="When you need a quick start, AI can generate a basic plan using your goals, schedule, experience, and recovery. For the most detailed program, choose a specialist."
-                actionText="Try AI"
-                actionLink="/dashboard"
+                icon="community"
+                title="Certified Trainers, Real Results"
+                description="Every program is created by a qualified specialist who reviews your goals, limitations, equipment, and schedule. You get a detailed plan with exercise selection rationale, intensity guidance, and progression logic."
+                actionText="Meet Trainers"
+                actionLink="/extra/chefs"
                 image="image2"
                 imagePosition="right"
             />
 
             {/* PRICING */}
             <Grid
-                title="Token Packages"
-                description="No subscriptions. Tokens let you choose specialist work or AI anytime."
+                title="Top Up Your Balance"
+                description="No subscriptions. Add funds and order a specialist plan when you need one."
                 columns={4}
                 gap="2rem"
             >
@@ -150,8 +151,8 @@ export default function HomePage() {
                     price="€5"
                     tokens={500}
                     badgeTop="Start"
-                    description="Ideal to test the platform, generate an AI plan, or cover part of a specialist order."
-                    buttonText="Buy Tokens"
+                    description="Ideal to test the platform or cover part of a specialist order."
+                    buttonText="Top Up €5"
                 />
 
                 <PricingCard
@@ -161,7 +162,7 @@ export default function HomePage() {
                     tokens={1900}
                     badgeTop="Popular"
                     description="Great for regular updates and specialist-made programs when your goals change."
-                    buttonText="Get Started"
+                    buttonText="Top Up €19"
                 />
 
                 <PricingCard
@@ -171,7 +172,7 @@ export default function HomePage() {
                     tokens={4900}
                     badgeTop="Best Value"
                     description="Best choice for serious progress with detailed specialist programming and periodic revisions."
-                    buttonText="Choose Plan"
+                    buttonText="Top Up €49"
                 />
 
                 <PricingCard
@@ -180,7 +181,7 @@ export default function HomePage() {
                     price="dynamic"
                     tokens={0}
                     badgeTop="Flexible"
-                    description="Choose the exact amount of tokens you need for your next plan or upgrade."
+                    description="Choose the exact amount you need for your next plan or upgrade."
                     buttonText="Continue"
                 />
             </Grid>
@@ -193,17 +194,17 @@ export default function HomePage() {
                 values={[
                     {
                         title: "No Monthly Payments",
-                        description: "Tokens replace subscriptions and recurring charges.",
+                        description: "Your balance stays until you use it — no recurring charges.",
                         icon: "subscriptions",
                     },
                     {
-                        title: "Choose Your Approach",
-                        description: "Specialist-first, with AI available as a faster option.",
-                        icon: "settings",
+                        title: "Specialist-Made",
+                        description: "Every program is built by a certified trainer for maximum quality.",
+                        icon: "community",
                     },
                     {
                         title: "Clear Value",
-                        description: "You know exactly what you’re paying for each time.",
+                        description: "You know exactly what you're paying for each time.",
                         icon: "priceTag",
                     },
                 ]}
@@ -212,7 +213,7 @@ export default function HomePage() {
             {/* FINAL CTA */}
             <Cta
                 title="Get Your Coach-Made Program"
-                description="Create an account, buy tokens, and order a specialist plan today. AI is available if you need it faster."
+                description="Create an account, top up your balance, and order a specialist plan today."
                 buttonText="Create Account"
                 link="/dashboard"
             />
@@ -221,23 +222,23 @@ export default function HomePage() {
             <FAQ
                 items={[
                     {
-                        question: "What’s the difference between a Specialist and AI program?",
+                        question: "How does it work?",
                         answer:
-                            "Specialist programs are manually created by a coach and are the main service. AI programs are faster and simpler, best when you need a quick start.",
+                            "Create an account, top up your balance, fill out a short form about your goals and preferences, choose a trainer, and receive your program as a PDF within 12–24 hours.",
                     },
                     {
-                        question: "Do tokens expire?",
-                        answer: "No, tokens never expire.",
+                        question: "Does my balance expire?",
+                        answer: "No, your balance never expires.",
                     },
                     {
                         question: "How fast do I receive my program?",
                         answer:
-                            "AI programs are generated quickly. Specialist programs take longer because they’re made manually for higher quality and detail.",
+                            "Your trainer prepares the program within 12–24 hours. You'll receive an email notification when it's ready to download.",
                     },
                     {
-                        question: "Can I use both options?",
+                        question: "Can I choose a specific trainer?",
                         answer:
-                            "Yes. You can spend tokens on specialist programs or AI anytime, depending on your needs.",
+                            "Yes. Browse our certified trainers, see their specialties and ratings, and choose the one that fits your goals.",
                     },
                 ]}
             />

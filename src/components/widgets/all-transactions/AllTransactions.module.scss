@@ -1,33 +1,29 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 16px;
 }
-
-/* ======================
-   HEADER
-   ====================== */
 
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 
   h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--text-primary);
+    margin: 0;
   }
 
   p {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
+    margin: 2px 0 0;
   }
 }
 
-/* ======================
-   TABLE
-   ====================== */
+/* ===== TABLE ===== */
 
 .table {
   display: flex;
@@ -37,107 +33,135 @@
 .head,
 .row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 1rem;
-  padding: 0.9rem 0;
+  grid-template-columns: 1.5fr 0.8fr 0.8fr 1fr;
+  gap: 12px;
+  padding: 10px 12px;
   align-items: center;
 }
 
 .head {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.7rem;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--text-muted);
   border-bottom: 1px solid var(--border-color);
 }
 
 .row {
-  border-bottom: 1px solid var(--border-color);
-  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+  font-size: 0.88rem;
+  border-radius: 8px;
+  transition: background 0.15s;
 }
 
 .row:hover {
-  background: rgba(0, 0, 0, 0.015);
+  background: rgba(37, 99, 235, 0.03);
 }
 
-/* ======================
-   COLUMNS
-   ====================== */
+.row:last-child {
+  border-bottom: none;
+}
+
+/* ===== COLUMNS ===== */
 
 .date {
-  color: var(--text-secondary);
+  color: var(--text-muted);
+  font-size: 0.82rem;
 }
 
 .typeAdd {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 650;
   color: #16a34a;
-  font-weight: 600;
+
+  &::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #16a34a;
+  }
 }
 
 .typeSpend {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 650;
   color: #dc2626;
-  font-weight: 600;
+
+  &::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #dc2626;
+  }
 }
 
 .amountAdd {
+  font-weight: 700;
   color: #16a34a;
-  font-weight: 600;
 }
 
 .amountSpend {
+  font-weight: 700;
   color: #dc2626;
-  font-weight: 600;
 }
 
 .balance {
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
-/* ======================
-   STATES
-   ====================== */
+/* ===== STATES ===== */
 
 .loading {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
+  padding: 24px 0;
 }
 
 .empty {
-  padding: 4rem 0;
+  padding: 48px 0;
   text-align: center;
   color: var(--text-muted);
 }
 
-/* ======================
-   ADAPTIVE
-   ====================== */
+/* ===== MOBILE ===== */
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .head {
     display: none;
   }
 
   .row {
-    grid-template-columns: 1fr;
-    gap: 0.4rem;
-    padding: 1rem 0;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 12px;
+    padding: 14px 8px;
   }
 
   .date {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    grid-column: span 2;
   }
 
   .typeAdd,
   .typeSpend {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .amountAdd,
   .amountSpend {
-    font-size: 0.9rem;
+    text-align: right;
   }
 
   .balance {
+    grid-column: span 2;
     font-size: 0.85rem;
   }
 }

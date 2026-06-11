@@ -4,7 +4,7 @@ import { COMPANY_NAME } from "@/resources/constants";
 const servicesSchema: PageSchema = {
     meta: {
         title: `Our Services — ${COMPANY_NAME}`,
-        description: `Explore ${COMPANY_NAME} services: personalized training plans, nutrition advice, progress tracking, and a flexible token system for fitness enthusiasts of all levels.`,
+        description: `Explore ${COMPANY_NAME} services: personalized training plans, nutrition advice, progress tracking, and a flexible pricing system for fitness enthusiasts of all levels.`,
         keywords: [
             `${COMPANY_NAME} services`,
             "fitness plans",
@@ -29,7 +29,7 @@ const servicesSchema: PageSchema = {
             left: {
                 type: "text",
                 title: "Everything You Need to Transform Your Fitness",
-                description: `${COMPANY_NAME} combines AI-powered planning with professional insights. From personalized workouts to nutrition and progress tracking — all in one app.`,
+                description: `${COMPANY_NAME} combines specialist coaching with structured programming. From personalized workouts to nutrition and progress tracking — all in one platform.`,
                 centerTitle: true,
                 centerDescription: true,
             },
@@ -42,7 +42,7 @@ const servicesSchema: PageSchema = {
                 {
                     image: "image1",
                     title: "Personalized Training Plans",
-                    description: "AI-generated workouts that match your level and adapt as you progress.",
+                    description: "Specialist-designed workouts that match your level and adapt as you progress.",
                     buttonLink: "/get-started",
                     buttonText: "Get Your Plan",
                 },
@@ -128,8 +128,8 @@ const servicesSchema: PageSchema = {
             cards: [
                 {
                     image: "image4",
-                    title: "Flexible Token System",
-                    description: "Buy tokens once and use them for workouts, nutrition, or extra features.",
+                    title: "Flexible Pricing",
+                    description: "Top up your balance once and use it for programs, nutrition guides, or extra features.",
                     buttonLink: "/pricing",
                     buttonText: "View Plans",
                 },
@@ -157,8 +157,8 @@ const servicesSchema: PageSchema = {
                 title: "Why Choose Us?",
                 description: `Because fitness should be simple, motivating, and personalized. ${COMPANY_NAME} adapts to you — not the other way around.`,
                 bullets: [
-                    "AI-assisted personalization",
-                    "Flexible pricing with tokens",
+                    "Specialist-driven personalization",
+                    "Flexible pay-as-you-go pricing",
                     "All-in-one solution: training + nutrition + tracking",
                 ],
                 centerTitle: true,
@@ -174,12 +174,12 @@ const servicesSchema: PageSchema = {
                     answer: "We offer training plans, nutrition guidance, progress tracking, and optional expert coaching.",
                 },
                 {
-                    question: "Do I need tokens to start?",
-                    answer: "You can try some features for free, but tokens unlock advanced workouts and nutrition plans.",
+                    question: "Do I need to top up to start?",
+                    answer: "You can explore the platform for free, but a balance top-up unlocks advanced programs and nutrition plans.",
                 },
                 {
-                    question: "How flexible is the token system?",
-                    answer: "Very. You buy once and spend only on what you need — no wasted subscriptions.",
+                    question: "How flexible is the pricing?",
+                    answer: "Very. You top up once and spend only on what you need — no wasted subscriptions.",
                 },
                 {
                     question: "Can I use this as a beginner?",

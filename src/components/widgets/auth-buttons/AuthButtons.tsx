@@ -14,7 +14,7 @@ const AuthButtons: React.FC = () => {
             <div className={styles.userCompact}>
                 <Link href="/profile" className={styles.tokensPill} aria-label="Профіль і баланс">
                     <GrMoney className={styles.iconMoney} />
-                    <span className={styles.tokensValue}>{user?.tokens ?? 0}</span>
+                    <span className={styles.tokensValue}>€{((user?.tokens ?? 0) / 100).toFixed(2)}</span>
                 </Link>
 
                 <Link href="/profile" className={styles.userIconButton} aria-label="Профіль">

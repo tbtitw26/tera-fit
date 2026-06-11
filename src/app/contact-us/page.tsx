@@ -35,7 +35,7 @@ export default function ContactUsPage() {
                 service={service}
                 tokens={tokens}
                 title={`Request ${service}`}
-                description={`Submitting this request will deduct ${tokens} tokens from your balance.`}
+                description={`Submitting this request will deduct €${(tokens / 100).toFixed(2)} from your balance.`}
             />
         </div>
     );

@@ -10,19 +10,20 @@ export default function BalanceCard() {
 
     if (!user) return null;
 
+    const balanceEur = (user.tokens / 100).toFixed(2);
+
     return (
         <section className={styles.card}>
             <div className={styles.top}>
-                <p className={styles.label}>TOKEN BALANCE</p>
+                <p className={styles.label}>YOUR BALANCE</p>
                 <div className={styles.badge}>Available</div>
             </div>
 
             <div className={styles.amountRow}>
-                <h3 className={styles.amount}>{user.tokens}</h3>
-                <span className={styles.unit}>tokens</span>
+                <h3 className={styles.amount}>€{balanceEur}</h3>
             </div>
 
-            <p className={styles.desc}>Use tokens to generate AI content or request expert-reviewed results.</p>
+            <p className={styles.desc}>Use your balance to order specialist-made training programs.</p>
 
             <div className={styles.actions}>
                 <Link href="/pricing">
@@ -34,7 +35,7 @@ export default function BalanceCard() {
             </div>
 
             <div className={styles.icon} aria-hidden>
-                T
+                €
             </div>
         </section>
     );

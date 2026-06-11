@@ -241,6 +241,98 @@ ${companyName} Team
 
         return await sendEmail(data.email, data.subject, text, html);
     },
+    async sendPlanReadyEmail(data: {
+        email: string;
+        firstName?: string;
+        orderId: string;
+        category: string;
+    }) {
+        const companyName = COMPANY_NAME || "Website";
+        const appUrl = ENV.APP_URL || "http://localhost:3000";
+        const customerName = data.firstName?.trim() || "there";
+
+        const subject = `Your training program is ready!`;
+
+        const text = `
+Hi ${customerName},
+
+Great news! Your ${data.category} program has been completed by your trainer and is now ready to download.
+
+Log in to your dashboard to download your PDF:
+${appUrl}/dashboard
+
+Order ID: #${data.orderId.slice(-6)}
+
+${COMPANY_EMAIL ? `Support email: ${COMPANY_EMAIL}` : ""}
+${COMPANY_PHONE ? `Phone: ${COMPANY_PHONE}` : ""}
+
+Best regards,
+${companyName} Team
+        `.trim();
+
+        const html = `
+        <div style="font-family: Arial, sans-serif; background:#f4faff; padding:20px; color:#333;">
+          <div style="max-width:600px; margin:auto; background:#fff; border-radius:8px; padding:30px; box-shadow:0 4px 10px rgba(0,0,0,0.05);">
+            <h2 style="color:#007BFF; text-align:center; margin-bottom:24px;">
+              Your Program Is Ready!
+            </h2>
+
+            <p style="font-size:16px; line-height:1.6;">
+              Hi <strong>${escapeHtml(customerName)}</strong>,
+            </p>
+
+            <p style="font-size:16px; line-height:1.6;">
+              Great news! Your <strong>${escapeHtml(data.category)}</strong> program has been completed by your trainer and is now ready to download.
+            </p>
+
+            <div style="text-align:center; margin:30px 0;">
+              <a
+                href="${escapeHtml(appUrl)}/dashboard"
+                style="background:#007BFF; color:#fff; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block; font-size:16px;"
+              >
+                Download Your Program
+              </a>
+            </div>
+
+            <div style="margin:24px 0; padding:16px; background:#f0f9f0; border-radius:8px; border-left:4px solid #28a745;">
+              <p style="margin:0; font-size:14px; color:#333;">
+                <strong>Order ID:</strong> #${escapeHtml(data.orderId.slice(-6))}
+              </p>
+            </div>
+
+            ${
+            COMPANY_EMAIL || COMPANY_PHONE
+                ? `
+            <div style="margin-top:24px; padding:16px; background:#f8fbff; border-radius:8px;">
+              <p style="margin:0 0 10px; font-size:14px; font-weight:bold;">Support</p>
+              ${COMPANY_EMAIL ? `<p style="margin:4px 0; font-size:14px;">Email: ${escapeHtml(COMPANY_EMAIL)}</p>` : ""}
+              ${COMPANY_PHONE ? `<p style="margin:4px 0; font-size:14px;">Phone: ${escapeHtml(COMPANY_PHONE)}</p>` : ""}
+            </div>
+            `
+                : ""
+        }
+
+            <hr style="margin:20px 0; border:none; border-top:1px solid #eee;" />
+            <p style="font-size:14px; color:#777; text-align:center; margin:0 0 8px;">
+              &copy; ${new Date().getFullYear()} ${escapeHtml(companyName)} &ndash; All rights reserved.
+            </p>
+            ${
+            COMPANY_LEGAL_NAME || COMPANY_NUMBER
+                ? `
+            <p style="font-size:13px; color:#999; text-align:center; margin:0;">
+              ${COMPANY_LEGAL_NAME ? escapeHtml(COMPANY_LEGAL_NAME) : ""}
+              ${COMPANY_LEGAL_NAME && COMPANY_NUMBER ? " &middot; " : ""}
+              ${COMPANY_NUMBER ? `Company No. ${escapeHtml(COMPANY_NUMBER)}` : ""}
+            </p>
+            `
+                : ""
+        }
+          </div>
+        </div>
+        `;
+
+        return await sendEmail(data.email, subject, text, html);
+    },
 };
 
 function escapeHtml(value: string) {

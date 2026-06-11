@@ -29,7 +29,7 @@ export default function SignUp() {
             {({ isSubmitting }) => (
                 <FormUI
                     title="Create Your Training Account"
-                    description="Join the platform and get access to specialist-made programs and AI workout plans."
+                    description="Join the platform and get access to specialist-made workout programs and personal coaching."
                     submitLabel="Create My Account"
                     showTerms
                     size="lg"

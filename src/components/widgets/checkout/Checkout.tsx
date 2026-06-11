@@ -207,7 +207,7 @@ const Checkout = () => {
                     <div className={styles.itemRow}>
                         <div className={styles.itemInfo}>
                             <h3>{activePlan.title}</h3>
-                            <p>{activePlan.tokens.toLocaleString()} tokens</p>
+                            <p>Balance top-up</p>
                         </div>
                         <span>
               {sign}

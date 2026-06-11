@@ -3,10 +3,7 @@
 import Grid from "@/components/constructor/grid/Grid";
 import PricingCard from "@/components/constructor/pricing-card/PricingCard";
 import ValuesIcons from "@/components/constructor/values-icons/ValuesIcons";
-import StoryGridSection from "@/components/sections/story-grid-section/StoryGridSection";
 import HowItWorksSection from "@/components/sections/how-it-works-section/HowItWorksSection";
-import TextWithButton from "@/components/constructor/text-with-button/TextWithButton";
-import PromoFeatureCard from "@/components/features/promo-card/PromoFeatureCard";
 import FAQ from "@/components/constructor/faq/FAQ";
 import PromoSection from "@/components/sections/promo-section/PromoSection";
 
@@ -15,14 +12,14 @@ export default function PricingPage() {
         <>
             <PromoSection
                 eyebrow="Pricing"
-                title="Flexible Token Pricing for"
+                title="Flexible Pricing for"
                 highlight="Specialist Training"
-                description="Buy tokens once and use them for specialist-made programs (primary service) or AI-generated plans (faster option). No subscriptions. No hidden fees."
+                description="Top up your balance once and use it for specialist-made programs. No subscriptions. No hidden fees. Pay only when you need a plan."
             />
 
             <Grid
-                title="Token Packages"
-                description="No subscriptions. Tokens let you choose specialist work or AI anytime."
+                title="Top Up Your Balance"
+                description="No subscriptions. Add funds and order a specialist plan anytime."
                 columns={4}
                 gap="2rem"
             >
@@ -32,8 +29,8 @@ export default function PricingPage() {
                     price="€5"
                     tokens={500}
                     badgeTop="Start"
-                    description="Ideal to test the platform, generate an AI plan, or cover part of a specialist order."
-                    buttonText="Buy Tokens"
+                    description="Ideal to test the platform or cover part of a specialist order."
+                    buttonText="Top Up €5"
                 />
 
                 <PricingCard
@@ -43,7 +40,7 @@ export default function PricingPage() {
                     tokens={1900}
                     badgeTop="Popular"
                     description="Great for regular updates and specialist-made programs when your goals change."
-                    buttonText="Get Started"
+                    buttonText="Top Up €19"
                 />
 
                 <PricingCard
@@ -53,7 +50,7 @@ export default function PricingPage() {
                     tokens={4900}
                     badgeTop="Best Value"
                     description="Best choice for serious progress with detailed specialist programming and periodic revisions."
-                    buttonText="Choose Plan"
+                    buttonText="Top Up €49"
                 />
 
                 <PricingCard
@@ -62,31 +59,54 @@ export default function PricingPage() {
                     price="dynamic"
                     tokens={0}
                     badgeTop="Flexible"
-                    description="Choose the exact amount of tokens you need for your next plan or upgrade."
+                    description="Choose the exact amount you need for your next plan or upgrade."
                     buttonText="Continue"
                 />
             </Grid>
 
+            <ValuesIcons
+                tagline="WHY THIS MODEL"
+                title="Simple, Transparent Pricing"
+                description="No recurring charges. Your balance stays until you use it."
+                values={[
+                    {
+                        title: "No Subscriptions",
+                        description: "Pay once. Use your balance whenever you need a new program.",
+                        icon: "subscriptions",
+                    },
+                    {
+                        title: "Instant Top-Up",
+                        description: "Funds are added to your account immediately after payment.",
+                        icon: "zap",
+                    },
+                    {
+                        title: "Specialist Quality",
+                        description: "Every program is designed by a certified trainer.",
+                        icon: "community",
+                    },
+                ]}
+            />
+
             <FAQ
                 items={[
                     {
-                        question: "What are tokens used for?",
+                        question: "What is my balance used for?",
                         answer:
-                            "Tokens are used to order a specialist-made training program (our primary service) or generate an AI plan (faster alternative). You only pay when you need a plan.",
+                            "Your balance is used to order specialist-made training programs. You only pay when you need a plan — no subscriptions.",
                     },
                     {
-                        question: "Do tokens expire?",
-                        answer: "No, tokens never expire.",
+                        question: "Does my balance expire?",
+                        answer: "No, your balance never expires.",
                     },
                     {
                         question: "How fast do I receive my plan?",
                         answer:
-                            "AI programs are generated quickly. Specialist programs take longer because they are manually created for higher quality and personalization.",
+                            "Your trainer prepares your program within 12–24 hours. You'll receive an email when it's ready to download.",
                     },
                     {
-                        question: "Can I switch between Specialist and AI?",
+                        question: "Can I top up with different currencies?",
                         answer:
-                            "Yes, you can use your tokens for either option anytime depending on your needs.",
+                            "Yes, we support EUR and GBP. You can switch currencies at checkout.",
                     },
                 ]}
             />

@@ -17,7 +17,7 @@ const SignUpAside: React.FC = () => {
             </h3>
 
             <p className={styles.subtitle}>
-                Join athletes who train with certified specialists and use AI when they need a faster solution.
+                Join athletes who train with certified specialists and receive personalized PDF programs.
             </p>
 
             <ul className={styles.features}>
@@ -32,16 +32,16 @@ const SignUpAside: React.FC = () => {
                 <li>
                     <span className={styles.icon}>✳</span>
                     <div>
-                        <strong>Token System</strong>
-                        <p>1€ = 100 tokens. No subscriptions. Pay only when you order a plan.</p>
+                        <strong>Flexible Balance</strong>
+                        <p>Top up in EUR or GBP. No subscriptions. Pay only when you order a plan.</p>
                     </div>
                 </li>
 
                 <li>
                     <span className={styles.icon}>●</span>
                     <div>
-                        <strong>AI Fast Option</strong>
-                        <p>Generate a structured workout plan quickly when you need it now.</p>
+                        <strong>Fast Turnaround</strong>
+                        <p>Your trainer prepares your program within 12–24 hours.</p>
                     </div>
                 </li>
             </ul>

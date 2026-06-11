@@ -3,11 +3,12 @@
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.06);
   border: 1.5px solid var(--border-color);
+  padding: 0;
+  cursor: text;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   min-height: 56px;
   display: flex;
   align-items: center;
-  cursor: pointer;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .field:hover {
@@ -59,11 +60,11 @@
   color: var(--error-color);
 }
 
-/* ===== Select ===== */
+/* ===== Input ===== */
 
-.select {
+.input {
   width: 100%;
-  padding: 18px 40px 8px 14px;
+  padding: 18px 14px 8px;
   font-size: 15px;
   font-family: inherit;
   line-height: 1.4;
@@ -71,25 +72,55 @@
   outline: none;
   background: transparent;
   color: var(--text-primary);
-  appearance: none;
-  cursor: pointer;
 }
 
-/* ===== Chevron ===== */
+.input[type="date"] {
+  color-scheme: light;
+}
 
-.chevron {
+.input[type="date"]::-webkit-datetime-edit {
+  color: transparent;
+  transition: color 0.2s;
+}
+
+.field.focused .input[type="date"]::-webkit-datetime-edit {
+  color: var(--text-muted);
+}
+
+.input.hasValue[type="date"]::-webkit-datetime-edit {
+  color: var(--text-primary);
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 40px var(--surface-color) inset;
+  -webkit-text-fill-color: var(--text-primary);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ===== Password Toggle ===== */
+
+.toggle {
   position: absolute;
-  right: 14px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border: none;
+  background: none;
   color: var(--text-muted);
-  pointer-events: none;
-  transition: color 0.2s, transform 0.3s ease;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
 }
 
-.field.focused .chevron {
-  color: var(--primary-color);
-  transform: translateY(-50%) rotate(180deg);
+.toggle:hover {
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.04);
 }
 
 /* ===== Error ===== */
