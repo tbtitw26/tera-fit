@@ -204,7 +204,7 @@ Our audit uncovers the hidden issues that prevent Google from fully crawling, in
             type: "custom",
             component: "TextWithButton",
             title: "Need a Technical SEO Audit?",
-            description: `Our specialists will analyse your site, find technical barriers, and prepare a full optimisation plan — no AI, just real experts.`,
+            description: `Our specialists will analyse your site, find technical barriers, and prepare a full optimisation plan — crafted by real experts.`,
             buttonText: "Request Your Audit",
             buttonLink: "/contact-us?service=Technical%20Website%20Audit&tokens=5"
         },

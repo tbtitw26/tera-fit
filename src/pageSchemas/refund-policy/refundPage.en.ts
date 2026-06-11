@@ -68,7 +68,7 @@ const refundPolicySchema: PageSchema = {
                 "(b) redemption of Tokens for Programs or other paid digital services;",
                 "(c) digital fitness content, training plans, recommendations, downloadable PDFs, and related digital outputs supplied through Tera Fit; and",
                 "(d) refund requests relating to digital services provided through the Service.",
-                "2.2 This Policy applies to both AI-generated and specialist-prepared Programs made available through the Service.",
+                "2.2 This Policy applies to both digitally prepared and specialist-prepared Programs made available through the Service.",
                 "2.3 This Policy does not apply to third-party products, platforms, payment services, websites, or services purchased outside Tera Fit, even if they are linked from our website.",
             ],
         },
@@ -77,7 +77,7 @@ const refundPolicySchema: PageSchema = {
             title: "3. Definitions",
             description: "For the purposes of this Policy:",
             bullets: [
-                "AI Program means a Program generated, supported, or assisted by automated tools or artificial intelligence features available through the Service.",
+                "Digital Program means a Program generated, supported, or prepared using internal tools and processes available through the Service.",
                 "Custom or Specialist Program means a Program prepared, reviewed, adapted, or structured by a human coach, trainer, specialist, or service provider, including work involving manual review or personalised effort.",
                 "Program means any digital fitness-related product or content supplied through the Service, including personalised or non-personalised training plans, workout guidance, recommendations, schedules, trackers, downloadable PDFs, and similar digital content.",
                 "Promotional or Bonus Tokens means Tokens granted free of charge, at a discount, as part of a promotion, incentive, or goodwill gesture.",

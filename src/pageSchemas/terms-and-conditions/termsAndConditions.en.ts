@@ -52,7 +52,7 @@ const termsSchema: PageSchema = {
             description: "For the purposes of these Terms:",
             bullets: [
                 "Account means your registered user account on the Service.",
-                "AI Program means a Program generated, supported, or assisted by automated tools or artificial intelligence features available through the Service.",
+                "Digital Program means a Program generated, supported, or prepared using internal tools and processes available through the Service.",
                 "Order means a completed purchase of Tokens and/or a completed redemption of Tokens for a Program or another paid Service.",
                 "Program means any digital fitness-related product or content supplied through the Service, including personalised or non-personalised training plans, workout routines, recommendations, schedules, guidance, and downloadable digital files such as PDFs.",
                 "Service means the Tera Fit website, platform, account area, forms, checkout, digital content, Programs, Tokens, and all related products, features, and services made available through tera-fit.eu.",
@@ -82,7 +82,7 @@ const termsSchema: PageSchema = {
             bullets: [
                 "3.1 Tera Fit is a digital fitness platform through which users may purchase Tokens and redeem them for Programs and related digital fitness services.",
                 "3.2 The Service is provided online only. Unless expressly stated otherwise, we do not sell, ship, or deliver physical goods.",
-                "3.3 The Service may include both AI-assisted and human-prepared outputs. The format, features, level of personalisation, and method of delivery may vary depending on the selected product, Program, or service type.",
+                "3.3 The Service may include both digitally prepared and specialist-prepared outputs. The format, features, level of personalisation, and method of delivery may vary depending on the selected product, Program, or service type.",
                 "3.4 Programs may be generated automatically, prepared by specialists, or produced through a combination of automated tools and human input, depending on the option selected by you through the Service.",
                 "3.5 We may change, update, improve, limit, suspend, or discontinue any part of the Service at any time for legal, technical, security, operational, or commercial reasons.",
             ],
@@ -250,7 +250,7 @@ const termsSchema: PageSchema = {
                 "12.3 We do not guarantee:",
                 "(a) any specific fitness, body composition, strength, performance, appearance, weight loss, health, or wellness result;",
                 "(b) that any Program will be suitable for every user;",
-                "(c) that any AI-generated, automated, or specialist-prepared output will be free from all error, omission, or subjective disagreement;",
+                "(c) that any automated or specialist-prepared output will be free from all error, omission, or subjective disagreement;",
                 "(d) that the Service will meet every personal preference, expectation, or training style; or",
                 "(e) uninterrupted access to the Service.",
                 "12.4 Any examples, testimonials, descriptions, or promotional materials on the Service are provided for general information and do not guarantee that you will achieve the same or similar results.",

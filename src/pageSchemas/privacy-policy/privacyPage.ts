@@ -416,12 +416,12 @@ const privacyPolicySchema: PageSchema = {
         },
         {
             type: "text",
-            title: "13. AI-Assisted Processing and Automated Decision-Making",
+            title: "13. Automated Processing and Decision-Making",
             bullets: [
-                "13.1 The Service may use automated tools, including AI-assisted processes, to generate, support, structure, or improve certain digital fitness outputs.",
-                "13.2 AI-assisted tools may process information you submit through the Service, such as questionnaire responses, preferences, goals, and other relevant inputs, for the purpose of preparing or supporting a Program.",
+                "13.1 The Service may use automated tools and internal processes to generate, support, structure, or improve certain digital fitness outputs.",
+                "13.2 Automated tools may process information you submit through the Service, such as questionnaire responses, preferences, goals, and other relevant inputs, for the purpose of preparing or supporting a Program.",
                 "13.3 We do not currently intend to make decisions based solely on automated processing that produce legal effects or similarly significant effects on you without appropriate safeguards and notice where required by law.",
-                "13.4 AI-assisted outputs are part of the digital fitness Service and do not constitute medical, clinical, diagnostic, or emergency advice.",
+                "13.4 Digitally prepared outputs are part of the digital fitness Service and do not constitute medical, clinical, diagnostic, or emergency advice.",
             ],
         },
         {
