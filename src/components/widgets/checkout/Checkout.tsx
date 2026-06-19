@@ -90,13 +90,11 @@ const Checkout = () => {
 
     /**
      * Backend amount:
-     * Your API /api/user/buy-tokens expects:
-     *   { currency: "EUR"|"GBP", amount: number }
-     * and converts amount -> EUR -> tokens.
+     * API /api/user/buy-tokens accepts EUR, GBP, USD, KZT.
+     * It converts amount → EUR → tokens using server-side rates.
      *
-     * IMPORTANT:
-     * We calculate amount from TOKENS (not from VAT),
-     * so VAT does NOT increase token amount.
+     * IMPORTANT: amount is calculated from TOKENS (not from VAT-inclusive total),
+     * so VAT display does NOT increase the token credit.
      */
     const amountForBackend = useMemo(() => {
         if (!activePlan) return 0;
@@ -140,13 +138,6 @@ const Checkout = () => {
             return;
         }
 
-        // backend currently supports only EUR/GBP
-        if (currency !== "EUR" && currency !== "GBP") {
-            alert("Unsupported currency. Please select EUR or GBP.");
-            return;
-        }
-
-        // guard
         if (!amountForBackend || amountForBackend <= 0) {
             alert("Invalid amount");
             return;

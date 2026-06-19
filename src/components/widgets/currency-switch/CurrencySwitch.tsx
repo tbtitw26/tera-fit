@@ -1,37 +1,47 @@
 "use client";
 
-import React, { useMemo } from "react";
-import { useCurrency } from "@/context/CurrencyContext";
+import React from "react";
+import { Currency, useCurrency } from "@/context/CurrencyContext";
 import styles from "./CurrencySwitch.module.scss";
 
-const CURRENCIES = ["EUR", "GBP", "USD"] as const;
+const CURRENCIES: { code: Currency; label: string }[] = [
+    { code: "EUR", label: "EUR €" },
+    { code: "GBP", label: "GBP £" },
+    { code: "USD", label: "USD $" },
+    { code: "KZT", label: "KZT ₸" },
+];
 
 const CurrencySwitch: React.FC = () => {
     const { currency, setCurrency } = useCurrency();
 
-    // Обчислюємо позицію активного фону (33.33% на кожен елемент)
-    const activeIndex = useMemo(() => CURRENCIES.indexOf(currency as any), [currency]);
-
     return (
-        <div className={styles.container}>
-            <div className={styles.segmentedControl}>
-                {/* Рухома підкладка */}
-                <div
-                    className={styles.activeGlow}
-                    style={{ transform: `translateX(${activeIndex * 100}%)` }}
-                />
-
-                {CURRENCIES.map((c) => (
-                    <button
-                        key={c}
-                        type="button"
-                        className={`${styles.tab} ${currency === c ? styles.active : ""}`}
-                        onClick={() => setCurrency(c)}
-                    >
-                        {c}
-                    </button>
+        <div className={styles.wrapper}>
+            <select
+                className={styles.select}
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value as Currency)}
+                aria-label="Select currency"
+            >
+                {CURRENCIES.map(({ code, label }) => (
+                    <option key={code} value={code}>
+                        {label}
+                    </option>
                 ))}
-            </div>
+            </select>
+            <svg
+                className={styles.chevron}
+                viewBox="0 0 12 8"
+                fill="none"
+                aria-hidden="true"
+            >
+                <path
+                    d="M1 1l5 5 5-5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                />
+            </svg>
         </div>
     );
 };

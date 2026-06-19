@@ -1,55 +1,54 @@
-.container {
+.wrapper {
+  position: relative;
   display: inline-flex;
-  padding: 4px;
-  background: rgba(255, 255, 255, 0.05); // Напівпрозорий фон
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 100px; // Повна округлість
-  position: relative;
-}
-
-.segmentedControl {
-  display: flex;
-  position: relative;
-  width: 180px; // Фіксована ширина для стабільності анімації
+  align-items: center;
   height: 36px;
 }
 
-.tab {
-  flex: 1;
-  z-index: 2;
-  border: none;
-  background: none;
-  cursor: pointer;
+.select {
+  height: 36px;
+  padding: 0 32px 0 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  color: var(--text-primary, #ccc);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
-  color: var(--text-muted, #888);
-  transition: color 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  cursor: pointer;
   outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
 
-  &.active {
-    color: #fff; // Колір активного тексту
+  &:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.2);
   }
 
-  &:hover:not(.active) {
-    color: var(--text-primary, #ccc);
+  &:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+  }
+
+  option {
+    background: #1e1e2e;
+    color: #e2e8f0;
+    font-weight: 600;
   }
 }
 
-/* Ефектна підкладка, що літає */
-.activeGlow {
+.chevron {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 33.33%; // Оскільки у нас 3 валюти
-  height: 100%;
-  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); // Градієнт
-  border-radius: 100px;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-  transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28); // Ефект "пружини"
-  z-index: 1;
+  right: 10px;
+  width: 12px;
+  height: 8px;
+  color: var(--text-muted, #888);
+  pointer-events: none;
+  transition: color 0.2s ease;
+
+  .wrapper:hover & {
+    color: var(--text-primary, #ccc);
+  }
 }
