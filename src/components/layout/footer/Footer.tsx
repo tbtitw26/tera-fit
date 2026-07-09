@@ -8,6 +8,7 @@ import styles from "./Footer.module.scss";
 import {footerContent} from "@/resources/content";
 import {footerStyles} from "@/resources/styles-config";
 import {SmartLinkProps} from "@/types/smart-link";
+import {SocialIcon} from "@/types/social-link";
 import {FaFacebookF, FaInstagram, FaPinterest} from "react-icons/fa";
 import visa from "@/assets/cards/visa.png";
 import mastercard from "@/assets/cards/mastercard.png";
@@ -30,8 +31,14 @@ const SmartLink: React.FC<SmartLinkProps> = ({href, className, children, ariaLab
     );
 };
 
+const socialIcons: Record<SocialIcon, React.ComponentType> = {
+    instagram: FaInstagram,
+    pinterest: FaPinterest,
+    facebook: FaFacebookF,
+};
+
 const Footer: React.FC = () => {
-    const {logo, columns, contact, legal} = footerContent;
+    const {logo, columns, contact, legal, socials} = footerContent;
 
     const PaymentMethods = () => (
         <div className={styles.paymentsContent}>
@@ -124,10 +131,21 @@ const Footer: React.FC = () => {
                     <div className={styles.column}>
                         <h4 className={styles.columnTitle}>Follow Us</h4>
                         <div className={styles.socials}>
-                            {/*<a href="#" className={styles.socialLink} aria-label="Facebook"><FaFacebookF/></a>*/}
-                            <a href="https://www.instagram.com/terafit.eu" className={styles.socialLink} aria-label="Instagram"><FaInstagram/></a>
-                            <a href="https://www.pinterest.com/terafitgo/" className={styles.socialLink}
-                               aria-label="Pinterest"><FaPinterest/></a>
+                            {socials.map((social) => {
+                                const Icon = socialIcons[social.icon];
+                                return (
+                                    <a
+                                        key={social.label}
+                                        href={social.href}
+                                        className={styles.socialLink}
+                                        aria-label={social.label}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Icon/>
+                                    </a>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>

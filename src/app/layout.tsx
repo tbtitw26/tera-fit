@@ -9,6 +9,25 @@ import {currentFont} from "@/resources/styles-config";
 import {I18nProvider} from "@/context/i18nContext";
 import {AllOrdersProvider} from "@/context/AllOrdersContext";
 import {CurrencyProvider} from "@/context/CurrencyContext";
+import {footerContent} from "@/resources/content";
+import {
+    COMPANY_EMAIL,
+    COMPANY_LEGAL_NAME,
+    COMPANY_NAME,
+    COMPANY_PHONE,
+    COMPANY_SITE_URL,
+} from "@/resources/constants";
+
+const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: COMPANY_NAME,
+    legalName: COMPANY_LEGAL_NAME,
+    url: COMPANY_SITE_URL,
+    email: COMPANY_EMAIL,
+    telephone: COMPANY_PHONE,
+    sameAs: footerContent.socials.map((social) => social.href),
+};
 
 function Layout({children}: { children: React.ReactNode }) {
     return (
@@ -18,6 +37,10 @@ function Layout({children}: { children: React.ReactNode }) {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
             <link href={currentFont.url} rel="stylesheet"/>
             <style>{`:root { --font-family: ${currentFont.css}; }`}</style>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{__html: JSON.stringify(organizationSchema)}}
+            />
         </head>
         <body>
         <I18nProvider>

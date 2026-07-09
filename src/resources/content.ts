@@ -1,13 +1,15 @@
 import {media} from "@/resources/media";
-import {FaTwitter, FaFacebook, FaLinkedin} from "react-icons/fa";
 import {
     COMPANY_ADDRESS,
     COMPANY_EMAIL,
     COMPANY_LEGAL_NAME,
     COMPANY_NAME,
     COMPANY_NUMBER,
-    COMPANY_PHONE
+    COMPANY_PHONE,
+    SOCIAL_INSTAGRAM,
+    SOCIAL_PINTEREST
 } from "@/resources/constants";
+import type {SocialLink} from "@/types/social-link";
 
 export const baseURL =
     typeof window !== "undefined"
@@ -69,6 +71,9 @@ export const footerContent = {
         email: COMPANY_EMAIL,
         phone: COMPANY_PHONE,
     },
-    socials: [],
+    socials: [
+        {label: "Instagram", href: SOCIAL_INSTAGRAM, icon: "instagram"},
+        {label: "Pinterest", href: SOCIAL_PINTEREST, icon: "pinterest"},
+    ] as SocialLink[],
 };
 
