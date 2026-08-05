@@ -269,14 +269,6 @@ const Checkout = () => {
                             )}
                         </dl>
                     </div>
-
-                    <div className={styles.paymentProcessor}>
-                        <h2>Payment Processor</h2>
-                        <p>
-                            Payments are securely processed by PAYTECH LTD. We do not store full card details.
-                            All transactions are tokenised and processed in compliance with PCI-DSS standards.
-                        </p>
-                    </div>
                 </div>
 
                 <div className={styles.payment}>
