@@ -90,7 +90,7 @@ const Checkout = () => {
 
     /**
      * Backend amount:
-     * API /api/user/buy-tokens accepts EUR, GBP, USD, KZT.
+     * API /api/user/buy-tokens accepts EUR, GBP, USD.
      * It converts amount → EUR → tokens using server-side rates.
      *
      * IMPORTANT: amount is calculated from TOKENS (not from VAT-inclusive total),

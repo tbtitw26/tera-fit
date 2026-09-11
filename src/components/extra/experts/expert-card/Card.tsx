@@ -14,20 +14,20 @@ type ExpertCardProps = {
 };
 
 const ExpertCard: React.FC<ExpertCardProps> = ({ expert, onAction }) => {
-    const { avatar, fullName, rating, subtitle, experience, education, specialties } = expert;
+    const { avatar, username, rating, subtitle, experience, education, specialties } = expert;
     const img = media[avatar];
 
     return (
         <div className={styles.card}>
             <div className={styles.imageWrapper}>
                 {img && (
-                    <Image src={img} alt={fullName} fill className={styles.image} />
+                    <Image src={img} alt={username} fill className={styles.image} />
                 )}
             </div>
 
             <div className={styles.content}>
                 <div className={styles.header}>
-                    <h3 className={styles.name}>{fullName}</h3>
+                    <h3 className={styles.name}>{username}</h3>
                     <div className={styles.rating}>★ {rating.toFixed(1)}</div>
                 </div>
 

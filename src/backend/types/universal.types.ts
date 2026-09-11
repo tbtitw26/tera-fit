@@ -10,6 +10,7 @@ export interface UniversalOrderType {
     totalTokens: number;
     planType: "default" | "reviewed";
     language?: string;
+    consents?: Record<string, any>;
     response: string;
     extrasData: Record<string, string>;
     status: "pending" | "ready";
@@ -24,6 +25,7 @@ export interface CreateUniversalOrderRequest {
     totalTokens: number;
     planType: "default" | "reviewed";
     language?: string;
+    consents?: Record<string, any>;
     email: string;
 }
 

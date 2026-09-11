@@ -11,6 +11,7 @@ export interface UniversalOrderUI {
     totalTokens: number;
     planType: "default" | "reviewed";
     language?: string;
+    consents?: Record<string, any>;
 
     response: string;
     extrasData?: Record<string, string>;

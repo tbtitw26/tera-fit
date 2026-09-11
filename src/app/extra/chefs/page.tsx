@@ -20,7 +20,7 @@ export default function Page() {
     const filteredExperts = useMemo(() => {
         return experts.filter((e) => {
             const byName =
-                e.fullName.toLowerCase().includes(search.toLowerCase()) ||
+                e.username.toLowerCase().includes(search.toLowerCase()) ||
                 e.specialties.some((s) =>
                     s.toLowerCase().includes(search.toLowerCase())
                 );

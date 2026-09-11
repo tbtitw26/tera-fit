@@ -257,6 +257,16 @@ export const universalService = {
         if (!["default", "reviewed"].includes(body.planType))
             throw new Error("Invalid planType (must be 'default' or 'reviewed')");
 
+        // AI Programs are supplied immediately, so express consent is required first
+        // (Terms 11.3, Refund Policy 4.2). Trainer Programs do not ask for early performance.
+        const consents = body.consents || {};
+        if (body.planType === "default" && consents.immediateSupply?.given !== true)
+            throw new Error("Express consent to immediate supply is required");
+
+        // Explicit consent for health-related data, where any was submitted (Privacy Policy 6.1).
+        if (body.fields?.limitations && consents.healthData?.given !== true)
+            throw new Error("Explicit consent is required to process health-related information");
+
         const user = await User.findById(userId);
         if (!user) throw new Error("User not found");
 
@@ -305,8 +315,13 @@ export const universalService = {
             }
         }
 
+        // "default" = instant AI plan (ready immediately)
+        // "reviewed" = expert plan (a trainer prepares it within 12-24h)
+        const isInstant = body.planType === "default";
         const delayHours = 12 + Math.random() * 12;
-        const readyAt = new Date(Date.now() + delayHours * 60 * 60 * 1000);
+        const readyAt = isInstant
+            ? new Date()
+            : new Date(Date.now() + delayHours * 60 * 60 * 1000);
 
         const orderDoc = {
             userId: new mongoose.Types.ObjectId(userId),
@@ -319,9 +334,10 @@ export const universalService = {
             language: body.language || "English",
             response: mainText,
             extrasData,
-            status: "pending" as const,
+            consents,
+            status: (isInstant ? "ready" : "pending") as "ready" | "pending",
             readyAt,
-            notified: false,
+            notified: isInstant,
         };
 
         const order = await UniversalOrder.create(orderDoc);
@@ -340,11 +356,17 @@ export const universalService = {
                 summaryTitle: "Order summary",
                 summaryLines: [
                     `Service: ${body.category}`,
-                    `Trainer: ${body.fields?.coach || "Assigned specialist"}`,
+                    isInstant
+                        ? `Delivery: Instant plan`
+                        : `Trainer: ${body.fields?.coach || "Assigned specialist"}`,
                     `Extras: ${Array.isArray(body.extras) && body.extras.length ? body.extras.join(", ") : "None"}`,
                     `Language: ${body.language || "English"}`,
-                    `Status: In progress — your trainer is working on it`,
-                    `Estimated delivery: ${estimatedReady}`,
+                    isInstant
+                        ? `Status: Ready — available for download now`
+                        : `Status: In progress — your trainer is working on it`,
+                    isInstant
+                        ? `Available: Now`
+                        : `Estimated delivery: ${estimatedReady}`,
                 ],
                 amountLabel: "Amount charged",
                 amountValue: `€${(totalCost / 100).toFixed(2)}`,

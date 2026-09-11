@@ -11,7 +11,7 @@ export type Expert = {
     id: string;
     slug: string;
     avatar: keyof typeof media;
-    fullName: string;
+    username: string;
     rating: number;
     subtitle: string;
     experience: string;

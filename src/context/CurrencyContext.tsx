@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
 
-export type Currency = "EUR" | "GBP" | "USD" | "KZT";
+export type Currency = "EUR" | "GBP" | "USD";
 
 interface CurrencyContextType {
     currency: Currency;
@@ -17,7 +17,6 @@ const CURRENCY_SIGNS: Record<Currency, string> = {
     EUR: "€",
     GBP: "£",
     USD: "$",
-    KZT: "₸",
 };
 
 // Base currency — EUR
@@ -25,7 +24,6 @@ const RATES: Record<Currency, number> = {
     EUR: 1,
     GBP: 0.84,   // 1 EUR = 0.84 GBP
     USD: 1.09,   // 1 EUR = 1.09 USD
-    KZT: 567.5,  // 1 EUR = 567.5 KZT (National Bank of Kazakhstan, 18.06.2026)
 };
 
 const CurrencyContext = createContext<CurrencyContextType>({

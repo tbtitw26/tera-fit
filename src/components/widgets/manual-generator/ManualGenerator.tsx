@@ -23,10 +23,31 @@ type FitnessGoal = "fat_loss" | "muscle_gain" | "strength" | "endurance" | "mobi
 type TrainingDays = "2" | "3" | "4" | "5" | "6";
 type SessionMinutes = "30" | "45" | "60" | "75" | "90";
 type Equipment = "gym" | "home_basic" | "home_full" | "no_equipment";
+type PlanMode = "ai" | "coach";
 
-const BASE_TOKENS = 3000;
+const BASE_TOKENS: Record<PlanMode, number> = {
+    ai: 1200,
+    coach: 3000,
+};
 const TOKENS_PER_EXTRA_WEEK = 800;
 const FREE_WEEKS = 2;
+
+const PLAN_MODES: Array<{ id: PlanMode; label: string; sub: string; delivery: string; icon: IconKey }> = [
+    {
+        id: "ai",
+        label: "AI Instant Plan",
+        sub: "Generated automatically from your answers",
+        delivery: "Ready immediately",
+        icon: "brain" as IconKey,
+    },
+    {
+        id: "coach",
+        label: "Trainer Plan",
+        sub: "Built and reviewed by a certified specialist",
+        delivery: "Ready in 12–24 hours",
+        icon: "flex" as IconKey,
+    },
+];
 
 const GOALS: Array<{ id: FitnessGoal; label: string; sub: string; icon?: IconKey }> = [
     { id: "fat_loss", label: "Fat Loss", sub: "calorie deficit + tone", icon: "path" as IconKey },
@@ -52,7 +73,23 @@ const EQUIPMENT: Array<{ id: Equipment; label: string; sub: string }> = [
 
 const FOCUS_AREAS = ["Glutes", "Core", "Upper body", "Lower body", "Cardio", "Mobility"] as const;
 
+/**
+ * Consent wording is stored with the Order alongside a timestamp, as required by the
+ * Privacy Policy (consent records) and the Refund Policy (section 4.2).
+ *
+ * Only AI Programs ask for it: they are supplied immediately, so the acknowledgement is
+ * what makes the loss of the withdrawal right effective. Trainer Programs deliberately do
+ * not ask for an early-performance request.
+ */
+const SUPPLY_CONSENT_TEXT =
+    "I expressly consent to Tera Fit generating and supplying my AI Program immediately, and I acknowledge that I will lose my right of withdrawal once supply begins.";
+
+const HEALTH_CONSENT_TEXT =
+    "I explicitly consent to Tera Fit processing the health-related information I entered under limitations or injuries, so that it can be used to adapt my Program. I may withdraw this consent at any time.";
+
 interface Values {
+    planMode: PlanMode;
+
     goal: FitnessGoal;
     experience: Experience;
     duration: Duration;
@@ -66,9 +103,14 @@ interface Values {
 
     coachId: string;
     extras: string[];
+
+    supplyConsent: boolean;
+    healthConsent: boolean;
 }
 
 const schema = Yup.object({
+    planMode: Yup.mixed<PlanMode>().oneOf(["ai", "coach"]).required("Required"),
+
     goal: Yup.mixed<FitnessGoal>()
         .oneOf(["fat_loss", "muscle_gain", "strength", "endurance", "mobility"])
         .required("Required"),
@@ -84,9 +126,26 @@ const schema = Yup.object({
     focusAreas: Yup.array().of(Yup.string()).required(),
     limitations: Yup.string().max(400, "Too long"),
 
-    coachId: Yup.string().required("Choose a trainer"),
+    coachId: Yup.string().when("planMode", {
+        is: "coach",
+        then: (s) => s.required("Choose a trainer"),
+        otherwise: (s) => s.optional(),
+    }),
 
     extras: Yup.array().of(Yup.string()).required(),
+
+    supplyConsent: Yup.boolean().when("planMode", {
+        is: "ai",
+        then: (s) => s.oneOf([true], "Required").required("Required"),
+        otherwise: (s) => s.optional(),
+    }),
+
+    // Explicit consent is only needed when health-related information was actually submitted.
+    healthConsent: Yup.boolean().when("limitations", {
+        is: (v: string) => Boolean(v && v.trim()),
+        then: (s) => s.oneOf([true], "Required").required("Required"),
+        otherwise: (s) => s.optional(),
+    }),
 });
 
 function CoachValue({ coachId }: { coachId: string }) {
@@ -95,9 +154,9 @@ function CoachValue({ coachId }: { coachId: string }) {
 
     return (
         <div className={styles.coachValue}>
-            <img src={media[coach.avatar].src} alt={coach.fullName} className={styles.coachAvatar} />
+            <img src={media[coach.avatar].src} alt={coach.username} className={styles.coachAvatar} />
             <div className={styles.coachValueMeta}>
-                <div className={styles.coachValueName}>{coach.fullName}</div>
+                <div className={styles.coachValueName}>{coach.username}</div>
                 <div className={styles.coachValueSub}>⭐ {coach.rating} · {coach.subtitle}</div>
             </div>
         </div>
@@ -128,6 +187,8 @@ export default function ManualGenerator() {
     const [coachOpen, setCoachOpen] = useState(false);
 
     const initialValues: Values = {
+        planMode: "coach",
+
         goal: "fat_loss",
         experience: "beginner",
         duration: "4w",
@@ -141,6 +202,9 @@ export default function ManualGenerator() {
 
         coachId: "",
         extras: [],
+
+        supplyConsent: false,
+        healthConsent: false,
     };
 
     function calcDurationTokens(duration: Duration) {
@@ -156,7 +220,7 @@ export default function ManualGenerator() {
             .filter((e) => values.extras.includes(e.id))
             .reduce((sum, e) => sum + e.tokens, 0);
 
-        return BASE_TOKENS + durationTokens + extrasTokens;
+        return BASE_TOKENS[values.planMode] + durationTokens + extrasTokens;
     }
 
     const experienceLabel = (x: Experience) => (x === "beginner" ? "Beginner" : x === "intermediate" ? "Intermediate" : "Advanced");
@@ -172,9 +236,12 @@ export default function ManualGenerator() {
                 setSubmitting(true);
 
                 try {
+                    const isAi = values.planMode === "ai";
+                    const healthDataSubmitted = Boolean(values.limitations?.trim());
+
                     const payload = {
                         category: "training",
-                        planType: "reviewed",
+                        planType: isAi ? "default" : "reviewed",
                         language: "English",
                         extras: values.extras,
                         totalTokens: calcTotalTokens(values),
@@ -182,7 +249,7 @@ export default function ManualGenerator() {
 
                         fields: {
                             domain: "fitness",
-                            deliveryMode: "expert",
+                            deliveryMode: isAi ? "ai" : "expert",
 
                             goal: values.goal,
                             experience: values.experience,
@@ -197,7 +264,28 @@ export default function ManualGenerator() {
                             focusAreas: values.focusAreas,
                             limitations: values.limitations?.trim() || undefined,
 
-                            coach: experts.find((c) => c.id === values.coachId)?.fullName,
+                            coach: isAi ? undefined : experts.find((c) => c.id === values.coachId)?.username,
+                        },
+
+                        consents: {
+                            ...(isAi
+                                ? {
+                                    immediateSupply: {
+                                        given: values.supplyConsent,
+                                        wording: SUPPLY_CONSENT_TEXT,
+                                        givenAt: new Date().toISOString(),
+                                    },
+                                }
+                                : {}),
+                            ...(healthDataSubmitted
+                                ? {
+                                    healthData: {
+                                        given: values.healthConsent,
+                                        wording: HEALTH_CONSENT_TEXT,
+                                        givenAt: new Date().toISOString(),
+                                    },
+                                }
+                                : {}),
                         },
                     };
 
@@ -209,7 +297,14 @@ export default function ManualGenerator() {
                     });
 
                     const data = await res.json();
-                    if (res.ok) showAlert("Success", "Your training plan has been ordered! Your trainer will prepare it within 12–24 hours.", "success");
+                    if (res.ok)
+                        showAlert(
+                            "Success",
+                            isAi
+                                ? "Your training plan has been generated and is ready to download."
+                                : "Your training plan has been ordered! Your trainer will prepare it within 12–24 hours.",
+                            "success"
+                        );
                     else showAlert("Error", data?.message || "Failed to save", "error");
                 } catch {
                     showAlert("Error", "Network or server issue", "error");
@@ -218,15 +313,57 @@ export default function ManualGenerator() {
                 }
             }}
         >
-            {({ values, setFieldValue, errors, touched, isSubmitting, submitForm }) => {
-                const estimatedTokens = useMemo(() => calcTotalTokens(values), [values.duration, values.extras]);
+            {({ values, setFieldValue, errors, touched, isSubmitting, submitForm, validateForm, setTouched }) => {
+                const isAiPlan = values.planMode === "ai";
+                const healthDataSubmitted = Boolean(values.limitations?.trim());
+                const showConsentStep = isAiPlan || healthDataSubmitted;
+
+                // Formik silently swallows an invalid submit, so surface what is missing.
+                async function handleOrderClick() {
+                    const formErrors = await validateForm();
+
+                    if (Object.keys(formErrors).length) {
+                        setTouched(
+                            Object.keys(formErrors).reduce(
+                                (acc, key) => ({ ...acc, [key]: true }),
+                                {} as Record<string, boolean>
+                            )
+                        );
+
+                        if (formErrors.coachId) {
+                            showAlert("Trainer required", "Please select a trainer before ordering.", "error");
+                        } else if (formErrors.supplyConsent || formErrors.healthConsent) {
+                            showAlert(
+                                "Confirmation required",
+                                "Please confirm the checkboxes in step 5 before placing your order.",
+                                "error"
+                            );
+                        }
+
+                        return;
+                    }
+
+                    await submitForm();
+                }
+                const estimatedTokens = useMemo(
+                    () => calcTotalTokens(values),
+                    [values.planMode, values.duration, values.extras]
+                );
                 const estimatedPrice = tokensToDisplay(estimatedTokens);
 
                 const selectedExtras = FITNESS_EXTRAS.filter((e) => values.extras.includes(e.id));
                 const durationWeeks = durationToWeeks(values.duration);
 
                 const summaryRows = [
-                    { k: "Trainer", v: values.coachId ? (experts.find(c => c.id === values.coachId)?.fullName ?? "—") : "Not selected" },
+                    { k: "Plan type", v: isAiPlan ? "AI Instant Plan" : "Trainer Plan" },
+                    ...(isAiPlan
+                        ? []
+                        : [{
+                            k: "Trainer",
+                            v: values.coachId
+                                ? (experts.find((c) => c.id === values.coachId)?.username ?? "—")
+                                : "Not selected",
+                        }]),
                     { k: "Goal", v: goalLabel(values.goal) },
                     { k: "Experience", v: experienceLabel(values.experience) },
                     { k: "Schedule", v: `${values.daysPerWeek}x / ${values.sessionMinutes} min` },
@@ -241,7 +378,7 @@ export default function ManualGenerator() {
                             <div className={styles.hero}>
                                 <div className={styles.heroText}>
                                     <h1>Order your fitness program</h1>
-                                    <p>Choose a trainer, set your goal and preferences — your personalized plan will be ready within 12–24 hours.</p>
+                                    <p>Pick an instant AI plan or a trainer-built program, set your goal and preferences — and get a plan made for you.</p>
                                 </div>
 
                                 <div className={styles.heroSteps}>
@@ -250,8 +387,11 @@ export default function ManualGenerator() {
                                         <span className={styles.stepPill}>2</span>
                                         <span className={styles.stepPill}>3</span>
                                         <span className={styles.stepPill}>4</span>
+                                        {showConsentStep && <span className={styles.stepPill}>5</span>}
                                     </div>
-                                    <div className={styles.stepTrail}>Trainer → Goal → Setup → Add-ons</div>
+                                    <div className={styles.stepTrail}>
+                                        Plan type → Goal → Setup → Add-ons{showConsentStep ? " → Confirm" : ""}
+                                    </div>
                                 </div>
                             </div>
 
@@ -259,16 +399,49 @@ export default function ManualGenerator() {
                             <div className={styles.shell}>
                                 {/* MAIN */}
                                 <div className={styles.main}>
-                                    {/* BLOCK 1 — TRAINER SELECTION */}
+                                    {/* BLOCK 1 — PLAN TYPE & TRAINER */}
                                     <section className={styles.block}>
                                         <div className={styles.blockHeader}>
                                             <div className={styles.blockKicker}>STEP 1</div>
                                             <div>
-                                                <div className={styles.blockTitle}>Choose your trainer</div>
-                                                <div className={styles.blockSub}>Select a certified specialist who will create your personalized program.</div>
+                                                <div className={styles.blockTitle}>How should your plan be made?</div>
+                                                <div className={styles.blockSub}>Get an AI-generated program instantly, or have a certified specialist build it for you.</div>
                                             </div>
                                         </div>
 
+                                        <div className={styles.planGrid}>
+                                            {PLAN_MODES.map((m) => {
+                                                const active = values.planMode === m.id;
+
+                                                return (
+                                                    <button
+                                                        key={m.id}
+                                                        type="button"
+                                                        className={`${styles.goalCard} ${active ? styles.goalCardActive : ""}`}
+                                                        onClick={() => {
+                                                            setFieldValue("planMode", m.id);
+                                                            if (m.id === "ai") {
+                                                                setFieldValue("coachId", "");
+                                                                setCoachOpen(false);
+                                                            }
+                                                        }}
+                                                    >
+                                                        <div className={styles.goalIcon}>{renderIcon(m.icon)}</div>
+                                                        <div className={styles.goalMeta}>
+                                                            <div className={styles.goalTitle}>
+                                                                {m.label} <span className={styles.planPrice}>· {sign}{tokensToDisplay(BASE_TOKENS[m.id])}</span>
+                                                            </div>
+                                                            <div className={styles.goalSub}>{m.sub} — {m.delivery}</div>
+                                                        </div>
+                                                        <div className={styles.goalCheck}>
+                                                            <span className={active ? styles.selectOn : styles.selectOff} />
+                                                        </div>
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+
+                                        {!isAiPlan && (
                                         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className={styles.coachBlock}>
                                             <div className={styles.fieldTitle}>Your trainer</div>
 
@@ -300,9 +473,9 @@ export default function ManualGenerator() {
                                                                     setCoachOpen(false);
                                                                 }}
                                                             >
-                                                                <img src={media[coach.avatar].src} alt={coach.fullName} className={styles.coachAvatar} />
+                                                                <img src={media[coach.avatar].src} alt={coach.username} className={styles.coachAvatar} />
                                                                 <div className={styles.dropdownItemMeta}>
-                                                                    <div className={styles.dropdownItemName}>{coach.fullName}</div>
+                                                                    <div className={styles.dropdownItemName}>{coach.username}</div>
                                                                     <div className={styles.dropdownItemSub}>⭐ {coach.rating} · {coach.subtitle}</div>
                                                                 </div>
                                                             </button>
@@ -311,6 +484,7 @@ export default function ManualGenerator() {
                                                 )}
                                             </div>
                                         </motion.div>
+                                        )}
                                     </section>
 
                                     {/* BLOCK 2 */}
@@ -549,10 +723,78 @@ export default function ManualGenerator() {
                                         </div>
                                     </section>
 
+                                    {/* BLOCK 5 — CONSENT */}
+                                    {showConsentStep && (
+                                    <section className={styles.block}>
+                                        <div className={styles.blockHeader}>
+                                            <div className={styles.blockKicker}>STEP 5</div>
+                                            <div>
+                                                <div className={styles.blockTitle}>Confirm before ordering</div>
+                                                <div className={styles.blockSub}>
+                                                    {isAiPlan
+                                                        ? "Your AI Program is generated immediately, so we need your express consent before starting."
+                                                        : "We need your explicit consent to use the health information you entered."}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {isAiPlan && (
+                                            <>
+                                                <label className={styles.consentRow}>
+                                                    <input
+                                                        type="checkbox"
+                                                        className={styles.consentBox}
+                                                        checked={values.supplyConsent}
+                                                        aria-invalid={Boolean(touched.supplyConsent && errors.supplyConsent)}
+                                                        onChange={(e) => setFieldValue("supplyConsent", e.target.checked)}
+                                                    />
+                                                    <span className={styles.consentText}>
+                                                        {SUPPLY_CONSENT_TEXT}{" "}
+                                                        <a href="/refund-policy" target="_blank" rel="noreferrer">
+                                                            Refund Policy
+                                                        </a>
+                                                    </span>
+                                                </label>
+                                                {touched.supplyConsent && errors.supplyConsent && (
+                                                    <div className={styles.consentError}>
+                                                        You must confirm this before placing the order.
+                                                    </div>
+                                                )}
+                                            </>
+                                        )}
+
+                                        {healthDataSubmitted && (
+                                            <>
+                                                <label className={styles.consentRow}>
+                                                    <input
+                                                        type="checkbox"
+                                                        className={styles.consentBox}
+                                                        checked={values.healthConsent}
+                                                        aria-invalid={Boolean(touched.healthConsent && errors.healthConsent)}
+                                                        onChange={(e) => setFieldValue("healthConsent", e.target.checked)}
+                                                    />
+                                                    <span className={styles.consentText}>
+                                                        {HEALTH_CONSENT_TEXT}{" "}
+                                                        <a href="/privacy-policy" target="_blank" rel="noreferrer">
+                                                            Privacy Policy
+                                                        </a>
+                                                    </span>
+                                                </label>
+                                                {touched.healthConsent && errors.healthConsent && (
+                                                    <div className={styles.consentError}>
+                                                        Explicit consent is required to process health-related information.
+                                                        Alternatively, clear the limitations field.
+                                                    </div>
+                                                )}
+                                            </>
+                                        )}
+                                    </section>
+                                    )}
+
                                     {/* DESKTOP FOOTER (main) */}
                                     <div className={styles.bottomNote}>
                                         <span>✅ Tailored plan</span>
-                                        <span>🏋️ Built by a specialist</span>
+                                        <span>{isAiPlan ? "⚡ Delivered instantly" : "🏋️ Built by a specialist"}</span>
                                         <span>📈 Progression built-in</span>
                                     </div>
                                 </div>
@@ -569,7 +811,12 @@ export default function ManualGenerator() {
                                                 </div>
                                             </div>
 
-                                            <button type="submit" className={styles.ctaButton} disabled={isSubmitting}>
+                                            <button
+                                                type="button"
+                                                className={styles.ctaButton}
+                                                disabled={isSubmitting}
+                                                onClick={() => void handleOrderClick()}
+                                            >
                                                 {isSubmitting ? "Ordering..." : "Order Program"}
                                             </button>
                                         </div>
@@ -603,7 +850,9 @@ export default function ManualGenerator() {
                                         <div className={styles.summaryDivider} />
 
                                         <div className={styles.muted} style={{ fontSize: "0.8rem", lineHeight: 1.4 }}>
-                                            Your trainer will prepare your program within 12–24 hours. You'll receive an email when it's ready to download.
+                                            {isAiPlan
+                                                ? "Your program is generated instantly and available to download right after ordering. A copy is also sent to your email."
+                                                : "Your trainer will prepare your program within 12–24 hours. You'll receive an email when it's ready to download."}
                                         </div>
                                     </div>
                                 </aside>
@@ -621,7 +870,7 @@ export default function ManualGenerator() {
                                     className={styles.mobileCTA}
                                     disabled={isSubmitting}
                                     onClick={() => {
-                                        void submitForm();
+                                        void handleOrderClick();
                                     }}
                                 >
                                     {isSubmitting ? "Ordering..." : "Order Program"}

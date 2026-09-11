@@ -11,6 +11,8 @@ export interface UniversalOrderDocument extends Document {
     planType: "default" | "reviewed";
     language?: string;
 
+    consents?: Record<string, any>;
+
     response: string;
     extrasData: Record<string, string>;
 
@@ -33,6 +35,9 @@ const universalOrderSchema = new Schema<UniversalOrderDocument>(
 
         // 🌍 необов’язкове поле
         language: { type: String, required: false, default: "English" },
+
+        // 📝 записи згод (текст + час) — потрібні за Privacy / Refund Policy
+        consents: { type: Schema.Types.Mixed, default: {} },
 
         response: { type: String, default: "" },
         extrasData: { type: Map, of: String, default: {} },

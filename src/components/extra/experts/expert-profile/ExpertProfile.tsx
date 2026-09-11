@@ -18,7 +18,7 @@ export default function ExpertProfile({ expert }: Props) {
                 <header className={styles.header}>
                     <div className={styles.headerMain}>
                         <p className={styles.kicker}>Coach profile</p>
-                        <h1 className={styles.title}>{expert.fullName}</h1>
+                        <h1 className={styles.title}>{expert.username}</h1>
                         <p className={styles.subtitle}>{expert.subtitle}</p>
                         <p className={styles.bio}>{expert.bio}</p>
 
@@ -33,7 +33,7 @@ export default function ExpertProfile({ expert }: Props) {
                         <div className={styles.avatarWrap}>
                             <Image
                                 src={img}
-                                alt={expert.fullName}
+                                alt={expert.username}
                                 fill
                                 priority
                                 className={styles.avatar}

@@ -7,9 +7,9 @@ export function getExpertBySlug(slug: string) {
 export const experts: Expert[] = [
     {
         id: "expert_marcus_l",
-        slug: "ethan-walker",
+        slug: "ethan-w",
         avatar: "team1",
-        fullName: "Ethan Walker",
+        username: "@ethan_w",
         rating: 4.9,
         subtitle: "Strength Training",
         experience: "15 Years",
@@ -34,9 +34,9 @@ export const experts: Expert[] = [
     },
     {
         id: "expert_sarah_j",
-        slug: "olivia-hayes",
+        slug: "olivia-h",
         avatar: "team10",
-        fullName: "Olivia Hayes",
+        username: "@olivia_h",
         rating: 4.8,
         subtitle: "Fat Loss Coaching",
         experience: "12 Years",
@@ -61,9 +61,9 @@ export const experts: Expert[] = [
     },
     {
         id: "expert_kenji_t",
-        slug: "daniel-kim",
+        slug: "daniel-k",
         avatar: "team2",
-        fullName: "Daniel Kim",
+        username: "@daniel_k",
         rating: 4.7,
         subtitle: "Mobility & Flexibility",
         experience: "10 Years",
@@ -88,9 +88,9 @@ export const experts: Expert[] = [
     },
     {
         id: "expert_maria_g",
-        slug: "isabella-martinez",
+        slug: "isabella-m",
         avatar: "team11",
-        fullName: "Isabella Martinez",
+        username: "@isabella_m",
         rating: 4.6,
         subtitle: "Functional Training",
         experience: "8 Years",
@@ -115,9 +115,9 @@ export const experts: Expert[] = [
     },
     {
         id: "expert_alex_r",
-        slug: "noah-bennett",
+        slug: "noah-b",
         avatar: "team3",
-        fullName: "Noah Bennett",
+        username: "@noah_b",
         rating: 4.5,
         subtitle: "Beginner Fitness",
         experience: "6 Years",
@@ -143,9 +143,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_luca_b",
-        slug: "giovanni-moretti",
+        slug: "giovanni-m",
         avatar: "team4",
-        fullName: "Giovanni Moretti",
+        username: "@giovanni_m",
         rating: 4.8,
         subtitle: "Italian Fitness",
         experience: "14 Years",
@@ -171,9 +171,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_emily_c",
-        slug: "chloe-liang",
+        slug: "chloe-l",
         avatar: "team12",
-        fullName: "Chloe Liang",
+        username: "@chloe_l",
         rating: 4.7,
         subtitle: "Yoga & Mindfulness",
         experience: "11 Years",
@@ -199,9 +199,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_david_m",
-        slug: "ryan-cooper",
+        slug: "ryan-c",
         avatar: "team5",
-        fullName: "Ryan Cooper",
+        username: "@ryan_c",
         rating: 4.6,
         subtitle: "Cardio & Endurance",
         experience: "16 Years",
@@ -227,9 +227,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_anna_k",
-        slug: "amelia-nowak",
+        slug: "amelia-n",
         avatar: "team13",
-        fullName: "Amelia Nowak",
+        username: "@amelia_n",
         rating: 4.5,
         subtitle: "Nutrition & Weight Loss",
         experience: "9 Years",
@@ -255,9 +255,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_pierre_d",
-        slug: "lucas-durand",
+        slug: "lucas-d",
         avatar: "team6",
-        fullName: "Lucas Durand",
+        username: "@lucas_d",
         rating: 4.9,
         subtitle: "Strength & Conditioning",
         experience: "20 Years",
@@ -283,9 +283,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_sofia_n",
-        slug: "elena-popescu",
+        slug: "elena-p",
         avatar: "team14",
-        fullName: "Elena Popescu",
+        username: "@elena_p",
         rating: 4.6,
         subtitle: "Pilates & Mobility",
         experience: "8 Years",
@@ -311,9 +311,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_omar_h",
-        slug: "karim-nasser",
+        slug: "karim-n",
         avatar: "team7",
-        fullName: "Karim Nasser",
+        username: "@karim_n",
         rating: 4.7,
         subtitle: "CrossFit & Functional Training",
         experience: "13 Years",
@@ -339,9 +339,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_julia_s",
-        slug: "mia-schulz",
+        slug: "mia-s",
         avatar: "team15",
-        fullName: "Mia Schulz",
+        username: "@mia_s",
         rating: 4.5,
         subtitle: "Home Fitness",
         experience: "7 Years",
@@ -367,9 +367,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_mateo_r",
-        slug: "andrea-ferraro",
+        slug: "andrea-f",
         avatar: "team9",
-        fullName: "Andrea Ferraro",
+        username: "@andrea_f",
         rating: 4.8,
         subtitle: "Mediterranean Fitness",
         experience: "15 Years",
@@ -395,9 +395,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_nina_p",
-        slug: "katarina-ivanova",
+        slug: "katarina-i",
         avatar: "team16",
-        fullName: "Katarina Ivanova",
+        username: "@katarina_i",
         rating: 4.6,
         subtitle: "Eastern European Fitness",
         experience: "12 Years",
@@ -423,9 +423,9 @@ export const experts: Expert[] = [
 
     {
         id: "expert_ivan_v",
-        slug: "maksim-orlov",
+        slug: "maksim-o",
         avatar: "team8",
-        fullName: "Maksim Orlov",
+        username: "@maksim_o",
         rating: 4.7,
         subtitle: "Athletic Conditioning",
         experience: "10 Years",

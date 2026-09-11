@@ -7,7 +7,6 @@ const RATES_FROM_EUR: Record<string, number> = {
     EUR: 1,
     GBP: 0.84,
     USD: 1.09,   // 1 EUR = 1.09 USD
-    KZT: 567.5,  // 1 EUR = 567.5 KZT (National Bank of Kazakhstan, 18.06.2026)
 };
 
 export async function POST(req: NextRequest) {

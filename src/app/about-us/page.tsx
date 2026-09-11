@@ -106,7 +106,7 @@ export default function AboutPage() {
                 description="Certified coaches who build programs with real training logic."
                 viewAllText="View All Trainers"
                 members={experts.slice(0, 4).map((expert) => ({
-                    name: expert.fullName,
+                    name: expert.username,
                     role: expert.subtitle,
                     image: expert.avatar,
                 }))}

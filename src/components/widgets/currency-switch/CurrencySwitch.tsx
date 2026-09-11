@@ -8,7 +8,6 @@ const CURRENCIES: { code: Currency; label: string }[] = [
     { code: "EUR", label: "EUR €" },
     { code: "GBP", label: "GBP £" },
     { code: "USD", label: "USD $" },
-    { code: "KZT", label: "KZT ₸" },
 ];
 
 const CurrencySwitch: React.FC = () => {
